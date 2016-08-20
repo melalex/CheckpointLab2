@@ -1,5 +1,5 @@
 //
-//  MELCanvas.h
+//  MELCanvasController.h
 //  ImageKeeper
 //
 //  Created by Александр Мелащенко on 8/20/16.
@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class MELImageModel;
+@class MELDataStore;
 
-@interface MELCanvas : NSView
+@interface MELCanvasController : NSViewController
 
-@property (retain) NSArray<MELImageModel *> *imagesToDraw;
+@property (retain) MELDataStore *dataStore;
 
 @end

@@ -10,8 +10,6 @@
 
 @interface Document ()
 
-@property (assign) IBOutlet NSView *canvas;
-
 @end
 
 @implementation Document
@@ -20,7 +18,7 @@
 {
     if (self = [super init])
     {
-        
+
     }
     return self;
 }

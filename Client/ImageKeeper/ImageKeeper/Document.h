@@ -10,6 +10,7 @@
 
 @interface Document : NSDocument
 
+@property (assign) IBOutlet NSView *canvas;
 
 @end
 

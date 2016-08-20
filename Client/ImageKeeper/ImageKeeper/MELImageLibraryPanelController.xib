@@ -97,6 +97,9 @@
                                             </prototypeCellViews>
                                         </tableColumn>
                                     </tableColumns>
+                                    <connections>
+                                        <action trigger="doubleAction" selector="doubleClickActionHandler:" target="-2" id="rcA-kL-Axf"/>
+                                    </connections>
                                 </tableView>
                             </subviews>
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

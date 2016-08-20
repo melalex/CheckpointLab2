@@ -7,7 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document">
             <connections>
-                <outlet property="canvas" destination="RNW-HF-m4J" id="rih-xP-TRt"/>
+                <outlet property="canvas" destination="qUW-VX-0d7" id="1ss-tk-NIa"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>
@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RNW-HF-m4J" customClass="MELCanvas">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qUW-VX-0d7">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     </customView>
                 </subviews>

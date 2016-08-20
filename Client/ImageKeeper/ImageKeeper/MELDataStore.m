@@ -23,19 +23,22 @@
     {
         _mutableImages = [[NSMutableArray alloc] init];
         
-        NSArray *paths = [[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:nil];
+        NSArray *paths = [[NSBundle mainBundle] pathsForResourcesOfType:nil inDirectory:nil];
         
         for (NSString *path in paths)
         {
-            NSURL *imageURL = [NSURL fileURLWithPath:path];
-            
-            NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
-            
-            imageObj.name = [[imageURL pathComponents] lastObject];
-            
-            [_mutableImages addObject:imageObj];
-            
-            [imageObj release];
+            if (![path hasSuffix:@"lproj"] && ![path hasSuffix:@"nib"])
+            {
+                NSURL *imageURL = [NSURL fileURLWithPath:path];
+                
+                NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
+                
+                imageObj.name = [[imageURL pathComponents] lastObject];
+                
+                [_mutableImages addObject:imageObj];
+                
+                [imageObj release];
+            }
         }
     }
     return self;

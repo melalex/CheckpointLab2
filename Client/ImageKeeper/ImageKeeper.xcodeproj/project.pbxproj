@@ -22,6 +22,10 @@
 		DDA665D91D687EAE0079220F /* MELImageLibraryPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665D71D687EAE0079220F /* MELImageLibraryPanelController.m */; };
 		DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665D81D687EAE0079220F /* MELImageLibraryPanelController.xib */; };
 		DDA665DE1D687F4A0079220F /* MELDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665DD1D687F4A0079220F /* MELDataStore.m */; };
+		DDA665E41D689CEB0079220F /* MELDocumentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665E31D689CEB0079220F /* MELDocumentModel.m */; };
+		DDA665E71D689E3B0079220F /* MELImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665E61D689E3B0079220F /* MELImageModel.m */; };
+		DDA665EB1D68A78A0079220F /* MELCanvasController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665E91D68A78A0079220F /* MELCanvasController.m */; };
+		DDA665EC1D68A78A0079220F /* MELCanvasController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665EA1D68A78A0079220F /* MELCanvasController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +72,14 @@
 		DDA665D81D687EAE0079220F /* MELImageLibraryPanelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELImageLibraryPanelController.xib; sourceTree = "<group>"; };
 		DDA665DC1D687F4A0079220F /* MELDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDataStore.h; sourceTree = "<group>"; };
 		DDA665DD1D687F4A0079220F /* MELDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELDataStore.m; sourceTree = "<group>"; };
+		DDA665E21D689CEB0079220F /* MELDocumentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDocumentModel.h; sourceTree = "<group>"; };
+		DDA665E31D689CEB0079220F /* MELDocumentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELDocumentModel.m; sourceTree = "<group>"; };
+		DDA665E51D689E3B0079220F /* MELImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELImageModel.h; sourceTree = "<group>"; };
+		DDA665E61D689E3B0079220F /* MELImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELImageModel.m; sourceTree = "<group>"; };
+		DDA665E81D68A78A0079220F /* MELCanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELCanvasController.h; sourceTree = "<group>"; };
+		DDA665E91D68A78A0079220F /* MELCanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCanvasController.m; sourceTree = "<group>"; };
+		DDA665EA1D68A78A0079220F /* MELCanvasController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELCanvasController.xib; sourceTree = "<group>"; };
+		DDA665ED1D68B9AD0079220F /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +144,7 @@
 		DDA665981D67636D0079220F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DDA665ED1D68B9AD0079220F /* Macros.h */,
 				DDA665991D67636D0079220F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -170,6 +183,10 @@
 			children = (
 				DDA665DC1D687F4A0079220F /* MELDataStore.h */,
 				DDA665DD1D687F4A0079220F /* MELDataStore.m */,
+				DDA665E21D689CEB0079220F /* MELDocumentModel.h */,
+				DDA665E31D689CEB0079220F /* MELDocumentModel.m */,
+				DDA665E51D689E3B0079220F /* MELImageModel.h */,
+				DDA665E61D689E3B0079220F /* MELImageModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -193,6 +210,8 @@
 				DDA6659C1D67636D0079220F /* Document.m */,
 				DDA665D61D687EAE0079220F /* MELImageLibraryPanelController.h */,
 				DDA665D71D687EAE0079220F /* MELImageLibraryPanelController.m */,
+				DDA665E81D68A78A0079220F /* MELCanvasController.h */,
+				DDA665E91D68A78A0079220F /* MELCanvasController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -203,6 +222,7 @@
 				DDA665D81D687EAE0079220F /* MELImageLibraryPanelController.xib */,
 				DDA6659E1D67636D0079220F /* Document.xib */,
 				DDA665A31D67636D0079220F /* MainMenu.xib */,
+				DDA665EA1D68A78A0079220F /* MELCanvasController.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -316,6 +336,7 @@
 				DDA665CF1D685E520079220F /* Balloons.jpg in Resources */,
 				DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */,
 				DDA665CE1D685E520079220F /* Husky.jpg in Resources */,
+				DDA665EC1D68A78A0079220F /* MELCanvasController.xib in Resources */,
 				DDA665A51D67636D0079220F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,8 +363,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA665D91D687EAE0079220F /* MELImageLibraryPanelController.m in Sources */,
+				DDA665E41D689CEB0079220F /* MELDocumentModel.m in Sources */,
 				DDA665D21D68684B0079220F /* MELCanvas.m in Sources */,
+				DDA665EB1D68A78A0079220F /* MELCanvasController.m in Sources */,
 				DDA665DE1D687F4A0079220F /* MELDataStore.m in Sources */,
+				DDA665E71D689E3B0079220F /* MELImageModel.m in Sources */,
 				DDA6659D1D67636D0079220F /* Document.m in Sources */,
 				DDA6659A1D67636D0079220F /* main.m in Sources */,
 				DDA665971D67636D0079220F /* AppDelegate.m in Sources */,

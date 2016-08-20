@@ -7,6 +7,7 @@
 //
 
 #import "MELCanvas.h"
+#import "MELImageModel.h"
 
 @implementation MELCanvas
 
@@ -17,7 +18,15 @@
 
     [super drawRect:dirtyRect];
     
-    // Drawing code here.
+    for (MELImageModel *image in self.imagesToDraw)
+    {
+        [image.image drawInRect:image.frame fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
+    }
+}
+
+- (BOOL)isFlipped
+{
+    return NO;
 }
 
 @end
