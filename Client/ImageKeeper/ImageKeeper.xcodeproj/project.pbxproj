@@ -1,0 +1,600 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DDA665971D67636D0079220F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665961D67636D0079220F /* AppDelegate.m */; };
+		DDA6659A1D67636D0079220F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665991D67636D0079220F /* main.m */; };
+		DDA6659D1D67636D0079220F /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6659C1D67636D0079220F /* Document.m */; };
+		DDA665A01D67636D0079220F /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA6659E1D67636D0079220F /* Document.xib */; };
+		DDA665A21D67636D0079220F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA665A11D67636D0079220F /* Assets.xcassets */; };
+		DDA665A51D67636D0079220F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665A31D67636D0079220F /* MainMenu.xib */; };
+		DDA665B01D67636D0079220F /* ImageKeeperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665AF1D67636D0079220F /* ImageKeeperTests.m */; };
+		DDA665BB1D67636D0079220F /* ImageKeeperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665BA1D67636D0079220F /* ImageKeeperUITests.m */; };
+		DDA665CD1D685E520079220F /* Butterfly.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA665CA1D685E520079220F /* Butterfly.jpg */; };
+		DDA665CE1D685E520079220F /* Husky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA665CB1D685E520079220F /* Husky.jpg */; };
+		DDA665CF1D685E520079220F /* Balloons.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA665CC1D685E520079220F /* Balloons.jpg */; };
+		DDA665D21D68684B0079220F /* MELCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665D11D68684B0079220F /* MELCanvas.m */; };
+		DDA665D91D687EAE0079220F /* MELImageLibraryPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665D71D687EAE0079220F /* MELImageLibraryPanelController.m */; };
+		DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665D81D687EAE0079220F /* MELImageLibraryPanelController.xib */; };
+		DDA665DE1D687F4A0079220F /* MELDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665DD1D687F4A0079220F /* MELDataStore.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DDA665AC1D67636D0079220F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDA6658A1D67636D0079220F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDA665911D67636D0079220F;
+			remoteInfo = ImageKeeper;
+		};
+		DDA665B71D67636D0079220F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDA6658A1D67636D0079220F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDA665911D67636D0079220F;
+			remoteInfo = ImageKeeper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DDA665921D67636D0079220F /* ImageKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDA665951D67636D0079220F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DDA665961D67636D0079220F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DDA665991D67636D0079220F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DDA6659B1D67636D0079220F /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
+		DDA6659C1D67636D0079220F /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
+		DDA6659F1D67636D0079220F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		DDA665A11D67636D0079220F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DDA665A41D67636D0079220F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		DDA665A61D67636D0079220F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDA665AB1D67636D0079220F /* ImageKeeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageKeeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDA665AF1D67636D0079220F /* ImageKeeperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageKeeperTests.m; sourceTree = "<group>"; };
+		DDA665B11D67636D0079220F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDA665B61D67636D0079220F /* ImageKeeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageKeeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDA665BA1D67636D0079220F /* ImageKeeperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageKeeperUITests.m; sourceTree = "<group>"; };
+		DDA665BC1D67636D0079220F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDA665CA1D685E520079220F /* Butterfly.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Butterfly.jpg; sourceTree = "<group>"; };
+		DDA665CB1D685E520079220F /* Husky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Husky.jpg; sourceTree = "<group>"; };
+		DDA665CC1D685E520079220F /* Balloons.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Balloons.jpg; sourceTree = "<group>"; };
+		DDA665D01D68684A0079220F /* MELCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELCanvas.h; sourceTree = "<group>"; };
+		DDA665D11D68684B0079220F /* MELCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCanvas.m; sourceTree = "<group>"; };
+		DDA665D61D687EAE0079220F /* MELImageLibraryPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELImageLibraryPanelController.h; sourceTree = "<group>"; };
+		DDA665D71D687EAE0079220F /* MELImageLibraryPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELImageLibraryPanelController.m; sourceTree = "<group>"; };
+		DDA665D81D687EAE0079220F /* MELImageLibraryPanelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELImageLibraryPanelController.xib; sourceTree = "<group>"; };
+		DDA665DC1D687F4A0079220F /* MELDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDataStore.h; sourceTree = "<group>"; };
+		DDA665DD1D687F4A0079220F /* MELDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELDataStore.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DDA6658F1D67636D0079220F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDA665A81D67636D0079220F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDA665B31D67636D0079220F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DDA665891D67636D0079220F = {
+			isa = PBXGroup;
+			children = (
+				DDA665941D67636D0079220F /* ImageKeeper */,
+				DDA665AE1D67636D0079220F /* ImageKeeperTests */,
+				DDA665B91D67636D0079220F /* ImageKeeperUITests */,
+				DDA665931D67636D0079220F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DDA665931D67636D0079220F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665921D67636D0079220F /* ImageKeeper.app */,
+				DDA665AB1D67636D0079220F /* ImageKeeperTests.xctest */,
+				DDA665B61D67636D0079220F /* ImageKeeperUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DDA665941D67636D0079220F /* ImageKeeper */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665D31D6878900079220F /* Models */,
+				DDA665D41D6878A30079220F /* Views */,
+				DDA665D51D6878AB0079220F /* Controllers */,
+				DDA665981D67636D0079220F /* Supporting Files */,
+				DDA665C91D685DE80079220F /* Resources */,
+				DDA665A11D67636D0079220F /* Assets.xcassets */,
+				DDA665A61D67636D0079220F /* Info.plist */,
+			);
+			path = ImageKeeper;
+			sourceTree = "<group>";
+		};
+		DDA665981D67636D0079220F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665991D67636D0079220F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DDA665AE1D67636D0079220F /* ImageKeeperTests */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665AF1D67636D0079220F /* ImageKeeperTests.m */,
+				DDA665B11D67636D0079220F /* Info.plist */,
+			);
+			path = ImageKeeperTests;
+			sourceTree = "<group>";
+		};
+		DDA665B91D67636D0079220F /* ImageKeeperUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665BA1D67636D0079220F /* ImageKeeperUITests.m */,
+				DDA665BC1D67636D0079220F /* Info.plist */,
+			);
+			path = ImageKeeperUITests;
+			sourceTree = "<group>";
+		};
+		DDA665C91D685DE80079220F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665CA1D685E520079220F /* Butterfly.jpg */,
+				DDA665CB1D685E520079220F /* Husky.jpg */,
+				DDA665CC1D685E520079220F /* Balloons.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		DDA665D31D6878900079220F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665DC1D687F4A0079220F /* MELDataStore.h */,
+				DDA665DD1D687F4A0079220F /* MELDataStore.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		DDA665D41D6878A30079220F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665DB1D687F0A0079220F /* XIBs */,
+				DDA665D01D68684A0079220F /* MELCanvas.h */,
+				DDA665D11D68684B0079220F /* MELCanvas.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		DDA665D51D6878AB0079220F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665951D67636D0079220F /* AppDelegate.h */,
+				DDA665961D67636D0079220F /* AppDelegate.m */,
+				DDA6659B1D67636D0079220F /* Document.h */,
+				DDA6659C1D67636D0079220F /* Document.m */,
+				DDA665D61D687EAE0079220F /* MELImageLibraryPanelController.h */,
+				DDA665D71D687EAE0079220F /* MELImageLibraryPanelController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		DDA665DB1D687F0A0079220F /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				DDA665D81D687EAE0079220F /* MELImageLibraryPanelController.xib */,
+				DDA6659E1D67636D0079220F /* Document.xib */,
+				DDA665A31D67636D0079220F /* MainMenu.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DDA665911D67636D0079220F /* ImageKeeper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDA665BF1D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeper" */;
+			buildPhases = (
+				DDA6658E1D67636D0079220F /* Sources */,
+				DDA6658F1D67636D0079220F /* Frameworks */,
+				DDA665901D67636D0079220F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageKeeper;
+			productName = ImageKeeper;
+			productReference = DDA665921D67636D0079220F /* ImageKeeper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DDA665AA1D67636D0079220F /* ImageKeeperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDA665C21D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeperTests" */;
+			buildPhases = (
+				DDA665A71D67636D0079220F /* Sources */,
+				DDA665A81D67636D0079220F /* Frameworks */,
+				DDA665A91D67636D0079220F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DDA665AD1D67636D0079220F /* PBXTargetDependency */,
+			);
+			name = ImageKeeperTests;
+			productName = ImageKeeperTests;
+			productReference = DDA665AB1D67636D0079220F /* ImageKeeperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DDA665B51D67636D0079220F /* ImageKeeperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDA665C51D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeperUITests" */;
+			buildPhases = (
+				DDA665B21D67636D0079220F /* Sources */,
+				DDA665B31D67636D0079220F /* Frameworks */,
+				DDA665B41D67636D0079220F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DDA665B81D67636D0079220F /* PBXTargetDependency */,
+			);
+			name = ImageKeeperUITests;
+			productName = ImageKeeperUITests;
+			productReference = DDA665B61D67636D0079220F /* ImageKeeperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DDA6658A1D67636D0079220F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Александр Мелащенко";
+				TargetAttributes = {
+					DDA665911D67636D0079220F = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					DDA665AA1D67636D0079220F = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = DDA665911D67636D0079220F;
+					};
+					DDA665B51D67636D0079220F = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = DDA665911D67636D0079220F;
+					};
+				};
+			};
+			buildConfigurationList = DDA6658D1D67636D0079220F /* Build configuration list for PBXProject "ImageKeeper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DDA665891D67636D0079220F;
+			productRefGroup = DDA665931D67636D0079220F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DDA665911D67636D0079220F /* ImageKeeper */,
+				DDA665AA1D67636D0079220F /* ImageKeeperTests */,
+				DDA665B51D67636D0079220F /* ImageKeeperUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DDA665901D67636D0079220F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDA665CD1D685E520079220F /* Butterfly.jpg in Resources */,
+				DDA665A21D67636D0079220F /* Assets.xcassets in Resources */,
+				DDA665A01D67636D0079220F /* Document.xib in Resources */,
+				DDA665CF1D685E520079220F /* Balloons.jpg in Resources */,
+				DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */,
+				DDA665CE1D685E520079220F /* Husky.jpg in Resources */,
+				DDA665A51D67636D0079220F /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDA665A91D67636D0079220F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDA665B41D67636D0079220F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DDA6658E1D67636D0079220F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDA665D91D687EAE0079220F /* MELImageLibraryPanelController.m in Sources */,
+				DDA665D21D68684B0079220F /* MELCanvas.m in Sources */,
+				DDA665DE1D687F4A0079220F /* MELDataStore.m in Sources */,
+				DDA6659D1D67636D0079220F /* Document.m in Sources */,
+				DDA6659A1D67636D0079220F /* main.m in Sources */,
+				DDA665971D67636D0079220F /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDA665A71D67636D0079220F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDA665B01D67636D0079220F /* ImageKeeperTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDA665B21D67636D0079220F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDA665BB1D67636D0079220F /* ImageKeeperUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DDA665AD1D67636D0079220F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDA665911D67636D0079220F /* ImageKeeper */;
+			targetProxy = DDA665AC1D67636D0079220F /* PBXContainerItemProxy */;
+		};
+		DDA665B81D67636D0079220F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDA665911D67636D0079220F /* ImageKeeper */;
+			targetProxy = DDA665B71D67636D0079220F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DDA6659E1D67636D0079220F /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDA6659F1D67636D0079220F /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		DDA665A31D67636D0079220F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDA665A41D67636D0079220F /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DDA665BD1D67636D0079220F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DDA665BE1D67636D0079220F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DDA665C01D67636D0079220F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ImageKeeper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MEL.ImageKeeper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DDA665C11D67636D0079220F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ImageKeeper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MEL.ImageKeeper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DDA665C31D67636D0079220F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ImageKeeperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MEL.ImageKeeperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageKeeper.app/Contents/MacOS/ImageKeeper";
+			};
+			name = Debug;
+		};
+		DDA665C41D67636D0079220F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ImageKeeperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MEL.ImageKeeperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageKeeper.app/Contents/MacOS/ImageKeeper";
+			};
+			name = Release;
+		};
+		DDA665C61D67636D0079220F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ImageKeeperUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MEL.ImageKeeperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ImageKeeper;
+			};
+			name = Debug;
+		};
+		DDA665C71D67636D0079220F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ImageKeeperUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MEL.ImageKeeperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ImageKeeper;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DDA6658D1D67636D0079220F /* Build configuration list for PBXProject "ImageKeeper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDA665BD1D67636D0079220F /* Debug */,
+				DDA665BE1D67636D0079220F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDA665BF1D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDA665C01D67636D0079220F /* Debug */,
+				DDA665C11D67636D0079220F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DDA665C21D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDA665C31D67636D0079220F /* Debug */,
+				DDA665C41D67636D0079220F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DDA665C51D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDA665C61D67636D0079220F /* Debug */,
+				DDA665C71D67636D0079220F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DDA6658A1D67636D0079220F /* Project object */;
+}
