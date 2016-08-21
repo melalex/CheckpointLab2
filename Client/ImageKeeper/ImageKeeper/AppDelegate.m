@@ -10,14 +10,16 @@
 #import "MELDataStore.h"
 #import "MELImageLibraryPanelController.h"
 #import "MELCanvasController.h"
+#import "MELCanvas.h"
 #import "Document.h"
 #import "MELDocumentModel.h"
+#import "MELImageInspector.h"
 
 @interface AppDelegate ()
 
 @property (retain) MELImageLibraryPanelController *imageLibraryPanelController;
 @property (retain) MELCanvasController *canvasController;
-
+@property (retain) MELImageInspector *imageInspector;
 
 @end
 
@@ -27,6 +29,7 @@
 {
     [_imageLibraryPanelController release];
     [_canvasController release];
+    [_imageInspector release];
     
     [super dealloc];
 }
@@ -38,12 +41,17 @@
     dataStore.documentModel = documentModel;
     [documentModel release];
     
+    self.imageInspector = [[MELImageInspector alloc] initWithWindowNibName:@"MELImageInspector"];
+    self.imageInspector.dataStore = dataStore;
+    [self.imageInspector showWindow:self];
+    
     self.imageLibraryPanelController = [[MELImageLibraryPanelController alloc] initWithWindowNibName:@"MELImageLibraryPanelController"];
     self.imageLibraryPanelController.dataStore = dataStore;
     [self.imageLibraryPanelController showWindow:self];
     
     self.canvasController = [[MELCanvasController alloc] initWithNibName:@"MELCanvasController" bundle:[NSBundle mainBundle]];
     self.canvasController.dataStore = dataStore;
+    self.canvasController.canvas.controller = self.canvasController;
     
     Document *document = [[NSDocumentController sharedDocumentController] documents][0];
     

@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 @class MELImageModel;
+@class MELCanvasController;
 
-@interface MELCanvas : NSView
+@interface MELCanvas : NSView<NSDraggingDestination>
 
 @property (retain) NSArray<MELImageModel *> *imagesToDraw;
+@property (assign) MELCanvasController *controller;
 
 @end

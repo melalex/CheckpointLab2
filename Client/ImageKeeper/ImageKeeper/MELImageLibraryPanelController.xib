@@ -18,19 +18,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="72" horizontalPageScroll="10" verticalLineScroll="72" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6V-vZ-J6z">
-                        <rect key="frame" x="-1" y="-1" width="302" height="602"/>
+                        <rect key="frame" x="-1" y="-1" width="301" height="602"/>
                         <clipView key="contentView" ambiguous="YES" id="Zh3-Mb-BMm">
-                            <rect key="frame" x="1" y="23" width="300" height="578"/>
+                            <rect key="frame" x="1" y="23" width="299" height="578"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" headerView="xu8-Sb-yOV" viewBased="YES" id="qHm-YE-gD9">
-                                    <rect key="frame" x="0.0" y="0.0" width="308" height="578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="299" height="578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="151" minWidth="40" maxWidth="1000" id="kW0-OR-nop">
+                                        <tableColumn width="150" minWidth="40" maxWidth="1000" id="kW0-OR-nop">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Image">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +44,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="17F-tW-rD4">
-                                                    <rect key="frame" x="1" y="1" width="151" height="70"/>
+                                                    <rect key="frame" x="1" y="1" width="150" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Zz-Lb-TLg">
@@ -61,7 +61,7 @@
                                                 <binding destination="zSf-3j-Npp" name="value" keyPath="arrangedObjects" id="njK-kd-pxO"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn width="151" minWidth="40" maxWidth="1000" id="0BN-Ga-kRG">
+                                        <tableColumn width="143" minWidth="40" maxWidth="1000" id="0BN-Ga-kRG">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -75,7 +75,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="t6l-et-PqF">
-                                                    <rect key="frame" x="155" y="1" width="151" height="70"/>
+                                                    <rect key="frame" x="154" y="1" width="143" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7uN-PX-0Cd">
@@ -99,12 +99,13 @@
                                     </tableColumns>
                                     <connections>
                                         <action trigger="doubleAction" selector="doubleClickActionHandler:" target="-2" id="rcA-kL-Axf"/>
+                                        <outlet property="dataSource" destination="-2" id="swH-Ux-xqR"/>
                                     </connections>
                                 </tableView>
                             </subviews>
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Z2s-aN-phZ">
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Z2s-aN-phZ">
                             <rect key="frame" x="1" y="585" width="300" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -113,7 +114,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="xu8-Sb-yOV">
-                            <rect key="frame" x="0.0" y="0.0" width="308" height="23"/>
+                            <rect key="frame" x="0.0" y="0.0" width="299" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>

@@ -10,11 +10,12 @@
 #import "MELDataStore.h"
 #import "MELImageModel.h"
 #import "MELDocumentModel.h"
+#import "MELRect.h"
 
 static CGFloat const kDefaultX = 0.0;
 static CGFloat const kDefaultY = 0.0;
 
-@interface MELImageLibraryPanelController ()
+@interface MELImageLibraryPanelController()<NSTableViewDataSource> 
 
 @end
 
@@ -34,10 +35,18 @@ static CGFloat const kDefaultY = 0.0;
     if (selectedRow >= 0)
     {
         NSImage *image = self.dataStore.images[selectedRow];
-        NSRect frame = NSMakeRect(kDefaultX, kDefaultY, image.size.width, image.size.height);
+        MELRect *frame = [[MELRect alloc] initWithX:kDefaultX y:kDefaultY width:image.size.width height:image.size.height];
         
-        [self.dataStore.documentModel addImagesToDrawObject:[[MELImageModel alloc] initWithImage:image frame:frame]];
+        [self.dataStore putToDocumentModelImage:image inFrame:frame];
     }
+}
+
+- (BOOL)tableView:(NSTableView *)tableView writeRows:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
+{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rows];
+    [pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+    
+    return [pboard setData:data forType:NSStringPboardType];;
 }
 
 #pragma mark - MELImageLibraryPanelControllerGetters

@@ -9,9 +9,15 @@
 #import <Cocoa/Cocoa.h>
 
 @class MELDataStore;
+@class MELCanvas;
 
 @interface MELCanvasController : NSViewController
 
 @property (retain) MELDataStore *dataStore;
+@property (readonly) MELCanvas *canvas;
+
+- (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
+
+- (void)selectImageinPoint:(NSPoint)point;
 
 @end

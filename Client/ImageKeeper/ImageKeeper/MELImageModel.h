@@ -8,12 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class MELRect;
+
+extern NSString *const kMELImageModelDidChangeFrameNotification;
+
 @interface MELImageModel : NSObject
 
 @property (readonly,retain) NSImage *image;
-@property NSRect frame;
-@property (readonly) NSUInteger *layer;
+@property (retain, readonly) MELRect *frame;
+@property (readonly) NSUInteger layer;
 
-- (instancetype)initWithImage:(NSImage *)image frame:(NSRect)frame;
+- (instancetype)initWithImage:(NSImage *)image frame:(MELRect *)frame layer:(NSUInteger)layer;
 
 @end

@@ -11,6 +11,8 @@
 #import "Macros.h"
 #import "MELCanvas.h"
 #import "MELDocumentModel.h"
+#import "MELImageModel.h"
+#import "MELRect.h"
 
 static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasControllerContextImageToDraw";
 
@@ -19,7 +21,6 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
     MELDataStore *_dataStore;
 }
 
-@property (readonly) MELCanvas *canvas;
 
 @end
 
@@ -40,6 +41,19 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
     // Do view setup here.
 }
 
+- (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point
+{
+    NSImage *image = self.dataStore.images[index];
+    MELRect *frame = [[MELRect alloc] initWithX:point.x y:point.y width:image.size.width height:image.size.height];
+    
+    [self.dataStore putToDocumentModelImage:image inFrame:frame];
+}
+
+- (void)selectImageinPoint:(NSPoint)point
+{
+    [self.dataStore selectImageInPoint:point];
+}
+
 - (void)setDataStore:(MELDataStore *)dataStore
 {
     if (_dataStore != dataStore)
@@ -50,8 +64,8 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
         _dataStore = [dataStore retain];
         
         [_dataStore addObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
-                        options:(NSKeyValueObservingOptionPrior | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial)
-                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
+                        options:NSKeyValueObservingOptionNew
+                        context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageToDraw)];
 
     }
 }
@@ -63,9 +77,18 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
 
 - (void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject change:(NSDictionary<NSString *,id> *)aChange context:(void *)aContext
 {
-    if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw))
+    if (aContext == (__bridge void *_Nullable)(kMELCanvasControllerContextImageToDraw))
     {
-        self.canvas.imagesToDraw = self.dataStore.documentModel.imagesToDraw;
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        
+        NSArray<MELImageModel *> *images = self.dataStore.documentModel.imagesToDraw;
+        
+        for (MELImageModel *image in images)
+        {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(frameDidChange:) name:kMELImageModelDidChangeFrameNotification object:image];
+        }
+        
+        self.canvas.imagesToDraw = images;
         self.view.needsDisplay = YES;
     }
     else
@@ -77,6 +100,11 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
 - (MELCanvas *)canvas
 {
     return (MELCanvas *)self.view;
+}
+
+- (void)frameDidChange:(NSNotification *)notification
+{
+    [self.view setNeedsDisplayInRect:[(MELRect *)[notification object] rect]];
 }
 
 @end

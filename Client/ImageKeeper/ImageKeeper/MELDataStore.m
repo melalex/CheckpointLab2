@@ -8,10 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MELDataStore.h"
+#import "MELImageModel.h"
+#import "MELDocumentModel.h"
+#import "MELRect.h"
 
 @interface MELDataStore()
 
 @property (retain) NSMutableArray<NSImage *> *mutableImages;
+@property (assign) MELImageModel *selectedImage;
 
 @end
 
@@ -51,6 +55,10 @@
     [super dealloc];
 }
 
+- (void)selectImageInPoint:(NSPoint)point
+{
+    self.selectedImage = [self.documentModel takeTopImageInPoint:point];
+}
 
 - (void)addImage:(NSImage *)image
 {
@@ -62,6 +70,14 @@
     
 }
 
+#pragma mark - MELDocumentModel modification
+
+- (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame
+{
+    NSUInteger layer = [self.documentModel currentLayerInRect:frame] + 1;
+    
+    [self.documentModel addImagesToDrawObject:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
+}
 
 #pragma mark - MELDataStoreGetters
 

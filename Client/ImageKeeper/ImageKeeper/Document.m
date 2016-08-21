@@ -7,6 +7,7 @@
 //
 
 #import "Document.h"
+#import "MELCanvas.h"
 
 @interface Document ()
 

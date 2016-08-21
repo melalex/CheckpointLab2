@@ -8,9 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MELCanvas;
+
 @interface Document : NSDocument
 
-@property (assign) IBOutlet NSView *canvas;
+@property (assign) IBOutlet MELCanvas *canvas;
 
 @end
 

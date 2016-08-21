@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qUW-VX-0d7">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qUW-VX-0d7" customClass="MELCanvas">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     </customView>
                 </subviews>

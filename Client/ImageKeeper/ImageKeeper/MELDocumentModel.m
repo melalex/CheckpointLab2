@@ -8,6 +8,7 @@
 
 #import "MELDocumentModel.h"
 #import "MELImageModel.h"
+#import "MELRect.h"
 
 @interface MELDocumentModel()
 
@@ -31,6 +32,53 @@
     [_mutableImagesToDraw release];
     
     [super dealloc];
+}
+
+#warning better name for rect
+
+- (NSUInteger)currentLayerInRect:(MELRect *)rect
+{
+    NSUInteger result = 0;
+    NSRect rectRect = rect.rect;
+    
+    for (MELImageModel *imageModel in self.imagesToDraw)
+    {
+        NSRect imageModelRect = imageModel.frame.rect;
+
+        if (!(NSMaxY(rectRect) < NSMinY(imageModelRect) ||
+              NSMinY(rectRect) > NSMaxY(imageModelRect) ||
+              NSMaxX(rectRect) < NSMinX(imageModelRect) ||
+              NSMinX(rectRect) > NSMaxX(imageModelRect)))
+        {
+            result++;
+        }
+    }
+    
+    return result;
+}
+
+- (MELImageModel *)takeTopImageInPoint:(NSPoint)point
+{
+    MELImageModel *result = nil;
+    NSUInteger topLayer = 0;
+    
+    for (MELImageModel *imageModel in self.mutableImagesToDraw)
+    {
+        NSRect imageModelRect = imageModel.frame.rect;
+        
+        if (NSMaxX(imageModelRect) > point.x &&
+            NSMinX(imageModelRect) < point.x &&
+            NSMaxY(imageModelRect) > point.y &&
+            NSMinY(imageModelRect) < point.y &&
+            imageModel.layer > topLayer)
+        {
+            
+            result = imageModel;
+            topLayer = imageModel.layer;
+        }
+    }
+    
+    return result;
 }
 
 - (void)removeImage:(MELImageModel *)image

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class MELImageModel;
+@class MELRect;
 
 @interface MELDocumentModel : NSObject
 
@@ -16,5 +17,8 @@
 
 - (void)addImagesToDrawObject:(MELImageModel *)object;
 - (void)removeImage:(MELImageModel *)image;
+
+- (NSUInteger)currentLayerInRect:(MELRect *)rect;
+- (MELImageModel *)takeTopImageInPoint:(NSPoint)point;
 
 @end
