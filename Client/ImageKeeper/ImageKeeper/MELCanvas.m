@@ -11,13 +11,22 @@
 #import "MELCanvasController.h"
 #import "MELRect.h"
 
+@interface MELCanvas()
+{
+    NSMutableArray<MELImageModel *> *_mutableimagesToDraw;
+}
+
+@property (readonly, retain) NSMutableArray<MELImageModel *> *mutableimagesToDraw;
+
+@end
+
 @implementation MELCanvas
 
 - (instancetype)initWithFrame:(NSRect)frameRect
 {
     if (self = [super initWithFrame:frameRect])
     {
-
+        
     }
     return self;
 }
@@ -29,7 +38,7 @@
 
 - (void)dealloc
 {
-    [_imagesToDraw release];
+    [_mutableimagesToDraw release];
     
     [super dealloc];
 }
@@ -66,6 +75,32 @@
 - (BOOL)isFlipped
 {
     return NO;
+}
+
+#pragma mark - imagesToDraw assessors
+
+- (void)addImagesToDrawObject:(MELImageModel *)object
+{
+    [self.mutableimagesToDraw addObject:object];
+}
+
+- (void)removeImagesToDrawObject:(MELImageModel *)object
+{
+    [self.mutableimagesToDraw removeObject:object];
+}
+
+- (NSArray<MELImageModel *> *)imagesToDraw
+{
+    return [[(NSArray<MELImageModel *> *)self.mutableimagesToDraw copy] autorelease];
+}
+
+- (NSMutableArray<MELImageModel *> *)mutableimagesToDraw
+{
+    if (!_mutableimagesToDraw)
+    {
+        _mutableimagesToDraw = [[NSMutableArray alloc] init];
+    }
+    return _mutableimagesToDraw;
 }
 
 #pragma mark - mouseEvents

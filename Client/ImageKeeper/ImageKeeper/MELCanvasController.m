@@ -18,6 +18,14 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
 static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanvasControllerContextImageChangeFrame";
 static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELCanvasControllerContextSelectedImageChanged";
 
+static NSString *const kIndexes = @"indexes";
+static NSString *const kOld = @"old";
+static NSString *const kX = @"x";
+static NSString *const kY = @"y";
+static NSString *const kWidth = @"width";
+static NSString *const kHeight = @"height";
+
+
 @interface MELCanvasController ()
 {
     MELDataStore *_dataStore;
@@ -112,17 +120,17 @@ static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELC
     return _dataStore;
 }
 
-#warning create consts for strings
 #warning wrong frames
 
 - (void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject change:(NSDictionary<NSString *,id> *)aChange context:(void *)aContext
 {
     if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw))
     {
-        NSUInteger index = [(NSIndexSet *)aChange[@"indexes"] firstIndex];
+        NSUInteger index = [(NSIndexSet *)aChange[kIndexes] firstIndex];
         
         NSArray<MELImageModel *> *images = self.dataStore.documentModel.imagesToDraw;
-        MELRect *frame = [images[index] frame];
+        MELImageModel *image = images[index];
+        MELRect *frame = [image frame];
         
         [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, x)
                     options:NSKeyValueObservingOptionOld
@@ -140,32 +148,32 @@ static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELC
                     options:NSKeyValueObservingOptionOld
                     context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
 
-        self.canvas.imagesToDraw = images;
+        [self.canvas addImagesToDrawObject:image];
                 
         [self.view setNeedsDisplayInRect:frame.rect];
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
     {
         NSRect rect = [(MELRect *)anObject rect];
-        CGFloat oldValue = [aChange[@"old"] doubleValue];
+        CGFloat oldValue = [aChange[kOld] doubleValue];
         
-        if ([aKeyPath isEqualToString:@"x"])
+        if ([aKeyPath isEqualToString:kX])
         {
             NSInteger dX = fabs(oldValue - rect.origin.x);
             rect.size.width += dX;
             rect.origin.x = fmin(rect.origin.x, oldValue);
         }
-        else if ([aKeyPath isEqualToString:@"y"])
+        else if ([aKeyPath isEqualToString:kY])
         {
             NSInteger dY = fabs(oldValue - rect.origin.y);
             rect.size.height += dY;
             rect.origin.y = fmin(rect.origin.y, oldValue);
         }
-        else if ([aKeyPath isEqualToString:@"width"])
+        else if ([aKeyPath isEqualToString:kWidth])
         {
             rect.size.width += fmax(rect.size.width, oldValue);
         }
-        else if ([aKeyPath isEqualToString:@"height"])
+        else if ([aKeyPath isEqualToString:kHeight])
         {
             rect.size.height += fmax(rect.size.height, oldValue);
         }
