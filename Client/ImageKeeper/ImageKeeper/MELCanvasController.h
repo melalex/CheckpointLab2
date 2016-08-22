@@ -10,6 +10,7 @@
 
 @class MELDataStore;
 @class MELCanvas;
+@class MELImageModel;
 
 @interface MELCanvasController : NSViewController
 
@@ -18,6 +19,10 @@
 
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 
-- (void)selectImageinPoint:(NSPoint)point;
+- (void)selectImageInPoint:(NSPoint)point;
+
+- (BOOL)isSelected:(MELImageModel *)image;
+
+- (NSUInteger)takeTopLayer;
 
 @end

@@ -16,6 +16,7 @@
 
 static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasControllerContextImageToDraw";
 static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanvasControllerContextImageChangeFrame";
+static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELCanvasControllerContextSelectedImageChanged";
 
 @interface MELCanvasController ()
 {
@@ -52,24 +53,57 @@ static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanva
     [self.dataStore putToDocumentModelImage:image inFrame:frame];
 }
 
-- (void)selectImageinPoint:(NSPoint)point
+- (void)selectImageInPoint:(NSPoint)point
 {
     [self.dataStore selectImageInPoint:point];
 }
+
+- (BOOL)isSelected:(MELImageModel *)image
+{
+    BOOL result = NO;
+    
+    if (image == self.dataStore.selectedImage)
+    {
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (NSUInteger)takeTopLayer
+{
+    NSUInteger topLayer = 0;
+    
+    for (MELImageModel *image in self.dataStore.documentModel.imagesToDraw)
+    {
+        if (image.layer > topLayer)
+        {
+            topLayer = image.layer;
+        }
+    }
+    
+    return topLayer;
+}
+
+#pragma mark - MELCanvasController KVO
 
 - (void)setDataStore:(MELDataStore *)dataStore
 {
     if (_dataStore != dataStore)
     {
         [_dataStore removeObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw) context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
-        
+        [_dataStore removeObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage) context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
+
         [_dataStore release];
         _dataStore = [dataStore retain];
         
         [_dataStore addObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
-                        options:NSKeyValueObservingOptionNew
-                        context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageToDraw)];
-
+                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
+        
+        [_dataStore addObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
+                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
     }
 }
 
@@ -78,9 +112,12 @@ static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanva
     return _dataStore;
 }
 
+#warning create consts for strings
+#warning wrong frames
+
 - (void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject change:(NSDictionary<NSString *,id> *)aChange context:(void *)aContext
 {
-    if (aContext == (__bridge void *_Nullable)(kMELCanvasControllerContextImageToDraw))
+    if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw))
     {
         NSUInteger index = [(NSIndexSet *)aChange[@"indexes"] firstIndex];
         
@@ -107,7 +144,7 @@ static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanva
                 
         [self.view setNeedsDisplayInRect:frame.rect];
     }
-    else if (aContext == (__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame))
+    else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
     {
         NSRect rect = [(MELRect *)anObject rect];
         CGFloat oldValue = [aChange[@"old"] doubleValue];
@@ -135,6 +172,10 @@ static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanva
         
         [self.view setNeedsDisplayInRect:rect];
     }
+    else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged))
+    {
+        self.view.needsDisplay = YES;
+    }
     else
     {
         [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
@@ -144,11 +185,6 @@ static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanva
 - (MELCanvas *)canvas
 {
     return (MELCanvas *)self.view;
-}
-
-- (void)frameDidChange:(NSNotification *)notification
-{
-    self.view.needsDisplay = YES;;
 }
 
 @end

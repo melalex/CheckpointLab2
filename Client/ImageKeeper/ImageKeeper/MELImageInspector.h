@@ -19,4 +19,6 @@
 @property CGFloat width;
 @property CGFloat height;
 
+@property (readonly) BOOL isSelected;
+
 @end

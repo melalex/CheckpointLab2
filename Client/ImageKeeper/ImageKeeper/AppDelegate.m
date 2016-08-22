@@ -17,6 +17,10 @@
 
 static CGFloat const kDistanceBetweenWindows = 20.0;
 
+static NSString *const kMELImageInspector = @"MELImageInspector";
+static NSString *const kMELImageLibraryPanelController = @"MELImageLibraryPanelController";
+static NSString *const kMELCanvasController = @"MELCanvasController";
+
 @interface AppDelegate ()
 
 @property (retain) MELImageLibraryPanelController *imageLibraryPanelController;
@@ -45,13 +49,13 @@ static CGFloat const kDistanceBetweenWindows = 20.0;
     dataStore.documentModel = documentModel;
     [documentModel release];
     
-    self.imageInspector = [[MELImageInspector alloc] initWithWindowNibName:@"MELImageInspector"];
+    self.imageInspector = [[MELImageInspector alloc] initWithWindowNibName:kMELImageInspector];
     self.imageInspector.dataStore = dataStore;
     
-    self.imageLibraryPanelController = [[MELImageLibraryPanelController alloc] initWithWindowNibName:@"MELImageLibraryPanelController"];
+    self.imageLibraryPanelController = [[MELImageLibraryPanelController alloc] initWithWindowNibName:kMELImageLibraryPanelController];
     self.imageLibraryPanelController.dataStore = dataStore;
     
-    self.canvasController = [[MELCanvasController alloc] initWithNibName:@"MELCanvasController" bundle:[NSBundle mainBundle]];
+    self.canvasController = [[MELCanvasController alloc] initWithNibName:kMELCanvasController bundle:[NSBundle mainBundle]];
     self.canvasController.dataStore = dataStore;
     self.canvasController.canvas.controller = self.canvasController;
     
@@ -69,6 +73,8 @@ static CGFloat const kDistanceBetweenWindows = 20.0;
     NSRect imageLibraryFrame = self.imageLibraryPanelController.window.frame;
     
     NSRect screenFrame = [[NSScreen mainScreen] frame];
+    
+#warning for screenFrame > documentFrame
     
     documentFrame.origin.y = (screenFrame.size.height - documentFrame.size.height)/2;
     documentFrame.origin.x = (screenFrame.size.width - documentFrame.size.width)/2;

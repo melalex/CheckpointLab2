@@ -41,9 +41,25 @@
 
     [super drawRect:dirtyRect];
     
-    for (MELImageModel *image in self.imagesToDraw)
+    NSUInteger topLayer = self.controller.takeTopLayer;
+    
+    for (NSUInteger i = 0; i <= topLayer; i++)
     {
-        [image.image drawInRect:image.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
+        for (MELImageModel *image in self.imagesToDraw)
+        {
+            if (image.layer == i)
+            {
+                [image.image drawInRect:image.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
+                
+                if ([self.controller isSelected:image])
+                {
+                    [NSGraphicsContext saveGraphicsState];
+                    NSSetFocusRingStyle(NSFocusRingOnly);
+                    [[NSBezierPath bezierPathWithRect:NSInsetRect(image.frame.rect, 4, 4)] fill];
+                    [NSGraphicsContext restoreGraphicsState];
+                }
+            }
+        }
     }
 }
 
@@ -63,7 +79,7 @@
 {
     NSPoint point = [self convertPoint:[theEvent locationInWindow] toView:self];
     
-    [self.controller selectImageinPoint:point];
+    [self.controller selectImageInPoint:point];
 }
 
 #pragma mark - NSDraggingDestination

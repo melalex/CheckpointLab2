@@ -62,7 +62,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="xCoordinate" id="KkB-dM-Pr4"/>
+                            <binding destination="-2" name="enabled" keyPath="isSelected" id="L3B-Z5-Qtc"/>
                             <binding destination="-2" name="value" keyPath="xCoordinate" id="8YF-66-OBm"/>
                         </connections>
                     </textField>
@@ -75,7 +75,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="yCoordinate" id="2HJ-ef-IDl"/>
+                            <binding destination="-2" name="enabled" keyPath="isSelected" id="2Pf-0H-Pzx"/>
                             <binding destination="-2" name="value" keyPath="yCoordinate" id="xZZ-bm-X72"/>
                         </connections>
                     </textField>
@@ -88,7 +88,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="width" id="zRs-GY-m5d"/>
+                            <binding destination="-2" name="enabled" keyPath="isSelected" id="3KK-kx-les"/>
                             <binding destination="-2" name="value" keyPath="width" id="MA8-BV-vYb"/>
                         </connections>
                     </textField>
@@ -101,7 +101,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="height" id="ySU-Ys-JPz"/>
+                            <binding destination="-2" name="enabled" keyPath="isSelected" id="lkg-TS-dfL"/>
                             <binding destination="-2" name="value" keyPath="height" id="dzz-5N-UTU"/>
                         </connections>
                     </textField>

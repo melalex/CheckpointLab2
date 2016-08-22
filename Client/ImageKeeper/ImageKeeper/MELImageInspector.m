@@ -52,6 +52,11 @@
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.frame.height), nil];
 }
 
++ (NSSet *)keyPathsForValuesAffectingIsSelected
+{
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage), nil];
+}
+
 #pragma mark - MELImageInspectorSetters
 
 - (void)setXCoordinate:(CGFloat)xCoordinate
@@ -96,4 +101,15 @@
     return self.dataStore.selectedImage.frame.height;
 }
 
+- (BOOL)isSelected
+{
+    BOOL result = NO;
+    
+    if (self.dataStore.selectedImage)
+    {
+        result = YES;
+    }
+    
+    return  result;
+}
 @end
