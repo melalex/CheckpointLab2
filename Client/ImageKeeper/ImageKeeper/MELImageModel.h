@@ -14,7 +14,7 @@
 
 @property (readonly,retain) NSImage *image;
 @property (retain, readonly) MELRect *frame;
-@property (readonly) NSUInteger layer;
+@property  NSUInteger layer;
 
 - (instancetype)initWithImage:(NSImage *)image frame:(MELRect *)frame layer:(NSUInteger)layer;
 

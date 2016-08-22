@@ -34,26 +34,7 @@
     [super dealloc];
 }
 
-- (NSUInteger)currentLayerInRect:(MELRect *)rect
-{
-    NSUInteger result = 0;
-    NSRect rectangle = rect.rect;
-    
-    for (MELImageModel *imageModel in self.imagesToDraw)
-    {
-        NSRect imageModelRect = imageModel.frame.rect;
-
-        if (!(NSMaxY(rectangle) < NSMinY(imageModelRect) ||
-              NSMinY(rectangle) > NSMaxY(imageModelRect) ||
-              NSMaxX(rectangle) < NSMinX(imageModelRect) ||
-              NSMinX(rectangle) > NSMaxX(imageModelRect)))
-        {
-            result++;
-        }
-    }
-    
-    return result;
-}
+#pragma mark - Work with layers
 
 - (MELImageModel *)takeTopImageInPoint:(NSPoint)point
 {
@@ -64,13 +45,9 @@
     {
         NSRect imageModelRect = imageModel.frame.rect;
         
-        if (NSMaxX(imageModelRect) > point.x &&
-            NSMinX(imageModelRect) < point.x &&
-            NSMaxY(imageModelRect) > point.y &&
-            NSMinY(imageModelRect) < point.y &&
+        if (NSPointInRect(point, imageModelRect) &&
             imageModel.layer > topLayer)
         {
-            
             result = imageModel;
             topLayer = imageModel.layer;
         }
@@ -79,16 +56,58 @@
     return result;
 }
 
-- (void)removeImage:(MELImageModel *)image
-{
-    [self removeImage:image];
-}
+#warning решить судьбу методов
+
+//- (BOOL)doIntersectRectA:(NSRect)rectA withRectB:(NSRect)rectB
+//{
+//    return !(NSMaxY(rectA) < NSMinY(rectB) ||
+//             NSMinY(rectA) > NSMaxY(rectB) ||
+//             NSMaxX(rectA) < NSMinX(rectB) ||
+//             NSMinX(rectA) > NSMaxX(rectB));
+//}
+
+//- (NSUInteger)takeTopLayerOfImages:(NSArray<MELImageModel *> *)images
+//{
+//    NSUInteger topLayer = 0;
+//    
+//    for (MELImageModel *image in images)
+//    {
+//        if (image.layer > topLayer)
+//        {
+//            topLayer = image.layer;
+//        }
+//    }
+//    
+//    return topLayer;
+//}
+
+//- (NSArray<MELImageModel *> *)imagesInRect:(NSRect)rect
+//{
+//    NSMutableArray<MELImageModel *> *images = [NSMutableArray array];
+//    
+//    for (MELImageModel *imageModel in self.mutableImagesToDraw)
+//    {
+//        NSRect imageModelRect = imageModel.frame.rect;
+//        
+//        if ([self doIntersectRectA:rect withRectB:imageModelRect])
+//        {
+//            [images addObject:imageModel];
+//        }
+//    }
+//
+//    return [[images copy] autorelease];
+//}
 
 #pragma mark - MELDocumentModel KVC Support
 
+- (void)addImage:(MELImageModel *)image
+{
+    [self insertObject:image inImagesToDrawAtIndex:self.mutableImagesToDraw.count];
+}
+
 - (void)addImagesToDrawObject:(MELImageModel *)object
 {
-    [self insertObject:object inImagesToDrawAtIndex:[self.mutableImagesToDraw count]];
+    [self.mutableImagesToDraw addObject:object];
 }
 
 - (NSArray<MELImageModel *> *)imagesToDraw
@@ -114,6 +133,11 @@
 - (void)removeObjectFromImagesToDrawAtIndex:(NSUInteger)index
 {
     [self.mutableImagesToDraw removeObjectAtIndex:index];
+}
+
+- (void)removeImagesToDrawObject:(MELImageModel *)object;
+{
+    [self.mutableImagesToDraw removeObject:object];
 }
 
 @end

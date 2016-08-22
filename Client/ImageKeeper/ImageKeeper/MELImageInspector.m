@@ -11,6 +11,7 @@
 #import "Macros.h"
 #import "MELImageModel.h"
 #import "MELRect.h"
+#import "MELDocumentModel.h"
 
 @interface MELImageInspector ()
 
@@ -52,6 +53,11 @@
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.frame.height), nil];
 }
 
++ (NSSet *)keyPathsForValuesAffectingLayer
+{
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.layer), nil];
+}
+
 + (NSSet *)keyPathsForValuesAffectingIsSelected
 {
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage), nil];
@@ -79,6 +85,26 @@
     self.dataStore.selectedImage.frame.height = height;
 }
 
+- (void)setLayer:(NSUInteger)layer
+{
+    NSUInteger oldLayer = self.dataStore.selectedImage.layer;
+    
+    for (MELImageModel *image in self.dataStore.documentModel.imagesToDraw)
+    {
+        if (image.layer > oldLayer)
+        {
+            image.layer--;
+        }
+        
+        if (image.layer >= layer)
+        {
+            image.layer++;
+        }
+    }
+
+    self.dataStore.selectedImage.layer = layer;
+}
+
 #pragma mark - MELImageInspectorGetters
 
 - (CGFloat)xCoordinate
@@ -99,6 +125,11 @@
 - (CGFloat)height
 {
     return self.dataStore.selectedImage.frame.height;
+}
+
+- (NSUInteger)layer
+{
+    return self.dataStore.selectedImage.layer;
 }
 
 - (BOOL)isSelected

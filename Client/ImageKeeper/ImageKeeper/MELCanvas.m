@@ -13,10 +13,10 @@
 
 @interface MELCanvas()
 {
-    NSMutableArray<MELImageModel *> *_mutableimagesToDraw;
+    NSMutableArray<MELImageModel *> *_mutableImagesToDraw;
 }
 
-@property (readonly, retain) NSMutableArray<MELImageModel *> *mutableimagesToDraw;
+@property (readonly, retain) NSMutableArray<MELImageModel *> *mutableImagesToDraw;
 
 @end
 
@@ -38,7 +38,7 @@
 
 - (void)dealloc
 {
-    [_mutableimagesToDraw release];
+    [_mutableImagesToDraw release];
     
     [super dealloc];
 }
@@ -50,24 +50,22 @@
 
     [super drawRect:dirtyRect];
     
-    NSUInteger topLayer = self.controller.takeTopLayer;
+    [self.mutableImagesToDraw sortUsingComparator:^NSComparisonResult(MELImageModel *a, MELImageModel *b)
+     {
+         return (NSComparisonResult)(a.layer > b.layer);
+     }];
+
     
-    for (NSUInteger i = 0; i <= topLayer; i++)
+    for (MELImageModel *image in self.imagesToDraw)
     {
-        for (MELImageModel *image in self.imagesToDraw)
+        [image.image drawInRect:image.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
+        
+        if ([self.controller isSelected:image])
         {
-            if (image.layer == i)
-            {
-                [image.image drawInRect:image.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
-                
-                if ([self.controller isSelected:image])
-                {
-                    [NSGraphicsContext saveGraphicsState];
-                    NSSetFocusRingStyle(NSFocusRingOnly);
-                    [[NSBezierPath bezierPathWithRect:NSInsetRect(image.frame.rect, 4, 4)] fill];
-                    [NSGraphicsContext restoreGraphicsState];
-                }
-            }
+            [NSGraphicsContext saveGraphicsState];
+            NSSetFocusRingStyle(NSFocusRingOnly);
+            [[NSBezierPath bezierPathWithRect:NSInsetRect(image.frame.rect, 4, 4)] fill];
+            [NSGraphicsContext restoreGraphicsState];
         }
     }
 }
@@ -96,11 +94,11 @@
 
 - (NSMutableArray<MELImageModel *> *)mutableimagesToDraw
 {
-    if (!_mutableimagesToDraw)
+    if (!_mutableImagesToDraw)
     {
-        _mutableimagesToDraw = [[NSMutableArray alloc] init];
+        _mutableImagesToDraw = [[NSMutableArray alloc] init];
     }
-    return _mutableimagesToDraw;
+    return _mutableImagesToDraw;
 }
 
 #pragma mark - mouseEvents
@@ -120,20 +118,19 @@
 - (void)mouseDragged:(NSEvent *)theEvent
 {
     NSPoint point = [self convertPoint:[theEvent locationInWindow] toView:self];
+    NSRect selectedImageFrame = self.controller.selectedImageFrame;
     
-    NSLog(@"Mouse dragged in point (%f, %f)", point.x, point.y);
+    if (NSPointInRect(point, selectedImageFrame))
+    {
+        [self.controller shiftByDeltaX:theEvent.deltaX deltaY:theEvent.deltaY];
+    }
 }
 
 #pragma mark - NSDraggingDestination
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
-{
-    NSDragOperation result = NSDragOperationNone;
-    if ((NSDragOperationGeneric & [sender draggingSourceOperationMask]) == NSDragOperationGeneric)
-    {
-        result = NSDragOperationGeneric;
-    }
-    return result;
+{    
+    return NSDragOperationCopy;
 }
 
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
@@ -141,12 +138,14 @@
     return YES;
 }
 
-- (void)draggingEnded:(id<NSDraggingInfo>)sender
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
     NSData *data = [[sender draggingPasteboard] dataForType:NSStringPboardType];
     NSArray *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     [self.controller addImageFromLibraryAtIndex:[rowIndexes[0] longLongValue] toPoint:sender.draggingLocation];
+    
+    return YES;
 }
 
 @end

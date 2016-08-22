@@ -26,13 +26,13 @@ static NSString *const kX = @"x";
 static NSString *const kY = @"y";
 static NSString *const kWidth = @"width";
 static NSString *const kHeight = @"height";
+static NSString *const kLayer = @"layer";
 
 
 @interface MELCanvasController ()
 {
     MELDataStore *_dataStore;
 }
-
 
 @end
 
@@ -62,14 +62,31 @@ static NSString *const kHeight = @"height";
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point
 {
     NSImage *image = self.dataStore.images[index];
-    MELRect *frame = [[MELRect alloc] initWithX:point.x y:point.y width:image.size.width height:image.size.height];
+ 
+    CGFloat width = image.size.width;
+    CGFloat height = image.size.height;
+    CGFloat x = point.x - image.size.width/2;
+    CGFloat y = point.y - image.size.height/2;
+
+    MELRect *frame = [[MELRect alloc] initWithX:x y:y width:width height:height];
     
     [self.dataStore putToDocumentModelImage:image inFrame:frame];
+}
+
+- (NSImage *)imageAtIndex:(NSUInteger)index
+{
+    return self.dataStore.images[index];
 }
 
 - (void)selectImageInPoint:(NSPoint)point
 {
     [self.dataStore selectImageInPoint:point];
+}
+
+- (void)shiftByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
+{
+    self.dataStore.selectedImage.frame.x += deltaX;
+    self.dataStore.selectedImage.frame.y -= deltaY;
 }
 
 - (BOOL)isSelected:(MELImageModel *)image
@@ -84,19 +101,9 @@ static NSString *const kHeight = @"height";
     return result;
 }
 
-- (NSUInteger)takeTopLayer
+- (NSRect)selectedImageFrame
 {
-    NSUInteger topLayer = 0;
-    
-    for (MELImageModel *image in self.dataStore.documentModel.imagesToDraw)
-    {
-        if (image.layer > topLayer)
-        {
-            topLayer = image.layer;
-        }
-    }
-    
-    return topLayer;
+    return self.dataStore.selectedImage.frame.rect;
 }
 
 #pragma mark - MELCanvasController KVO
@@ -156,6 +163,11 @@ static NSString *const kHeight = @"height";
         [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, height)
                     options:NSKeyValueObservingOptionOld
                     context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+        
+        [image addObserver:self forKeyPath:@OBJECT_KEY_PATH(image, layer)
+                   options:NSKeyValueObservingOptionOld
+                   context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+
 
         [self.canvas addImagesToDrawObject:image];
                 
@@ -163,7 +175,7 @@ static NSString *const kHeight = @"height";
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
     {
-        NSRect rect = [(MELRect *)anObject rect];
+        NSRect rect = [aKeyPath isEqualToString:kLayer] ? [[(MELImageModel *)anObject frame] rect] : [(MELRect *)anObject rect];
         CGFloat oldValue = [aChange[kOld] doubleValue];
         
         if ([aKeyPath isEqualToString:kX])

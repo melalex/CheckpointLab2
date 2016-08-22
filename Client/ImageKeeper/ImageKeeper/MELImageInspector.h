@@ -18,6 +18,7 @@
 @property CGFloat yCoordinate;
 @property CGFloat width;
 @property CGFloat height;
+@property NSUInteger layer;
 
 @property (readonly) BOOL isSelected;
 

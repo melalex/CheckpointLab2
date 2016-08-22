@@ -12,6 +12,9 @@
 #import "MELDocumentModel.h"
 #import "MELRect.h"
 
+static NSString *const kLproj = @"lproj";
+static NSString *const kNib = @"nib";
+
 @interface MELDataStore()
 
 @property (retain) NSMutableArray<NSImage *> *mutableImages;
@@ -31,13 +34,13 @@
         
         for (NSString *path in paths)
         {
-            if (![path hasSuffix:@"lproj"] && ![path hasSuffix:@"nib"])
+            if (![path hasSuffix:kLproj] && ![path hasSuffix:kNib])
             {
                 NSURL *imageURL = [NSURL fileURLWithPath:path];
                 
                 NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
                 
-                imageObj.name = [[imageURL pathComponents] lastObject];
+                imageObj.name = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
                 
                 [_mutableImages addObject:imageObj];
                 
@@ -74,9 +77,9 @@
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame
 {
-    NSUInteger layer = [self.documentModel currentLayerInRect:frame] + 1;
+    NSUInteger layer = self.documentModel.imagesToDraw.count + 1;
     
-    [self.documentModel addImagesToDrawObject:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
+    [self.documentModel addImage:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
 }
 
 #pragma mark - MELDataStoreGetters

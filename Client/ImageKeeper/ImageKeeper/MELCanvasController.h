@@ -20,9 +20,11 @@
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 
 - (void)selectImageInPoint:(NSPoint)point;
+#warning imageAtIndex
+- (NSImage *)imageAtIndex:(NSUInteger)index;
 
+- (void)shiftByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY;
 - (BOOL)isSelected:(MELImageModel *)image;
-
-- (NSUInteger)takeTopLayer;
+- (NSRect)selectedImageFrame;
 
 @end

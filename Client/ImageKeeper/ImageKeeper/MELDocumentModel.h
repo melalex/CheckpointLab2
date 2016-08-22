@@ -15,10 +15,12 @@
 
 @property (retain, readonly) NSArray<MELImageModel *> *imagesToDraw;
 
-- (void)addImagesToDrawObject:(MELImageModel *)object;
-- (void)removeImage:(MELImageModel *)image;
+- (void)addImage:(MELImageModel *)image;
 
-- (NSUInteger)currentLayerInRect:(MELRect *)rect;
+#warning Вызов метода addImagesToDrawObject возбуждает исключение '*** -[NSSet intersectsSet:]: set argument is not an NSSet'
+- (void)addImagesToDrawObject:(MELImageModel *)object;
+- (void)removeImagesToDrawObject:(MELImageModel *)object;
+
 - (MELImageModel *)takeTopImageInPoint:(NSPoint)point;
 
 @end
