@@ -24,8 +24,6 @@ static CGFloat const kDefaultY = 0.0;
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
 - (IBAction)doubleClickActionHandler:(id)sender

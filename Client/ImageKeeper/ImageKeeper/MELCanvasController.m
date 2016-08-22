@@ -15,6 +15,7 @@
 #import "MELRect.h"
 
 static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasControllerContextImageToDraw";
+static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanvasControllerContextImageChangeFrame";
 
 @interface MELCanvasController ()
 {
@@ -29,6 +30,8 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
 - (void)dealloc
 {
     [_dataStore removeObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw) context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
+   
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [_dataStore release];
     
@@ -79,17 +82,58 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
 {
     if (aContext == (__bridge void *_Nullable)(kMELCanvasControllerContextImageToDraw))
     {
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        NSUInteger index = [(NSIndexSet *)aChange[@"indexes"] firstIndex];
         
         NSArray<MELImageModel *> *images = self.dataStore.documentModel.imagesToDraw;
+        MELRect *frame = [images[index] frame];
         
-        for (MELImageModel *image in images)
+        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, x)
+                    options:NSKeyValueObservingOptionOld
+                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+        
+        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, y)
+                    options:NSKeyValueObservingOptionOld
+                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+        
+        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, width)
+                    options:NSKeyValueObservingOptionOld
+                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+        
+        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, height)
+                    options:NSKeyValueObservingOptionOld
+                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+
+        self.canvas.imagesToDraw = images;
+                
+        [self.view setNeedsDisplayInRect:frame.rect];
+    }
+    else if (aContext == (__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame))
+    {
+        NSRect rect = [(MELRect *)anObject rect];
+        CGFloat oldValue = [aChange[@"old"] doubleValue];
+        
+        if ([aKeyPath isEqualToString:@"x"])
         {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(frameDidChange:) name:kMELImageModelDidChangeFrameNotification object:image];
+            NSInteger dX = fabs(oldValue - rect.origin.x);
+            rect.size.width += dX;
+            rect.origin.x = fmin(rect.origin.x, oldValue);
+        }
+        else if ([aKeyPath isEqualToString:@"y"])
+        {
+            NSInteger dY = fabs(oldValue - rect.origin.y);
+            rect.size.height += dY;
+            rect.origin.y = fmin(rect.origin.y, oldValue);
+        }
+        else if ([aKeyPath isEqualToString:@"width"])
+        {
+            rect.size.width += fmax(rect.size.width, oldValue);
+        }
+        else if ([aKeyPath isEqualToString:@"height"])
+        {
+            rect.size.height += fmax(rect.size.height, oldValue);
         }
         
-        self.canvas.imagesToDraw = images;
-        self.view.needsDisplay = YES;
+        [self.view setNeedsDisplayInRect:rect];
     }
     else
     {
@@ -104,7 +148,7 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
 
 - (void)frameDidChange:(NSNotification *)notification
 {
-    [self.view setNeedsDisplayInRect:[(MELRect *)[notification object] rect]];
+    self.view.needsDisplay = YES;;
 }
 
 @end

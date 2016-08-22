@@ -13,6 +13,8 @@
 
 @interface MELCanvas : NSView<NSDraggingDestination>
 
+#warning add method to imagesToDraw
+
 @property (retain) NSArray<MELImageModel *> *imagesToDraw;
 @property (assign) MELCanvasController *controller;
 

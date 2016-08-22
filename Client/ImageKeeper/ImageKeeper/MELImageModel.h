@@ -10,8 +10,6 @@
 
 @class MELRect;
 
-extern NSString *const kMELImageModelDidChangeFrameNotification;
-
 @interface MELImageModel : NSObject
 
 @property (readonly,retain) NSImage *image;

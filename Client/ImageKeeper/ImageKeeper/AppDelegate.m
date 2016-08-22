@@ -15,6 +15,8 @@
 #import "MELDocumentModel.h"
 #import "MELImageInspector.h"
 
+static CGFloat const kDistanceBetweenWindows = 20.0;
+
 @interface AppDelegate ()
 
 @property (retain) MELImageLibraryPanelController *imageLibraryPanelController;
@@ -36,6 +38,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    
+#pragma mark - App App dependencies
     MELDocumentModel *documentModel = [[MELDocumentModel alloc] init];
     MELDataStore *dataStore = [[MELDataStore alloc] init];
     dataStore.documentModel = documentModel;
@@ -43,11 +47,9 @@
     
     self.imageInspector = [[MELImageInspector alloc] initWithWindowNibName:@"MELImageInspector"];
     self.imageInspector.dataStore = dataStore;
-    [self.imageInspector showWindow:self];
     
     self.imageLibraryPanelController = [[MELImageLibraryPanelController alloc] initWithWindowNibName:@"MELImageLibraryPanelController"];
     self.imageLibraryPanelController.dataStore = dataStore;
-    [self.imageLibraryPanelController showWindow:self];
     
     self.canvasController = [[MELCanvasController alloc] initWithNibName:@"MELCanvasController" bundle:[NSBundle mainBundle]];
     self.canvasController.dataStore = dataStore;
@@ -59,6 +61,26 @@
     [self.canvasController.view setFrame:document.canvas.bounds];
     
     [dataStore release];
+
+#pragma mark - Windows position
+
+    NSRect documentFrame = [[document.windowControllers[0] window] frame];
+    NSRect imageInspectorFrame = self.imageInspector.window.frame;
+    NSRect imageLibraryFrame = self.imageLibraryPanelController.window.frame;
+    
+    NSRect screenFrame = [[NSScreen mainScreen] frame];
+    
+    documentFrame.origin.y = (screenFrame.size.height - documentFrame.size.height)/2;
+    documentFrame.origin.x = (screenFrame.size.width - documentFrame.size.width)/2;
+
+    imageInspectorFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageInspectorFrame.size.height;
+    imageInspectorFrame.origin.x = documentFrame.origin.x - imageInspectorFrame.size.width - kDistanceBetweenWindows;
+    imageLibraryFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageLibraryFrame.size.height;
+    imageLibraryFrame.origin.x = documentFrame.origin.x + documentFrame.size.width + kDistanceBetweenWindows;
+    
+    [self.imageInspector.window setFrame:imageInspectorFrame display:YES];
+    [self.imageLibraryPanelController.window setFrame:imageLibraryFrame display:YES];
+    [[document.windowControllers[0] window] setFrame:documentFrame display:YES];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
