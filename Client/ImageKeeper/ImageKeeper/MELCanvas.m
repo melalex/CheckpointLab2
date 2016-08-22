@@ -117,6 +117,13 @@
     [self.controller selectImageInPoint:point];
 }
 
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    NSPoint point = [self convertPoint:[theEvent locationInWindow] toView:self];
+    
+    NSLog(@"Mouse dragged in point (%f, %f)", point.x, point.y);
+}
+
 #pragma mark - NSDraggingDestination
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender

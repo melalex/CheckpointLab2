@@ -34,21 +34,19 @@
     [super dealloc];
 }
 
-#warning better name for rect
-
 - (NSUInteger)currentLayerInRect:(MELRect *)rect
 {
     NSUInteger result = 0;
-    NSRect rectRect = rect.rect;
+    NSRect rectangle = rect.rect;
     
     for (MELImageModel *imageModel in self.imagesToDraw)
     {
         NSRect imageModelRect = imageModel.frame.rect;
 
-        if (!(NSMaxY(rectRect) < NSMinY(imageModelRect) ||
-              NSMinY(rectRect) > NSMaxY(imageModelRect) ||
-              NSMaxX(rectRect) < NSMinX(imageModelRect) ||
-              NSMinX(rectRect) > NSMaxX(imageModelRect)))
+        if (!(NSMaxY(rectangle) < NSMinY(imageModelRect) ||
+              NSMinY(rectangle) > NSMaxY(imageModelRect) ||
+              NSMaxX(rectangle) < NSMinX(imageModelRect) ||
+              NSMinX(rectangle) > NSMaxX(imageModelRect)))
         {
             result++;
         }

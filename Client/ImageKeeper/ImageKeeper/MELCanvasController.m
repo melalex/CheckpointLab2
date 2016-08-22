@@ -20,6 +20,8 @@ static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELC
 
 static NSString *const kIndexes = @"indexes";
 static NSString *const kOld = @"old";
+static NSString *const kNew = @"new";
+
 static NSString *const kX = @"x";
 static NSString *const kY = @"y";
 static NSString *const kWidth = @"width";
@@ -38,9 +40,13 @@ static NSString *const kHeight = @"height";
 
 - (void)dealloc
 {
-    [_dataStore removeObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw) context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
-   
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_dataStore removeObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
+                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
+    
+    [_dataStore removeObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
+                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
 
     [_dataStore release];
     
@@ -99,8 +105,13 @@ static NSString *const kHeight = @"height";
 {
     if (_dataStore != dataStore)
     {
-        [_dataStore removeObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw) context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
-        [_dataStore removeObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage) context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
+        [_dataStore removeObserver:self
+                        forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
+                           context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
+        
+        [_dataStore removeObserver:self
+                        forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
+                           context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
 
         [_dataStore release];
         _dataStore = [dataStore retain];
@@ -119,8 +130,6 @@ static NSString *const kHeight = @"height";
 {
     return _dataStore;
 }
-
-#warning wrong frames
 
 - (void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject change:(NSDictionary<NSString *,id> *)aChange context:(void *)aContext
 {
@@ -160,7 +169,7 @@ static NSString *const kHeight = @"height";
         if ([aKeyPath isEqualToString:kX])
         {
             NSInteger dX = fabs(oldValue - rect.origin.x);
-            rect.size.width += dX;
+            rect.size.width += dX + 0.5;
             rect.origin.x = fmin(rect.origin.x, oldValue);
         }
         else if ([aKeyPath isEqualToString:kY])
@@ -182,7 +191,20 @@ static NSString *const kHeight = @"height";
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged))
     {
-        self.view.needsDisplay = YES;
+        if (![aChange[kOld] isEqual:[NSNull null]])
+        {
+            NSRect oldValue = [[(MELImageModel *)aChange[kOld] frame] rect];
+            
+            [self.view setNeedsDisplayInRect:oldValue];
+        }
+        
+        if (![aChange[kNew] isEqual:[NSNull null]])
+        {
+            NSRect newValue = [[(MELImageModel *)aChange[kNew] frame] rect];
+
+            [self.view setNeedsDisplayInRect:newValue];
+        }
+
     }
     else
     {
