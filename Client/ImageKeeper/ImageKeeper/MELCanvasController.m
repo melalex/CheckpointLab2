@@ -34,9 +34,8 @@ static CGFloat const kDefaultDeltaY = 1.0;
 @interface MELCanvasController ()
 {
     MELDataStore *_dataStore;
+    id<MELStrategy> _strategy;
 }
-
-
 
 @end
 
@@ -53,6 +52,7 @@ static CGFloat const kDefaultDeltaY = 1.0;
                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
 
     [_dataStore release];
+    [_strategy release];
     
     [super dealloc];
 }
@@ -75,11 +75,6 @@ static CGFloat const kDefaultDeltaY = 1.0;
     MELRect *frame = [[MELRect alloc] initWithX:x y:y width:width height:height];
     
     [self.dataStore putToDocumentModelImage:image inFrame:frame];
-}
-
-- (void)selectImageInPoint:(NSPoint)point
-{
-    [self.dataStore selectImageInPoint:point];
 }
 
 - (void)shiftByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
@@ -105,29 +100,35 @@ static CGFloat const kDefaultDeltaY = 1.0;
     return self.dataStore.selectedImage.frame.rect;
 }
 
+#pragma mark - strategy
+
+- (void)setStrategy:(id<MELStrategy>)strategy
+{
+    if (_strategy != strategy)
+    {
+        [_strategy release];
+        _strategy = [strategy retain];
+        
+        _strategy.ownerView = self.view;
+        _strategy.dataStore = self.dataStore;
+    }
+}
+
+- (id<MELStrategy>)strategy
+{
+    return _strategy;
+}
+
 #pragma mark - mouseEvents
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSPoint point = [self.view convertPoint:[theEvent locationInWindow] fromView:nil];
-    
-    [self selectImageInPoint:point];
+    [self.strategy mouseDownAction:theEvent];
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
 {
-    NSPoint point = [self.view convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSRect selectedImageFrame = self.selectedImageFrame;
-    
-    if (NSPointInRect(point, selectedImageFrame))
-    {
-#warning optimize deltaX, deltaY
-        [self shiftByDeltaX:theEvent.deltaX deltaY:theEvent.deltaY];
-    }
-    else
-    {
-        [super mouseDragged:theEvent];
-    }
+    [self.strategy mouseDraggAction:theEvent];
 }
 
 #pragma mark - keyboardEvents

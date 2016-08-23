@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MELCanvasController;
+
 @interface MELInstrumentPanelController : NSWindowController
+
+@property (retain) MELCanvasController *canvasController;
 
 @end

@@ -15,50 +15,50 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="bSk-QV-Cmn" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="112" width="257" height="50"/>
+            <rect key="contentRect" x="196" y="112" width="246" height="50"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="S9b-hz-T5U">
-                <rect key="frame" x="0.0" y="0.0" width="257" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="246" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k5U-rl-3xH">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Cursor" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0py-cw-0pC">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Cursor" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="0py-cw-0pC">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iod-fd-Lon">
                         <rect key="frame" x="49" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Line" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="eAp-Xg-tx6">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJn-O7-gCt">
-                        <rect key="frame" x="207" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Brush" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="oEf-YP-JVO">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Line" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="eAp-Xg-tx6">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-s6-tsc">
-                        <rect key="frame" x="158" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Oval" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8xf-An-o6V">
+                        <rect key="frame" x="147" y="0.0" width="50" height="50"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Oval" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8xf-An-o6V">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BoV-1o-MhY">
                         <rect key="frame" x="98" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Rectangle" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="nVR-Il-GlQ">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Rectangle" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="nVR-Il-GlQ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJn-O7-gCt">
+                        <rect key="frame" x="196" y="0.0" width="50" height="50"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Brush" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="oEf-YP-JVO">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="386.5" y="-60"/>
+            <point key="canvasLocation" x="381" y="-60"/>
         </window>
     </objects>
     <resources>

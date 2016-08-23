@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MELStrategy.h"
 
 @class MELDataStore;
 @class MELCanvas;
@@ -14,6 +15,7 @@
 
 @interface MELCanvasController : NSViewController
 
+@property (retain) id<MELStrategy> strategy;
 @property (retain) MELDataStore *dataStore;
 @property (readonly) MELCanvas *canvas;
 

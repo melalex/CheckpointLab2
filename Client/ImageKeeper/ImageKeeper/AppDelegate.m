@@ -16,18 +16,21 @@
 #import "MELImageInspector.h"
 #import "MELImageModel.h"
 #import "MELRect.h"
+#import "MELInstrumentPanelController.h"
 
 static CGFloat const kDistanceBetweenWindows = 20.0;
 
 static NSString *const kMELImageInspector = @"MELImageInspector";
 static NSString *const kMELImageLibraryPanelController = @"MELImageLibraryPanelController";
 static NSString *const kMELCanvasController = @"MELCanvasController";
+static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelController";
 
 @interface AppDelegate ()
 
 @property (retain) MELImageLibraryPanelController *imageLibraryPanelController;
 @property (retain) MELCanvasController *canvasController;
 @property (retain) MELImageInspector *imageInspector;
+@property (retain) MELInstrumentPanelController *instrumentPanelController;
 
 @end
 
@@ -61,6 +64,9 @@ static NSString *const kMELCanvasController = @"MELCanvasController";
     self.canvasController.dataStore = dataStore;
     self.canvasController.canvas.controller = self.canvasController;
     
+    self.instrumentPanelController = [[MELInstrumentPanelController alloc] initWithWindowNibName:kMELInstrumentPanelController];
+    self.instrumentPanelController.canvasController = self.canvasController;
+    
     Document *document = [[NSDocumentController sharedDocumentController] documents][0];
     
     [document.canvas addSubview:self.canvasController.view];
@@ -73,6 +79,7 @@ static NSString *const kMELCanvasController = @"MELCanvasController";
     NSRect documentFrame = [[document.windowControllers[0] window] frame];
     NSRect imageInspectorFrame = self.imageInspector.window.frame;
     NSRect imageLibraryFrame = self.imageLibraryPanelController.window.frame;
+    NSRect instrumentPanelFrame = self.instrumentPanelController.window.frame;
     
     NSRect screenFrame = [[NSScreen mainScreen] frame];
     
@@ -83,11 +90,17 @@ static NSString *const kMELCanvasController = @"MELCanvasController";
 
     imageInspectorFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageInspectorFrame.size.height;
     imageInspectorFrame.origin.x = documentFrame.origin.x - imageInspectorFrame.size.width - kDistanceBetweenWindows;
+   
     imageLibraryFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageLibraryFrame.size.height;
     imageLibraryFrame.origin.x = documentFrame.origin.x + documentFrame.size.width + kDistanceBetweenWindows;
     
+    instrumentPanelFrame.origin.y = documentFrame.origin.y + documentFrame.size.height + kDistanceBetweenWindows;
+    instrumentPanelFrame.origin.x = documentFrame.origin.x + documentFrame.size.width / 2 - instrumentPanelFrame.size.width / 2;
+
     [self.imageInspector.window setFrame:imageInspectorFrame display:YES];
     [self.imageLibraryPanelController.window setFrame:imageLibraryFrame display:YES];
+    [self.instrumentPanelController.window setFrame:instrumentPanelFrame display:YES];
+
     [[document.windowControllers[0] window] setFrame:documentFrame display:YES];
 }
 
