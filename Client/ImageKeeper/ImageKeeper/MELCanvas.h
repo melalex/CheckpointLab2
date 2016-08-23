@@ -13,10 +13,7 @@
 
 @interface MELCanvas : NSView<NSDraggingDestination>
 
-@property (readonly, retain) NSArray<MELImageModel *> *imagesToDraw;
+@property (retain) NSArray<MELImageModel *> *imagesToDraw;
 @property (assign) MELCanvasController *controller;
-
-- (void)addImagesToDrawObject:(MELImageModel *)object;
-- (void)removeImagesToDrawObject:(MELImageModel *)object;
 
 @end

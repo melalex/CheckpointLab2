@@ -63,6 +63,11 @@ static NSString *const kNib = @"nib";
     self.selectedImage = [self.documentModel takeTopImageInPoint:point];
 }
 
+- (void)deselectImage
+{
+    self.selectedImage = nil;
+}
+
 - (void)addImage:(NSImage *)image
 {
     

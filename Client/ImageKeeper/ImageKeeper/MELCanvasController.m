@@ -18,7 +18,6 @@ static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasCont
 static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanvasControllerContextImageChangeFrame";
 static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELCanvasControllerContextSelectedImageChanged";
 
-static NSString *const kIndexes = @"indexes";
 static NSString *const kOld = @"old";
 static NSString *const kNew = @"new";
 
@@ -142,7 +141,9 @@ static NSString *const kLayer = @"layer";
 
 - (void)deleteSelectedImage
 {
+    [self.dataStore.documentModel removeImage:self.dataStore.selectedImage];
     
+    [self.dataStore deselectImage];
 }
 
 #pragma mark - MELCanvasController KVO
@@ -162,11 +163,13 @@ static NSString *const kLayer = @"layer";
         [_dataStore release];
         _dataStore = [dataStore retain];
         
-        [_dataStore addObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
+        [_dataStore addObserver:self
+                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                         context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
         
-        [_dataStore addObserver:self forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
+        [_dataStore addObserver:self
+                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                         context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
     }
@@ -181,36 +184,73 @@ static NSString *const kLayer = @"layer";
 {
     if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw))
     {
-        NSUInteger index = [(NSIndexSet *)aChange[kIndexes] firstIndex];
+        MELImageModel *newImage = (MELImageModel *)[aChange[kNew] objectAtIndex:0];
+        MELImageModel *oldImage = (MELImageModel *)[aChange[kOld] objectAtIndex:0];
         
-        NSArray<MELImageModel *> *images = self.dataStore.documentModel.imagesToDraw;
-        MELImageModel *image = images[index];
-        MELRect *frame = [image frame];
-        
-        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, x)
-                    options:NSKeyValueObservingOptionOld
-                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-        
-        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, y)
-                    options:NSKeyValueObservingOptionOld
-                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-        
-        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, width)
-                    options:NSKeyValueObservingOptionOld
-                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-        
-        [frame addObserver:self forKeyPath:@OBJECT_KEY_PATH(frame, height)
-                    options:NSKeyValueObservingOptionOld
-                    context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-        
-        [image addObserver:self forKeyPath:@OBJECT_KEY_PATH(image, layer)
-                   options:NSKeyValueObservingOptionOld
-                   context:(__bridge void *_Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+        if (newImage)
+        {
+            MELRect *frame = newImage.frame;
+            
+            [frame addObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(frame, x)
+                       options:NSKeyValueObservingOptionOld
+                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+            
+            [frame addObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(frame, y)
+                       options:NSKeyValueObservingOptionOld
+                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+            
+            [frame addObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(frame, width)
+                       options:NSKeyValueObservingOptionOld
+                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+            
+            [frame addObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(frame, height)
+                       options:NSKeyValueObservingOptionOld
+                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+            
+            [newImage addObserver:self
+                       forKeyPath:@OBJECT_KEY_PATH(newImage, layer)
+                          options:NSKeyValueObservingOptionOld
+                          context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+            
+            
+            self.canvas.imagesToDraw = self.dataStore.documentModel.imagesToDraw;
+            
+            [self.view setNeedsDisplayInRect:frame.rect];
+        }
+        else if (oldImage)
+        {
+            MELRect *frame = newImage.frame;
+            
+            [frame removeObserver:self
+                       forKeyPath:@OBJECT_KEY_PATH(frame, x)
+                          context:kMELCanvasControllerContextImageChangeFrame];
+            
+            [frame removeObserver:self
+                       forKeyPath:@OBJECT_KEY_PATH(frame, y)
+                          context:kMELCanvasControllerContextImageChangeFrame];
+            
+            [frame removeObserver:self
+                       forKeyPath:@OBJECT_KEY_PATH(frame, width)
+                          context:kMELCanvasControllerContextImageChangeFrame];
+            
+            [frame removeObserver:self
+                       forKeyPath:@OBJECT_KEY_PATH(frame, height)
+                          context:kMELCanvasControllerContextImageChangeFrame];
+            
+            [oldImage removeObserver:self
+                          forKeyPath:@OBJECT_KEY_PATH(oldImage, layer)
+                             context:kMELCanvasControllerContextImageChangeFrame];
+            
+            self.canvas.imagesToDraw = self.dataStore.documentModel.imagesToDraw;
 
+            [self.view setNeedsDisplayInRect:frame.rect];
+        }
 
-        [self.canvas addImagesToDrawObject:image];
-                
-        [self.view setNeedsDisplayInRect:frame.rect];
+            
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
     {
@@ -238,6 +278,8 @@ static NSString *const kLayer = @"layer";
             rect.size.height += fmax(rect.size.height, oldValue);
         }
         
+        self.canvas.imagesToDraw = self.dataStore.documentModel.imagesToDraw;
+
         [self.view setNeedsDisplayInRect:rect];
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged))

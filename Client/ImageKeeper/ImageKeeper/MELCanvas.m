@@ -15,11 +15,6 @@ static CGFloat const kDefaultDeltaX = 1.0;
 static CGFloat const kDefaultDeltaY = 1.0;
 
 @interface MELCanvas()
-{
-    NSMutableArray<MELImageModel *> *_mutableImagesToDraw;
-}
-
-@property (readonly, retain) NSMutableArray<MELImageModel *> *mutableImagesToDraw;
 
 @end
 
@@ -41,7 +36,7 @@ static CGFloat const kDefaultDeltaY = 1.0;
 
 - (void)dealloc
 {
-    [_mutableImagesToDraw release];
+    [_imagesToDraw release];
     
     [super dealloc];
 }
@@ -53,12 +48,6 @@ static CGFloat const kDefaultDeltaY = 1.0;
 
     [super drawRect:dirtyRect];
     
-    [self.mutableImagesToDraw sortUsingComparator:^NSComparisonResult(MELImageModel *a, MELImageModel *b)
-     {
-         return (NSComparisonResult)(a.layer > b.layer);
-     }];
-
-    
     for (MELImageModel *image in self.imagesToDraw)
     {
         [image.image drawInRect:image.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
@@ -66,7 +55,9 @@ static CGFloat const kDefaultDeltaY = 1.0;
         if ([self.controller isSelected:image])
         {
             [NSGraphicsContext saveGraphicsState];
+            
             NSSetFocusRingStyle(NSFocusRingOnly);
+            
             [[NSBezierPath bezierPathWithRect:NSInsetRect(image.frame.rect, 4, 4)] fill];
             [NSGraphicsContext restoreGraphicsState];
         }
@@ -76,32 +67,6 @@ static CGFloat const kDefaultDeltaY = 1.0;
 - (BOOL)isFlipped
 {
     return NO;
-}
-
-#pragma mark - imagesToDraw assessors
-
-- (void)addImagesToDrawObject:(MELImageModel *)object
-{
-    [self.mutableimagesToDraw addObject:object];
-}
-
-- (void)removeImagesToDrawObject:(MELImageModel *)object
-{
-    [self.mutableimagesToDraw removeObject:object];
-}
-
-- (NSArray<MELImageModel *> *)imagesToDraw
-{
-    return [[(NSArray<MELImageModel *> *)self.mutableimagesToDraw copy] autorelease];
-}
-
-- (NSMutableArray<MELImageModel *> *)mutableimagesToDraw
-{
-    if (!_mutableImagesToDraw)
-    {
-        _mutableImagesToDraw = [[NSMutableArray alloc] init];
-    }
-    return _mutableImagesToDraw;
 }
 
 #pragma mark - mouseEvents
@@ -125,7 +90,12 @@ static CGFloat const kDefaultDeltaY = 1.0;
     
     if (NSPointInRect(point, selectedImageFrame))
     {
+#warning optimize deltaX, deltaY
         [self.controller shiftByDeltaX:theEvent.deltaX deltaY:theEvent.deltaY];
+    }
+    else
+    {
+        [super mouseDragged:theEvent];
     }
 }
 #pragma mark - keyboardEvents
@@ -151,6 +121,10 @@ static CGFloat const kDefaultDeltaY = 1.0;
         
         case NSRightArrowFunctionKey:
             [self.controller shiftByDeltaX:kDefaultDeltaX deltaY:0];
+            break;
+            
+        default:
+            [super keyDown:theEvent];
             break;
     }
 }

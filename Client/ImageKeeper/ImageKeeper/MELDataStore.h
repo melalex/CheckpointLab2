@@ -22,6 +22,7 @@
 - (void)putToDocumentModelImageModel:(MELImageModel *)imageModel;
 
 - (void)selectImageInPoint:(NSPoint)point;
+- (void)deselectImage;
 
 - (void)addImage:(NSImage *)image;
 - (void)removeImage:(NSImage *)image;

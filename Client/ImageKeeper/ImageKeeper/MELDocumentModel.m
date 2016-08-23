@@ -60,7 +60,23 @@
 
 - (void)addImage:(MELImageModel *)image
 {
-    [self insertObject:image inImagesToDrawAtIndex:self.mutableImagesToDraw.count];
+    if (image)
+    {
+        [self insertObject:image inImagesToDrawAtIndex:self.mutableImagesToDraw.count];
+    }
+}
+
+- (void)removeImage:(MELImageModel *)image
+{
+    for (MELImageModel *imageModel in self.mutableImagesToDraw)
+    {
+        if (image.layer < imageModel.layer)
+        {
+            imageModel.layer--;
+        }
+    }
+    
+    [self removeObjectFromImagesToDrawAtIndex:[self.mutableImagesToDraw indexOfObject:image]];
 }
 
 - (void)addImagesToDrawObject:(MELImageModel *)object
@@ -70,6 +86,11 @@
 
 - (NSArray<MELImageModel *> *)imagesToDraw
 {
+    [self.mutableImagesToDraw sortUsingComparator:^NSComparisonResult(MELImageModel *a, MELImageModel *b)
+     {
+         return (NSComparisonResult)(a.layer > b.layer);
+     }];
+
     return [[(NSArray<MELImageModel *> *)self.mutableImagesToDraw copy] autorelease];
 }
 
@@ -85,7 +106,10 @@
 
 - (void)insertObject:(MELImageModel *)object inImagesToDrawAtIndex:(NSUInteger)index
 {
-    [self.mutableImagesToDraw insertObject:object atIndex:index];
+    if (object)
+    {
+        [self.mutableImagesToDraw insertObject:object atIndex:index];
+    }
 }
 
 - (void)removeObjectFromImagesToDrawAtIndex:(NSUInteger)index
