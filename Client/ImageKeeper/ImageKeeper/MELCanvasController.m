@@ -27,11 +27,16 @@ static NSString *const kWidth = @"width";
 static NSString *const kHeight = @"height";
 static NSString *const kLayer = @"layer";
 
+static CGFloat const kDefaultDeltaX = 1.0;
+static CGFloat const kDefaultDeltaY = 1.0;
+
 
 @interface MELCanvasController ()
 {
     MELDataStore *_dataStore;
 }
+
+
 
 @end
 
@@ -72,11 +77,6 @@ static NSString *const kLayer = @"layer";
     [self.dataStore putToDocumentModelImage:image inFrame:frame];
 }
 
-- (NSImage *)imageAtIndex:(NSUInteger)index
-{
-    return self.dataStore.images[index];
-}
-
 - (void)selectImageInPoint:(NSPoint)point
 {
     [self.dataStore selectImageInPoint:point];
@@ -103,6 +103,62 @@ static NSString *const kLayer = @"layer";
 - (NSRect)selectedImageFrame
 {
     return self.dataStore.selectedImage.frame.rect;
+}
+
+#pragma mark - mouseEvents
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    NSPoint point = [self.view convertPoint:[theEvent locationInWindow] fromView:nil];
+    
+    [self selectImageInPoint:point];
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent
+{
+    NSPoint point = [self.view convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSRect selectedImageFrame = self.selectedImageFrame;
+    
+    if (NSPointInRect(point, selectedImageFrame))
+    {
+#warning optimize deltaX, deltaY
+        [self shiftByDeltaX:theEvent.deltaX deltaY:theEvent.deltaY];
+    }
+    else
+    {
+        [super mouseDragged:theEvent];
+    }
+}
+
+#pragma mark - keyboardEvents
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+    NSString* const character = [theEvent charactersIgnoringModifiers];
+    unichar const code = [character characterAtIndex:0];
+    
+    switch (code)
+    {
+        case NSUpArrowFunctionKey:
+            [self shiftByDeltaX:0 deltaY:-kDefaultDeltaY];
+            break;
+            
+        case NSDownArrowFunctionKey:
+            [self shiftByDeltaX:0 deltaY:kDefaultDeltaY];
+            break;
+            
+        case NSLeftArrowFunctionKey:
+            [self shiftByDeltaX:-kDefaultDeltaX deltaY:0];
+            break;
+            
+        case NSRightArrowFunctionKey:
+            [self shiftByDeltaX:kDefaultDeltaX deltaY:0];
+            break;
+            
+        default:
+            [super keyDown:theEvent];
+            break;
+    }
 }
 
 #pragma mark - Edit commands

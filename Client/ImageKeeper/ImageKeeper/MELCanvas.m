@@ -11,9 +11,6 @@
 #import "MELCanvasController.h"
 #import "MELRect.h"
 
-static CGFloat const kDefaultDeltaX = 1.0;
-static CGFloat const kDefaultDeltaY = 1.0;
-
 @interface MELCanvas()
 
 @end
@@ -69,64 +66,9 @@ static CGFloat const kDefaultDeltaY = 1.0;
     return NO;
 }
 
-#pragma mark - mouseEvents
-
 - (BOOL)acceptsFirstResponder
 {
     return YES;
-}
-
-- (void)mouseDown:(NSEvent *)theEvent
-{
-    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    
-    [self.controller selectImageInPoint:point];
-}
-
-- (void)mouseDragged:(NSEvent *)theEvent
-{
-    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSRect selectedImageFrame = self.controller.selectedImageFrame;
-    
-    if (NSPointInRect(point, selectedImageFrame))
-    {
-#warning optimize deltaX, deltaY
-        [self.controller shiftByDeltaX:theEvent.deltaX deltaY:theEvent.deltaY];
-    }
-    else
-    {
-        [super mouseDragged:theEvent];
-    }
-}
-#pragma mark - keyboardEvents
-
-- (void)keyDown:(NSEvent *)theEvent
-{
-    NSString* const character = [theEvent charactersIgnoringModifiers];
-    unichar const code = [character characterAtIndex:0];
-    
-    switch (code)
-    {
-        case NSUpArrowFunctionKey:
-            [self.controller shiftByDeltaX:0 deltaY:-kDefaultDeltaY];
-            break;
-        
-        case NSDownArrowFunctionKey:
-            [self.controller shiftByDeltaX:0 deltaY:kDefaultDeltaY];
-            break;
-        
-        case NSLeftArrowFunctionKey:
-            [self.controller shiftByDeltaX:-kDefaultDeltaX deltaY:0];
-            break;
-        
-        case NSRightArrowFunctionKey:
-            [self.controller shiftByDeltaX:kDefaultDeltaX deltaY:0];
-            break;
-            
-        default:
-            [super keyDown:theEvent];
-            break;
-    }
 }
 
 #pragma mark - NSDraggingDestination

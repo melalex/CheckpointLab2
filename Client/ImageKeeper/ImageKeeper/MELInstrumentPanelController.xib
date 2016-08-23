@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MELInstrumentPanelController">
+            <connections>
+                <outlet property="window" destination="bSk-QV-Cmn" id="Mxm-hg-aht"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="bSk-QV-Cmn" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="112" width="257" height="50"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="S9b-hz-T5U">
+                <rect key="frame" x="0.0" y="0.0" width="257" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k5U-rl-3xH">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Cursor" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0py-cw-0pC">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iod-fd-Lon">
+                        <rect key="frame" x="49" y="0.0" width="50" height="50"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Line" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="eAp-Xg-tx6">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJn-O7-gCt">
+                        <rect key="frame" x="207" y="0.0" width="50" height="50"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Brush" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="oEf-YP-JVO">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-s6-tsc">
+                        <rect key="frame" x="158" y="0.0" width="50" height="50"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Oval" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8xf-An-o6V">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BoV-1o-MhY">
+                        <rect key="frame" x="98" y="0.0" width="50" height="50"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Rectangle" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="nVR-Il-GlQ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="386.5" y="-60"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="Brush" width="512" height="512"/>
+        <image name="Cursor" width="20.803611755371094" height="20.803611755371094"/>
+        <image name="Line" width="512" height="512"/>
+        <image name="Oval" width="512" height="512"/>
+        <image name="Rectangle" width="512" height="512"/>
+    </resources>
+</document>
