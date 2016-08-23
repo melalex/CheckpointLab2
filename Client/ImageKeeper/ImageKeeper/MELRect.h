@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MELRect : NSObject
+@interface MELRect : NSObject<NSCoding>
 
 @property CGFloat x;
 @property CGFloat y;

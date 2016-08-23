@@ -13,6 +13,7 @@
 
 @interface MELDocumentModel : NSObject
 
+#warning encapsulate
 @property (retain, readonly) NSArray<MELImageModel *> *imagesToDraw;
 
 - (void)addImage:(MELImageModel *)image;

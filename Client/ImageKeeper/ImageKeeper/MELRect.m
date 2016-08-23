@@ -39,4 +39,26 @@
     return NSMakeRect(self.x, self.y, self.width, self.height);
 }
 
+#pragma mark - NSCoding
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [self init])
+    {
+        _x = [aDecoder decodeDoubleForKey:@"x"];
+        _y = [aDecoder decodeDoubleForKey:@"y"];
+        _width = [aDecoder decodeDoubleForKey:@"width"];
+        _height = [aDecoder decodeDoubleForKey:@"height"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeDouble:self.x forKey:@"x"];
+    [aCoder encodeDouble:self.y forKey:@"y"];
+    [aCoder encodeDouble:self.width forKey:@"width"];
+    [aCoder encodeDouble:self.height forKey:@"height"];
+}
+
 @end

@@ -30,6 +30,7 @@
 		DDA665F61D69EF2C0079220F /* MELImageInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665F41D69EF2C0079220F /* MELImageInspector.m */; };
 		DDA665F71D69EF2C0079220F /* MELImageInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665F51D69EF2C0079220F /* MELImageInspector.xib */; };
 		DDA665FA1D6A12060079220F /* MELRect.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665F91D6A12060079220F /* MELRect.m */; };
+		DDA665FD1D6B86450079220F /* Jobs.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA665FB1D6B86450079220F /* Jobs.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		DDA665F51D69EF2C0079220F /* MELImageInspector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELImageInspector.xib; sourceTree = "<group>"; };
 		DDA665F81D6A12060079220F /* MELRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELRect.h; sourceTree = "<group>"; };
 		DDA665F91D6A12060079220F /* MELRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELRect.m; sourceTree = "<group>"; };
+		DDA665FB1D6B86450079220F /* Jobs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jobs.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 		DDA665C91D685DE80079220F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DDA665FB1D6B86450079220F /* Jobs.png */,
 				DDA665F11D69E7F80079220F /* Venice.jpg */,
 				DDA665CA1D685E520079220F /* Butterfly.jpg */,
 				DDA665CB1D685E520079220F /* Husky.jpg */,
@@ -354,6 +357,7 @@
 				DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */,
 				DDA665CE1D685E520079220F /* Husky.jpg in Resources */,
 				DDA665EC1D68A78A0079220F /* MELCanvasController.xib in Resources */,
+				DDA665FD1D6B86450079220F /* Jobs.png in Resources */,
 				DDA665A51D67636D0079220F /* MainMenu.xib in Resources */,
 				DDA665F21D69E7F80079220F /* Venice.jpg in Resources */,
 			);
@@ -621,6 +625,7 @@
 				DDA665C11D67636D0079220F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DDA665C21D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeperTests" */ = {
 			isa = XCConfigurationList;
@@ -629,6 +634,7 @@
 				DDA665C41D67636D0079220F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DDA665C51D67636D0079220F /* Build configuration list for PBXNativeTarget "ImageKeeperUITests" */ = {
 			isa = XCConfigurationList;
@@ -637,6 +643,7 @@
 				DDA665C71D67636D0079220F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

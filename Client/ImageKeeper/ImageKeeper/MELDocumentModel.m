@@ -56,48 +56,6 @@
     return result;
 }
 
-#warning решить судьбу методов
-
-//- (BOOL)doIntersectRectA:(NSRect)rectA withRectB:(NSRect)rectB
-//{
-//    return !(NSMaxY(rectA) < NSMinY(rectB) ||
-//             NSMinY(rectA) > NSMaxY(rectB) ||
-//             NSMaxX(rectA) < NSMinX(rectB) ||
-//             NSMinX(rectA) > NSMaxX(rectB));
-//}
-
-//- (NSUInteger)takeTopLayerOfImages:(NSArray<MELImageModel *> *)images
-//{
-//    NSUInteger topLayer = 0;
-//    
-//    for (MELImageModel *image in images)
-//    {
-//        if (image.layer > topLayer)
-//        {
-//            topLayer = image.layer;
-//        }
-//    }
-//    
-//    return topLayer;
-//}
-
-//- (NSArray<MELImageModel *> *)imagesInRect:(NSRect)rect
-//{
-//    NSMutableArray<MELImageModel *> *images = [NSMutableArray array];
-//    
-//    for (MELImageModel *imageModel in self.mutableImagesToDraw)
-//    {
-//        NSRect imageModelRect = imageModel.frame.rect;
-//        
-//        if ([self doIntersectRectA:rect withRectB:imageModelRect])
-//        {
-//            [images addObject:imageModel];
-//        }
-//    }
-//
-//    return [[images copy] autorelease];
-//}
-
 #pragma mark - MELDocumentModel KVC Support
 
 - (void)addImage:(MELImageModel *)image

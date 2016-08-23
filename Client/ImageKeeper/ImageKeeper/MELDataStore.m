@@ -82,6 +82,13 @@ static NSString *const kNib = @"nib";
     [self.documentModel addImage:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
 }
 
+- (void)putToDocumentModelImageModel:(MELImageModel *)imageModel
+{
+    imageModel.layer = self.documentModel.imagesToDraw.count + 1;
+    
+    [self.documentModel addImage:imageModel];
+}
+
 #pragma mark - MELDataStoreGetters
 
 - (NSArray<NSImage *> *)images

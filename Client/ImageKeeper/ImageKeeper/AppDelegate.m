@@ -14,6 +14,8 @@
 #import "Document.h"
 #import "MELDocumentModel.h"
 #import "MELImageInspector.h"
+#import "MELImageModel.h"
+#import "MELRect.h"
 
 static CGFloat const kDistanceBetweenWindows = 20.0;
 
@@ -45,7 +47,7 @@ static NSString *const kMELCanvasController = @"MELCanvasController";
     
 #pragma mark - App App dependencies
     MELDocumentModel *documentModel = [[MELDocumentModel alloc] init];
-    MELDataStore *dataStore = [[MELDataStore alloc] init];
+    MELDataStore *dataStore =[[MELDataStore alloc] init];
     dataStore.documentModel = documentModel;
     [documentModel release];
     
@@ -98,5 +100,23 @@ static NSString *const kMELCanvasController = @"MELCanvasController";
 {
     return YES;
 }
+
+#pragma mark - Edit commands
+
+- (IBAction)copy:(id)sender
+{
+    [self.canvasController copySelectedImage];
+}
+
+- (IBAction)paste:(id)sender
+{
+    [self.canvasController paste];
+}
+
+- (IBAction)delete:(id)sender
+{
+    [self.canvasController deleteSelectedImage];
+}
+
 
 @end

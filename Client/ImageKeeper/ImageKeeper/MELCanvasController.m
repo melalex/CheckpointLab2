@@ -106,6 +106,45 @@ static NSString *const kLayer = @"layer";
     return self.dataStore.selectedImage.frame.rect;
 }
 
+#pragma mark - Edit commands
+
+- (void)copySelectedImage
+{
+    MELImageModel *imageModel = self.dataStore.selectedImage;
+    
+    if (imageModel != nil)
+    {
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:imageModel];
+        [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+        
+        [pasteboard setData:data forType:NSStringPboardType];
+    }
+}
+
+- (void)paste
+{
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    NSData *data = [pasteboard dataForType:NSStringPboardType];
+    MELImageModel *imageModel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    NSRect pointRect = NSMakeRect(NSEvent.mouseLocation.x - imageModel.frame.width / 2, NSEvent.mouseLocation.y - imageModel.frame.height / 2, 0, 0);
+    NSPoint mouseLocation = [self.view convertPoint:[self.view.window convertRectFromScreen:pointRect].origin
+                                           fromView:nil];
+    
+    imageModel.frame.x = mouseLocation.x;
+    imageModel.frame.y = mouseLocation.y;
+
+    [self.dataStore putToDocumentModelImageModel:imageModel];
+
+}
+
+- (void)deleteSelectedImage
+{
+    
+}
+
 #pragma mark - MELCanvasController KVO
 
 - (void)setDataStore:(MELDataStore *)dataStore

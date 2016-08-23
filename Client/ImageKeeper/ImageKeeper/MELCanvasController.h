@@ -27,4 +27,8 @@
 - (BOOL)isSelected:(MELImageModel *)image;
 - (NSRect)selectedImageFrame;
 
+- (void)copySelectedImage;
+- (void)paste;
+- (void)deleteSelectedImage;
+
 @end

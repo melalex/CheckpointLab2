@@ -19,6 +19,7 @@
 @property (readonly, assign) MELImageModel *selectedImage;
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
+- (void)putToDocumentModelImageModel:(MELImageModel *)imageModel;
 
 - (void)selectImageInPoint:(NSPoint)point;
 
