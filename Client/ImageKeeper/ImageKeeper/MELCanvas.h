@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MELElement.h"
 
-@class MELImageModel;
 @class MELCanvasController;
 
 @interface MELCanvas : NSView<NSDraggingDestination>
 
-@property (retain) NSArray<MELImageModel *> *imagesToDraw;
+@property (retain) NSArray<id<MELElement>> *elements;
 @property (assign) MELCanvasController *controller;
 
 @end

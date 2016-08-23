@@ -1,21 +1,19 @@
 //
-//  MELImageModel.m
+//  MELPrimitiveModel.m
 //  ImageKeeper
 //
-//  Created by Александр Мелащенко on 8/20/16.
+//  Created by Александр Мелащенко on 8/23/16.
 //  Copyright © 2016 Александр Мелащенко. All rights reserved.
 //
 
-#import "MELImageModel.h"
+#import "MELPrimitiveModel.h"
 #import "MELRect.h"
 #import "MELVisitor.h"
 
-static NSString *const kImage = @"image";
 static NSString *const kFrame = @"frame";
 static NSString *const kLayer = @"layer";
 
-
-@interface MELImageModel()
+@interface MELPrimitiveModel()
 {
     MELRect *_frame;
     NSUInteger _layer;
@@ -23,13 +21,12 @@ static NSString *const kLayer = @"layer";
 
 @end
 
-@implementation MELImageModel
+@implementation MELPrimitiveModel
 
-- (instancetype)initWithImage:(NSImage *)image frame:(MELRect *)frame layer:(NSUInteger)layer;
+- (instancetype)initWithFrame:(MELRect *)frame layer:(NSUInteger)layer;
 {
     if (self = [self init])
     {
-        _image = [image retain];
         _frame = [frame retain];
         _layer = layer;
     }
@@ -54,7 +51,6 @@ static NSString *const kLayer = @"layer";
 {
     if (self = [self init])
     {
-        _image = [[aDecoder decodeObjectForKey:kImage] retain];
         _frame = [[aDecoder decodeObjectForKey:kFrame] retain];
         _layer = [aDecoder decodeIntegerForKey:kLayer];
     }
@@ -63,12 +59,11 @@ static NSString *const kLayer = @"layer";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:self.image forKey:kImage];
     [aCoder encodeObject:self.frame forKey:kFrame];
     [aCoder encodeInteger:self.layer forKey:kLayer];
 }
 
-#pragma mark - MELImageModelSetters
+#pragma mark - MELPrimitiveModelSetters
 
 - (void)setFrame:(MELRect *)frame
 {
@@ -84,7 +79,7 @@ static NSString *const kLayer = @"layer";
     _layer = layer;
 }
 
-#pragma mark - MELImageModelGetters
+#pragma mark - MELPrimitiveModelGetters
 
 - (MELRect *)frame
 {

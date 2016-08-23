@@ -8,14 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
+#import "MELElement.h"
 
 @class MELRect;
 
-@interface MELImageModel : NSObject<NSCoding>
+@interface MELImageModel : NSObject<MELElement>
 
 @property (readonly,retain) NSImage *image;
-@property (readonly, retain) MELRect *frame;
-@property  NSUInteger layer;
 
 - (instancetype)initWithImage:(NSImage *)image frame:(MELRect *)frame layer:(NSUInteger)layer;
 

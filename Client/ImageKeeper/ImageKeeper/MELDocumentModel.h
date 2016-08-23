@@ -7,23 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MELElement.h"
 
-@class MELImageModel;
 @class MELRect;
 
 @interface MELDocumentModel : NSObject
 
 #warning encapsulate
-@property (retain, readonly) NSArray<MELImageModel *> *imagesToDraw;
+@property (retain, readonly) NSArray<id<MELElement>> *elements;
 
-- (void)addImage:(MELImageModel *)image;
-- (void)removeImage:(MELImageModel *)image;
+- (void)addElement:(id<MELElement>)element;
+- (void)removeElement:(id<MELElement>)element;
 
-#warning Вызов метода addImagesToDrawObject возбуждает исключение '*** -[NSSet intersectsSet:]: set argument is not an NSSet'
-- (void)addImagesToDrawObject:(MELImageModel *)object;
-#warning Вызов метода removeImagesToDrawObject возбуждает исключение '*** -[NSSet intersectsSet:]: set argument is not an NSSet'
-- (void)removeImagesToDrawObject:(MELImageModel *)object;
-
-- (MELImageModel *)takeTopImageInPoint:(NSPoint)point;
+- (id<MELElement>)takeTopElementInPoint:(NSPoint)point;
 
 @end

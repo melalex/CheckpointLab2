@@ -6,12 +6,12 @@
 //  Copyright © 2016 Александр Мелащенко. All rights reserved.
 //
 
+#import <Cocoa/Cocoa.h>
+
 #import "MELCursorStrategy.h"
 #import "MELDataStore.h"
-#import <Cocoa/Cocoa.h>
-#import "MELDataStore.h"
-#import "MELImageModel.h"
 #import "MELRect.h"
+#import "MELElement.h"
 
 @interface MELCursorStrategy()
 {
@@ -38,12 +38,12 @@
 - (void)mouseDraggAction:(NSEvent *)theEvent
 {
     NSPoint point = [self.ownerView convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSRect selectedImageFrame = self.dataStore.selectedImage.frame.rect;
+    NSRect selectedElementFrame = self.dataStore.selectedElement.frame.rect;
     
-    if (NSPointInRect(point, selectedImageFrame))
+    if (NSPointInRect(point, selectedElementFrame))
     {
-        self.dataStore.selectedImage.frame.x += theEvent.deltaX;
-        self.dataStore.selectedImage.frame.y -= theEvent.deltaY;
+        self.dataStore.selectedElement.frame.x += theEvent.deltaX;
+        self.dataStore.selectedElement.frame.y -= theEvent.deltaY;
     }
 }
 

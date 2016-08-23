@@ -8,7 +8,6 @@
 
 #import "MELImageLibraryPanelController.h"
 #import "MELDataStore.h"
-#import "MELImageModel.h"
 #import "MELDocumentModel.h"
 #import "MELRect.h"
 

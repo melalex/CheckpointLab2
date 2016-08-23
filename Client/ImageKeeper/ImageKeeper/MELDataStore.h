@@ -7,19 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MELElement.h"
 
 @class MELDocumentModel;
-@class MELImageModel;
 @class MELRect;
+
+#warning Add protocols
 
 @interface MELDataStore : NSObject
 
 @property (readonly, retain) NSArray<NSImage *> *images;
 @property (retain) MELDocumentModel *documentModel;
-@property (readonly, assign) MELImageModel *selectedImage;
+@property (readonly, assign) id<MELElement> selectedElement;
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
-- (void)putToDocumentModelImageModel:(MELImageModel *)imageModel;
+- (void)putToDocumentModelElement:(id<MELElement>)element;
 
 - (void)selectImageInPoint:(NSPoint)point;
 - (void)deselectImage;

@@ -14,7 +14,6 @@
 #import "Document.h"
 #import "MELDocumentModel.h"
 #import "MELImageInspector.h"
-#import "MELImageModel.h"
 #import "MELRect.h"
 #import "MELInstrumentPanelController.h"
 

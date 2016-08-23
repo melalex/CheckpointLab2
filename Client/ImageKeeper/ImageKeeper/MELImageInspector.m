@@ -9,9 +9,9 @@
 #import "MELImageInspector.h"
 #import "MELDataStore.h"
 #import "Macros.h"
-#import "MELImageModel.h"
 #import "MELRect.h"
 #import "MELDocumentModel.h"
+#import "MELElement.h"
 
 @interface MELImageInspector ()
 
@@ -35,108 +35,108 @@
 
 + (NSSet *)keyPathsForValuesAffectingXCoordinate
 {
-    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.frame.x), nil];
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.frame.x), nil];
 }
 
 + (NSSet *)keyPathsForValuesAffectingYCoordinate
 {
-    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.frame.y), nil];
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.frame.y), nil];
 }
 
 + (NSSet *)keyPathsForValuesAffectingWidth
 {
-    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.frame.width), nil];
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.frame.width), nil];
 }
 
 + (NSSet *)keyPathsForValuesAffectingHeight
 {
-    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.frame.height), nil];
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.frame.height), nil];
 }
 
 + (NSSet *)keyPathsForValuesAffectingLayer
 {
-    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage.layer), nil];
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.layer), nil];
 }
 
 + (NSSet *)keyPathsForValuesAffectingIsSelected
 {
-    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedImage), nil];
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement), nil];
 }
 
 #pragma mark - MELImageInspectorSetters
 
 - (void)setXCoordinate:(CGFloat)xCoordinate
 {
-    self.dataStore.selectedImage.frame.x = xCoordinate;
+    self.dataStore.selectedElement.frame.x = xCoordinate;
 }
 
 - (void)setYCoordinate:(CGFloat)yCoordinate
 {
-    self.dataStore.selectedImage.frame.y = yCoordinate;
+    self.dataStore.selectedElement.frame.y = yCoordinate;
 }
 
 - (void)setWidth:(CGFloat)width
 {
-    self.dataStore.selectedImage.frame.width = width;
+    self.dataStore.selectedElement.frame.width = width;
 }
 
 - (void)setHeight:(CGFloat)height
 {
-    self.dataStore.selectedImage.frame.height = height;
+    self.dataStore.selectedElement.frame.height = height;
 }
 
 - (void)setLayer:(NSUInteger)layer
 {
-    NSUInteger oldLayer = self.dataStore.selectedImage.layer;
+    NSUInteger oldLayer = self.dataStore.selectedElement.layer;
     
-    for (MELImageModel *image in self.dataStore.documentModel.imagesToDraw)
+    for (id<MELElement> element in self.dataStore.documentModel.elements)
     {
-        if (image.layer > oldLayer)
+        if (element.layer > oldLayer)
         {
-            image.layer--;
+            element.layer--;
         }
         
-        if (image.layer >= layer)
+        if (element.layer >= layer)
         {
-            image.layer++;
+            element.layer++;
         }
     }
 
-    self.dataStore.selectedImage.layer = layer;
+    self.dataStore.selectedElement.layer = layer;
 }
 
 #pragma mark - MELImageInspectorGetters
 
 - (CGFloat)xCoordinate
 {
-    return self.dataStore.selectedImage.frame.x;
+    return self.dataStore.selectedElement.frame.x;
 }
 
 - (CGFloat)yCoordinate
 {
-    return self.dataStore.selectedImage.frame.y;
+    return self.dataStore.selectedElement.frame.y;
 }
 
 - (CGFloat)width
 {
-    return self.dataStore.selectedImage.frame.width;
+    return self.dataStore.selectedElement.frame.width;
 }
 
 - (CGFloat)height
 {
-    return self.dataStore.selectedImage.frame.height;
+    return self.dataStore.selectedElement.frame.height;
 }
 
 - (NSUInteger)layer
 {
-    return self.dataStore.selectedImage.layer;
+    return self.dataStore.selectedElement.layer;
 }
 
 - (BOOL)isSelected
 {
     BOOL result = NO;
     
-    if (self.dataStore.selectedImage)
+    if (self.dataStore.selectedElement)
     {
         result = YES;
     }

@@ -11,7 +11,6 @@
 #import "Macros.h"
 #import "MELCanvas.h"
 #import "MELDocumentModel.h"
-#import "MELImageModel.h"
 #import "MELRect.h"
 
 static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasControllerContextImageToDraw";
@@ -44,11 +43,11 @@ static CGFloat const kDefaultDeltaY = 1.0;
 - (void)dealloc
 {
     [_dataStore removeObserver:self
-                    forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
+                    forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.elements)
                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
     
     [_dataStore removeObserver:self
-                    forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
+                    forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedElement)
                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
 
     [_dataStore release];
@@ -79,15 +78,15 @@ static CGFloat const kDefaultDeltaY = 1.0;
 
 - (void)shiftByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
 {
-    self.dataStore.selectedImage.frame.x += deltaX;
-    self.dataStore.selectedImage.frame.y -= deltaY;
+    self.dataStore.selectedElement.frame.x += deltaX;
+    self.dataStore.selectedElement.frame.y -= deltaY;
 }
 
-- (BOOL)isSelected:(MELImageModel *)image
+- (BOOL)isSelected:(id<MELElement>)element
 {
     BOOL result = NO;
     
-    if (image == self.dataStore.selectedImage)
+    if (element == self.dataStore.selectedElement)
     {
         result = YES;
     }
@@ -97,7 +96,7 @@ static CGFloat const kDefaultDeltaY = 1.0;
 
 - (NSRect)selectedImageFrame
 {
-    return self.dataStore.selectedImage.frame.rect;
+    return self.dataStore.selectedElement.frame.rect;
 }
 
 #pragma mark - strategy
@@ -166,13 +165,13 @@ static CGFloat const kDefaultDeltaY = 1.0;
 
 - (void)copySelectedImage
 {
-    MELImageModel *imageModel = self.dataStore.selectedImage;
+    id<MELElement> elementModel = self.dataStore.selectedElement;
     
-    if (imageModel != nil)
+    if (elementModel != nil)
     {
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:imageModel];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:elementModel];
         [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
         
         [pasteboard setData:data forType:NSStringPboardType];
@@ -183,22 +182,22 @@ static CGFloat const kDefaultDeltaY = 1.0;
 {
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
     NSData *data = [pasteboard dataForType:NSStringPboardType];
-    MELImageModel *imageModel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    id<MELElement> elementModel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    NSRect pointRect = NSMakeRect(NSEvent.mouseLocation.x - imageModel.frame.width / 2, NSEvent.mouseLocation.y - imageModel.frame.height / 2, 0, 0);
+    NSRect pointRect = NSMakeRect(NSEvent.mouseLocation.x - elementModel.frame.width / 2, NSEvent.mouseLocation.y - elementModel.frame.height / 2, 0, 0);
     NSPoint mouseLocation = [self.view convertPoint:[self.view.window convertRectFromScreen:pointRect].origin
                                            fromView:nil];
     
-    imageModel.frame.x = mouseLocation.x;
-    imageModel.frame.y = mouseLocation.y;
+    elementModel.frame.x = mouseLocation.x;
+    elementModel.frame.y = mouseLocation.y;
 
-    [self.dataStore putToDocumentModelImageModel:imageModel];
+    [self.dataStore putToDocumentModelElement:elementModel];
 
 }
 
 - (void)deleteSelectedImage
 {
-    [self.dataStore.documentModel removeImage:self.dataStore.selectedImage];
+    [self.dataStore.documentModel removeElement:self.dataStore.selectedElement];
     
     [self.dataStore deselectImage];
 }
@@ -210,23 +209,23 @@ static CGFloat const kDefaultDeltaY = 1.0;
     if (_dataStore != dataStore)
     {
         [_dataStore removeObserver:self
-                        forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
+                        forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.elements)
                            context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
         
         [_dataStore removeObserver:self
-                        forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
+                        forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedElement)
                            context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
 
         [_dataStore release];
         _dataStore = [dataStore retain];
         
         [_dataStore addObserver:self
-                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.imagesToDraw)
+                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel.elements)
                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                         context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw)];
         
         [_dataStore addObserver:self
-                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedImage)
+                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedElement)
                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                         context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
     }
@@ -241,12 +240,12 @@ static CGFloat const kDefaultDeltaY = 1.0;
 {
     if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw))
     {
-        MELImageModel *newImage = (MELImageModel *)[aChange[kNew] objectAtIndex:0];
-        MELImageModel *oldImage = (MELImageModel *)[aChange[kOld] objectAtIndex:0];
+        id<MELElement> newElement = (id<MELElement>)[aChange[kNew] objectAtIndex:0];
+        id<MELElement> oldElement = (id<MELElement>)[aChange[kOld] objectAtIndex:0];
         
-        if (newImage)
+        if (newElement)
         {
-            MELRect *frame = newImage.frame;
+            MELRect *frame = newElement.frame;
             
             [frame addObserver:self
                     forKeyPath:@OBJECT_KEY_PATH(frame, x)
@@ -268,19 +267,19 @@ static CGFloat const kDefaultDeltaY = 1.0;
                        options:NSKeyValueObservingOptionOld
                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
             
-            [newImage addObserver:self
-                       forKeyPath:@OBJECT_KEY_PATH(newImage, layer)
-                          options:NSKeyValueObservingOptionOld
-                          context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+            [newElement addObserver:self
+                         forKeyPath:@OBJECT_KEY_PATH(newElement, layer)
+                            options:NSKeyValueObservingOptionOld
+                            context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
             
             
-            self.canvas.imagesToDraw = self.dataStore.documentModel.imagesToDraw;
+            self.canvas.elements = self.dataStore.documentModel.elements;
             
             [self.view setNeedsDisplayInRect:frame.rect];
         }
-        else if (oldImage)
+        else if (oldElement)
         {
-            MELRect *frame = newImage.frame;
+            MELRect *frame = oldElement.frame;
             
             [frame removeObserver:self
                        forKeyPath:@OBJECT_KEY_PATH(frame, x)
@@ -298,20 +297,18 @@ static CGFloat const kDefaultDeltaY = 1.0;
                        forKeyPath:@OBJECT_KEY_PATH(frame, height)
                           context:kMELCanvasControllerContextImageChangeFrame];
             
-            [oldImage removeObserver:self
-                          forKeyPath:@OBJECT_KEY_PATH(oldImage, layer)
-                             context:kMELCanvasControllerContextImageChangeFrame];
+            [oldElement removeObserver:self
+                            forKeyPath:@OBJECT_KEY_PATH(oldElement, layer)
+                               context:kMELCanvasControllerContextImageChangeFrame];
             
-            self.canvas.imagesToDraw = self.dataStore.documentModel.imagesToDraw;
+            self.canvas.elements = self.dataStore.documentModel.elements;
 
             [self.view setNeedsDisplayInRect:frame.rect];
         }
-
-            
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
     {
-        NSRect rect = [aKeyPath isEqualToString:kLayer] ? [[(MELImageModel *)anObject frame] rect] : [(MELRect *)anObject rect];
+        NSRect rect = [aKeyPath isEqualToString:kLayer] ? [[(id<MELElement>)anObject frame] rect] : [(MELRect *)anObject rect];
         CGFloat oldValue = [aChange[kOld] doubleValue];
         
         if ([aKeyPath isEqualToString:kX])
@@ -335,7 +332,7 @@ static CGFloat const kDefaultDeltaY = 1.0;
             rect.size.height += fmax(rect.size.height, oldValue);
         }
         
-        self.canvas.imagesToDraw = self.dataStore.documentModel.imagesToDraw;
+        self.canvas.elements = self.dataStore.documentModel.elements;
 
         [self.view setNeedsDisplayInRect:rect];
     }
@@ -343,14 +340,14 @@ static CGFloat const kDefaultDeltaY = 1.0;
     {
         if (![aChange[kOld] isEqual:[NSNull null]])
         {
-            NSRect oldValue = [[(MELImageModel *)aChange[kOld] frame] rect];
+            NSRect oldValue = [[(id<MELElement>)aChange[kOld] frame] rect];
             
             [self.view setNeedsDisplayInRect:oldValue];
         }
         
         if (![aChange[kNew] isEqual:[NSNull null]])
         {
-            NSRect newValue = [[(MELImageModel *)aChange[kNew] frame] rect];
+            NSRect newValue = [[(id<MELElement>)aChange[kNew] frame] rect];
 
             [self.view setNeedsDisplayInRect:newValue];
         }

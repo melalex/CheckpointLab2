@@ -39,6 +39,12 @@
 		DDA6660F1D6C93010079220F /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6660A1D6C93010079220F /* Line.png */; };
 		DDA666101D6C93010079220F /* Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6660B1D6C93010079220F /* Oval.png */; };
 		DDA666151D6CA67D0079220F /* MELCursorStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666141D6CA67D0079220F /* MELCursorStrategy.m */; };
+		DDA6661B1D6CBEC10079220F /* MELVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6661A1D6CBEC10079220F /* MELVisitor.m */; };
+		DDA6661F1D6CBF790079220F /* MELLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6661E1D6CBF790079220F /* MELLineModel.m */; };
+		DDA666221D6CBF8D0079220F /* MELOvalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666211D6CBF8D0079220F /* MELOvalModel.m */; };
+		DDA666251D6CBFA60079220F /* MELRectangleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666241D6CBFA60079220F /* MELRectangleModel.m */; };
+		DDA666281D6CC0410079220F /* MELCurveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666271D6CC0410079220F /* MELCurveModel.m */; };
+		DDA6662B1D6CCD0E0079220F /* MELPrimitiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6662A1D6CCD0E0079220F /* MELPrimitiveModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +117,19 @@
 		DDA666121D6CA4EF0079220F /* MELStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELStrategy.h; sourceTree = "<group>"; };
 		DDA666131D6CA67D0079220F /* MELCursorStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELCursorStrategy.h; sourceTree = "<group>"; };
 		DDA666141D6CA67D0079220F /* MELCursorStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCursorStrategy.m; sourceTree = "<group>"; };
+		DDA666181D6CBD5C0079220F /* MELElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELElement.h; sourceTree = "<group>"; };
+		DDA666191D6CBEC10079220F /* MELVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELVisitor.h; sourceTree = "<group>"; };
+		DDA6661A1D6CBEC10079220F /* MELVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELVisitor.m; sourceTree = "<group>"; };
+		DDA6661D1D6CBF790079220F /* MELLineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELLineModel.h; sourceTree = "<group>"; };
+		DDA6661E1D6CBF790079220F /* MELLineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELLineModel.m; sourceTree = "<group>"; };
+		DDA666201D6CBF8D0079220F /* MELOvalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELOvalModel.h; sourceTree = "<group>"; };
+		DDA666211D6CBF8D0079220F /* MELOvalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELOvalModel.m; sourceTree = "<group>"; };
+		DDA666231D6CBFA60079220F /* MELRectangleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELRectangleModel.h; sourceTree = "<group>"; };
+		DDA666241D6CBFA60079220F /* MELRectangleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELRectangleModel.m; sourceTree = "<group>"; };
+		DDA666261D6CC0410079220F /* MELCurveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELCurveModel.h; sourceTree = "<group>"; };
+		DDA666271D6CC0410079220F /* MELCurveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCurveModel.m; sourceTree = "<group>"; };
+		DDA666291D6CCD0E0079220F /* MELPrimitiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELPrimitiveModel.h; sourceTree = "<group>"; };
+		DDA6662A1D6CCD0E0079220F /* MELPrimitiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELPrimitiveModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,12 +234,11 @@
 		DDA665D31D6878900079220F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DDA6661C1D6CBED10079220F /* Visitor */,
 				DDA665DC1D687F4A0079220F /* MELDataStore.h */,
 				DDA665DD1D687F4A0079220F /* MELDataStore.m */,
 				DDA665E21D689CEB0079220F /* MELDocumentModel.h */,
 				DDA665E31D689CEB0079220F /* MELDocumentModel.m */,
-				DDA665E51D689E3B0079220F /* MELImageModel.h */,
-				DDA665E61D689E3B0079220F /* MELImageModel.m */,
 				DDA665F81D6A12060079220F /* MELRect.h */,
 				DDA665F91D6A12060079220F /* MELRect.m */,
 			);
@@ -290,6 +308,36 @@
 				DDA666141D6CA67D0079220F /* MELCursorStrategy.m */,
 			);
 			name = Strategy;
+			sourceTree = "<group>";
+		};
+		DDA666171D6CBCFD0079220F /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				DDA666181D6CBD5C0079220F /* MELElement.h */,
+				DDA665E51D689E3B0079220F /* MELImageModel.h */,
+				DDA665E61D689E3B0079220F /* MELImageModel.m */,
+				DDA666291D6CCD0E0079220F /* MELPrimitiveModel.h */,
+				DDA6662A1D6CCD0E0079220F /* MELPrimitiveModel.m */,
+				DDA6661D1D6CBF790079220F /* MELLineModel.h */,
+				DDA6661E1D6CBF790079220F /* MELLineModel.m */,
+				DDA666201D6CBF8D0079220F /* MELOvalModel.h */,
+				DDA666211D6CBF8D0079220F /* MELOvalModel.m */,
+				DDA666231D6CBFA60079220F /* MELRectangleModel.h */,
+				DDA666241D6CBFA60079220F /* MELRectangleModel.m */,
+				DDA666261D6CC0410079220F /* MELCurveModel.h */,
+				DDA666271D6CC0410079220F /* MELCurveModel.m */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
+		DDA6661C1D6CBED10079220F /* Visitor */ = {
+			isa = PBXGroup;
+			children = (
+				DDA666171D6CBCFD0079220F /* Elements */,
+				DDA666191D6CBEC10079220F /* MELVisitor.h */,
+				DDA6661A1D6CBEC10079220F /* MELVisitor.m */,
+			);
+			name = Visitor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,15 +486,21 @@
 			files = (
 				DDA665D91D687EAE0079220F /* MELImageLibraryPanelController.m in Sources */,
 				DDA666151D6CA67D0079220F /* MELCursorStrategy.m in Sources */,
+				DDA666281D6CC0410079220F /* MELCurveModel.m in Sources */,
 				DDA665FA1D6A12060079220F /* MELRect.m in Sources */,
 				DDA665E41D689CEB0079220F /* MELDocumentModel.m in Sources */,
 				DDA665D21D68684B0079220F /* MELCanvas.m in Sources */,
+				DDA6662B1D6CCD0E0079220F /* MELPrimitiveModel.m in Sources */,
 				DDA665EB1D68A78A0079220F /* MELCanvasController.m in Sources */,
 				DDA665F61D69EF2C0079220F /* MELImageInspector.m in Sources */,
+				DDA6661B1D6CBEC10079220F /* MELVisitor.m in Sources */,
 				DDA665DE1D687F4A0079220F /* MELDataStore.m in Sources */,
 				DDA665E71D689E3B0079220F /* MELImageModel.m in Sources */,
+				DDA666251D6CBFA60079220F /* MELRectangleModel.m in Sources */,
+				DDA666221D6CBF8D0079220F /* MELOvalModel.m in Sources */,
 				DDA666041D6C8EE20079220F /* MELInstrumentPanelController.m in Sources */,
 				DDA6659D1D67636D0079220F /* Document.m in Sources */,
+				DDA6661F1D6CBF790079220F /* MELLineModel.m in Sources */,
 				DDA6659A1D67636D0079220F /* main.m in Sources */,
 				DDA665971D67636D0079220F /* AppDelegate.m in Sources */,
 			);

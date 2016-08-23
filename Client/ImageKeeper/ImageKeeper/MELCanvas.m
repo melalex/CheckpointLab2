@@ -7,8 +7,8 @@
 //
 
 #import "MELCanvas.h"
-#import "MELImageModel.h"
 #import "MELCanvasController.h"
+#import "MELVisitor.h"
 #import "MELRect.h"
 
 @interface MELCanvas()
@@ -33,7 +33,7 @@
 
 - (void)dealloc
 {
-    [_imagesToDraw release];
+    [_elements release];
     
     [super dealloc];
 }
@@ -45,17 +45,19 @@
 
     [super drawRect:dirtyRect];
     
-    for (MELImageModel *image in self.imagesToDraw)
+    MELVisitor *drawer = [[MELVisitor alloc] init];
+    
+    for (id<MELElement> element in self.elements)
     {
-        [image.image drawInRect:image.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
+        [element acceptVisitor:drawer];
         
-        if ([self.controller isSelected:image])
+        if ([self.controller isSelected:element])
         {
             [NSGraphicsContext saveGraphicsState];
             
             NSSetFocusRingStyle(NSFocusRingOnly);
             
-            [[NSBezierPath bezierPathWithRect:NSInsetRect(image.frame.rect, 4, 4)] fill];
+            [[NSBezierPath bezierPathWithRect:NSInsetRect(element.frame.rect, 4, 4)] fill];
             [NSGraphicsContext restoreGraphicsState];
         }
     }

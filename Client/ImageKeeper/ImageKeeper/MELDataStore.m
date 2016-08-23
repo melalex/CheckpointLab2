@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MELDataStore.h"
-#import "MELImageModel.h"
 #import "MELDocumentModel.h"
+#import "MELImageModel.h"
 #import "MELRect.h"
 
 static NSString *const kLproj = @"lproj";
@@ -18,7 +18,7 @@ static NSString *const kNib = @"nib";
 @interface MELDataStore()
 
 @property (retain) NSMutableArray<NSImage *> *mutableImages;
-@property (assign) MELImageModel *selectedImage;
+@property (assign) id<MELElement> selectedElement;
 
 @end
 
@@ -37,7 +37,6 @@ static NSString *const kNib = @"nib";
             if (![path hasSuffix:kLproj] && ![path hasSuffix:kNib])
             {
                 NSURL *imageURL = [NSURL fileURLWithPath:path];
-                
                 NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
                 
                 imageObj.name = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
@@ -60,12 +59,12 @@ static NSString *const kNib = @"nib";
 
 - (void)selectImageInPoint:(NSPoint)point
 {
-    self.selectedImage = [self.documentModel takeTopImageInPoint:point];
+    self.selectedElement = [self.documentModel takeTopElementInPoint:point];
 }
 
 - (void)deselectImage
 {
-    self.selectedImage = nil;
+    self.selectedElement = nil;
 }
 
 - (void)addImage:(NSImage *)image
@@ -80,18 +79,20 @@ static NSString *const kNib = @"nib";
 
 #pragma mark - MELDocumentModel modification
 
+#warning optimize layer
+
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame
 {
-    NSUInteger layer = self.documentModel.imagesToDraw.count + 1;
+    NSUInteger layer = self.documentModel.elements.count + 1;
     
-    [self.documentModel addImage:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
+    [self.documentModel addElement:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
 }
 
-- (void)putToDocumentModelImageModel:(MELImageModel *)imageModel
+- (void)putToDocumentModelElement:(id<MELElement>)element;
 {
-    imageModel.layer = self.documentModel.imagesToDraw.count + 1;
+    element.layer = self.documentModel.elements.count + 1;
     
-    [self.documentModel addImage:imageModel];
+    [self.documentModel addElement:element];
 }
 
 #pragma mark - MELDataStoreGetters

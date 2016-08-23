@@ -7,12 +7,11 @@
 //
 
 #import "MELDocumentModel.h"
-#import "MELImageModel.h"
 #import "MELRect.h"
 
 @interface MELDocumentModel()
 
-@property NSMutableArray<MELImageModel *> *mutableImagesToDraw;
+@property NSMutableArray<id<MELElement>> *mutableElements;
 
 @end
 
@@ -22,34 +21,34 @@
 {
     if (self = [super init])
     {
-        _mutableImagesToDraw = [[NSMutableArray alloc] init];
+        _mutableElements = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_mutableImagesToDraw release];
+    [_mutableElements release];
     
     [super dealloc];
 }
 
 #pragma mark - Work with layers
 
-- (MELImageModel *)takeTopImageInPoint:(NSPoint)point
+- (id<MELElement>)takeTopElementInPoint:(NSPoint)point;
 {
-    MELImageModel *result = nil;
+    id<MELElement> result = nil;
     NSUInteger topLayer = 0;
     
-    for (MELImageModel *imageModel in self.mutableImagesToDraw)
+    for (id<MELElement> element in self.mutableElements)
     {
-        NSRect imageModelRect = imageModel.frame.rect;
+        NSRect elementModelRect = element.frame.rect;
         
-        if (NSPointInRect(point, imageModelRect) &&
-            imageModel.layer > topLayer)
+        if (NSPointInRect(point, elementModelRect) &&
+            element.layer > topLayer)
         {
-            result = imageModel;
-            topLayer = imageModel.layer;
+            result = element;
+            topLayer = element.layer;
         }
     }
     
@@ -58,68 +57,58 @@
 
 #pragma mark - MELDocumentModel KVC Support
 
-- (void)addImage:(MELImageModel *)image
+- (void)addElement:(id<MELElement>)element;
 {
-    if (image)
+    if (element)
     {
-        [self insertObject:image inImagesToDrawAtIndex:self.mutableImagesToDraw.count];
+        [self insertObject:element inElementsAtIndex:self.mutableElements.count];
     }
 }
 
-- (void)removeImage:(MELImageModel *)image
+- (void)removeElement:(id<MELElement>)element;
 {
-    for (MELImageModel *imageModel in self.mutableImagesToDraw)
+    for (id<MELElement> element in self.mutableElements)
     {
-        if (image.layer < imageModel.layer)
+        if (element.layer < element.layer)
         {
-            imageModel.layer--;
+            element.layer--;
         }
     }
     
-    [self removeObjectFromImagesToDrawAtIndex:[self.mutableImagesToDraw indexOfObject:image]];
+    [self removeObjectFromElementsAtIndex:[self.mutableElements indexOfObject:element]];
 }
 
-- (void)addImagesToDrawObject:(MELImageModel *)object
+- (NSArray<id<MELElement>> *)elements
 {
-    [self.mutableImagesToDraw addObject:object];
-}
-
-- (NSArray<MELImageModel *> *)imagesToDraw
-{
-    [self.mutableImagesToDraw sortUsingComparator:^NSComparisonResult(MELImageModel *a, MELImageModel *b)
+    [self.mutableElements sortUsingComparator:^NSComparisonResult(id<MELElement> a, id<MELElement> b)
      {
          return (NSComparisonResult)(a.layer > b.layer);
      }];
 
-    return [[(NSArray<MELImageModel *> *)self.mutableImagesToDraw copy] autorelease];
+    return [[(NSArray<id<MELElement>> *)self.mutableElements copy] autorelease];
 }
 
-- (NSUInteger)countOfImagesToDraw
+- (NSUInteger)countOfElements
 {
-    return self.mutableImagesToDraw.count;
+    return self.mutableElements.count;
 }
 
-- (MELImageModel *)objectInImagesToDrawAtIndex:(NSUInteger)index
+- (id)objectInElementsAtIndex:(NSUInteger)index
 {
-    return self.mutableImagesToDraw[index];
+    return self.mutableElements[index];
 }
 
-- (void)insertObject:(MELImageModel *)object inImagesToDrawAtIndex:(NSUInteger)index
+- (void)insertObject:(id<MELElement>)object inElementsAtIndex:(NSUInteger)index
 {
     if (object)
     {
-        [self.mutableImagesToDraw insertObject:object atIndex:index];
+        [self.mutableElements insertObject:object atIndex:index];
     }
 }
 
-- (void)removeObjectFromImagesToDrawAtIndex:(NSUInteger)index
+- (void)removeObjectFromElementsAtIndex:(NSUInteger)index
 {
-    [self.mutableImagesToDraw removeObjectAtIndex:index];
-}
-
-- (void)removeImagesToDrawObject:(MELImageModel *)object;
-{
-    [self.mutableImagesToDraw removeObject:object];
+    [self.mutableElements removeObjectAtIndex:index];
 }
 
 @end

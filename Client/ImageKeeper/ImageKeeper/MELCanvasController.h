@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MELStrategy.h"
+#import "MELElement.h"
 
 @class MELDataStore;
 @class MELCanvas;
-@class MELImageModel;
 
 @interface MELCanvasController : NSViewController
 
@@ -21,7 +21,7 @@
 
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 
-- (BOOL)isSelected:(MELImageModel *)image;
+- (BOOL)isSelected:(id<MELElement>)element;
 - (NSRect)selectedImageFrame;
 
 - (void)copySelectedImage;
