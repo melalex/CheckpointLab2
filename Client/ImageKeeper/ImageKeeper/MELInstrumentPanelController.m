@@ -7,16 +7,19 @@
 //
 
 #import "MELInstrumentPanelController.h"
-#import "MELCursorStrategy.h"
 #import "MELCanvasController.h"
+#import "MELCursorStrategy.h"
+#import "MELLineStrategy.h"
 
 @interface MELInstrumentPanelController ()
 {
     MELCanvasController *_canvasController;
     MELCursorStrategy *_cursorStrategy;
+    MELLineStrategy *_lineStrategy;
 }
 
 @property (retain, readonly) MELCursorStrategy *cursorStrategy;
+@property (retain, readonly) MELLineStrategy *lineStrategy;
 
 @end
 
@@ -29,11 +32,39 @@
 
 - (void)dealloc
 {
-    [_cursorStrategy release];
     [_canvasController release];
-    
+    [_cursorStrategy release];
+    [_lineStrategy release];
+
     [super dealloc];
 }
+
+- (IBAction)cursorSelected:(id)sender
+{
+    self.canvasController.strategy = self.cursorStrategy;
+}
+
+- (IBAction)lineSelected:(id)sender
+{
+    self.canvasController.strategy = self.lineStrategy;
+}
+
+- (IBAction)rectangleSelected:(id)sender
+{
+    
+}
+
+- (IBAction)ovalSelected:(id)sender
+{
+    
+}
+
+- (IBAction)brushSelected:(id)sender
+{
+    
+}
+
+#pragma mark - MELCursorStrategySetters
 
 - (void)setCanvasController:(MELCanvasController *)canvasController
 {
@@ -45,6 +76,8 @@
         _canvasController.strategy = self.cursorStrategy;
     }
 }
+
+#pragma mark - MELCursorStrategyGetters
 
 - (MELCanvasController *)canvasController
 {
@@ -58,6 +91,15 @@
         _cursorStrategy = [[MELCursorStrategy alloc] init];
     }
     return _cursorStrategy;
+}
+
+- (MELLineStrategy *)lineStrategy
+{
+    if (!_lineStrategy)
+    {
+        _lineStrategy = [[MELLineStrategy alloc] init];
+    }
+    return _lineStrategy;
 }
 
 @end

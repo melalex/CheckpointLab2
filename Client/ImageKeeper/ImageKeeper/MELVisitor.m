@@ -46,7 +46,13 @@
 
 - (void)performMELLineModelTasks:(MELLineModel *)object
 {
+    NSBezierPath * path = [NSBezierPath bezierPath];
+        
+    [path  moveToPoint:object.firstPoint];
+    [path lineToPoint:object.secondPoint];
     
+    [[NSColor blackColor] set];
+    [path stroke];
 }
 
 - (void)performMELOvalModelTasks:(MELOvalModel *)object

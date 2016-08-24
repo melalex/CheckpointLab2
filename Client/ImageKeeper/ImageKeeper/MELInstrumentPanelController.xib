@@ -27,6 +27,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="cursorSelected:" target="-2" id="VSg-Zh-jF7"/>
+                        </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iod-fd-Lon">
                         <rect key="frame" x="49" y="0.0" width="50" height="50"/>
@@ -34,6 +37,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="lineSelected:" target="-2" id="Hqy-Cv-BNa"/>
+                        </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-s6-tsc">
                         <rect key="frame" x="147" y="0.0" width="50" height="50"/>
@@ -41,6 +47,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="ovalSelected:" target="-2" id="7uL-GP-6gJ"/>
+                        </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BoV-1o-MhY">
                         <rect key="frame" x="98" y="0.0" width="50" height="50"/>
@@ -48,6 +57,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="rectangleSelected:" target="-2" id="Htf-TN-kW3"/>
+                        </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJn-O7-gCt">
                         <rect key="frame" x="196" y="0.0" width="50" height="50"/>
@@ -55,6 +67,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="brushSelected:" target="-2" id="Q9t-AL-ctg"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>

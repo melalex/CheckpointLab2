@@ -19,5 +19,6 @@
 
 - (void)mouseDownAction:(NSEvent *)theEvent;
 - (void)mouseDraggAction:(NSEvent *)theEvent;
+- (void)mouseUpAction:(NSEvent *)theEvent;
 
 @end

@@ -29,6 +29,7 @@ static NSString *const kLayer = @"layer";
 static CGFloat const kDefaultDeltaX = 1.0;
 static CGFloat const kDefaultDeltaY = 1.0;
 
+static CGFloat const kFocusRingThickness = 4.0;
 
 @interface MELCanvasController ()
 {
@@ -130,6 +131,11 @@ static CGFloat const kDefaultDeltaY = 1.0;
     [self.strategy mouseDraggAction:theEvent];
 }
 
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    [self.strategy mouseUpAction:theEvent];
+}
+
 #pragma mark - keyboardEvents
 
 - (void)keyDown:(NSEvent *)theEvent
@@ -199,7 +205,7 @@ static CGFloat const kDefaultDeltaY = 1.0;
 {
     [self.dataStore.documentModel removeElement:self.dataStore.selectedElement];
     
-    [self.dataStore deselectImage];
+    [self.dataStore deselectElement];
 }
 
 #pragma mark - MELCanvasController KVO
@@ -314,13 +320,15 @@ static CGFloat const kDefaultDeltaY = 1.0;
         if ([aKeyPath isEqualToString:kX])
         {
             NSInteger dX = fabs(oldValue - rect.origin.x);
-            rect.size.width += dX + 0.5;
+            rect.size.width += dX + kFocusRingThickness * 2 + 1;
+            rect.origin.x -= kFocusRingThickness;
             rect.origin.x = fmin(rect.origin.x, oldValue);
         }
         else if ([aKeyPath isEqualToString:kY])
         {
             NSInteger dY = fabs(oldValue - rect.origin.y);
-            rect.size.height += dY;
+            rect.size.height += dY + kFocusRingThickness * 2;
+            rect.origin.y -= kFocusRingThickness;
             rect.origin.y = fmin(rect.origin.y, oldValue);
         }
         else if ([aKeyPath isEqualToString:kWidth])
@@ -342,6 +350,11 @@ static CGFloat const kDefaultDeltaY = 1.0;
         {
             NSRect oldValue = [[(id<MELElement>)aChange[kOld] frame] rect];
             
+            oldValue.origin.x -= kFocusRingThickness;
+            oldValue.origin.y -= kFocusRingThickness;
+            oldValue.size.width += kFocusRingThickness * 2;
+            oldValue.size.height += kFocusRingThickness * 2;
+
             [self.view setNeedsDisplayInRect:oldValue];
         }
         
@@ -349,6 +362,11 @@ static CGFloat const kDefaultDeltaY = 1.0;
         {
             NSRect newValue = [[(id<MELElement>)aChange[kNew] frame] rect];
 
+            newValue.origin.x -= kFocusRingThickness;
+            newValue.origin.y -= kFocusRingThickness;
+            newValue.size.width += kFocusRingThickness * 2;
+            newValue.size.height += kFocusRingThickness * 2;
+            
             [self.view setNeedsDisplayInRect:newValue];
         }
 

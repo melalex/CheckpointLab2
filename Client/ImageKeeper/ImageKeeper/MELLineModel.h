@@ -11,4 +11,7 @@
 
 @interface MELLineModel : MELPrimitiveModel
 
+@property NSPoint firstPoint;
+@property NSPoint secondPoint;
+
 @end

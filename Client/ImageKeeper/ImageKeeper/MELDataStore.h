@@ -23,8 +23,8 @@
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
 - (void)putToDocumentModelElement:(id<MELElement>)element;
 
-- (void)selectImageInPoint:(NSPoint)point;
-- (void)deselectImage;
+- (void)selectElementInPoint:(NSPoint)point;
+- (void)deselectElement;
 
 - (void)addImage:(NSImage *)image;
 - (void)removeImage:(NSImage *)image;

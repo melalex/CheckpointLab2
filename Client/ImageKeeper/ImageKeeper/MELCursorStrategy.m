@@ -13,24 +13,13 @@
 #import "MELRect.h"
 #import "MELElement.h"
 
-@interface MELCursorStrategy()
-{
-    MELDataStore *_dataStore;
-    NSView *_ownerView;
-}
-
-@property CGFloat oldX;
-@property CGFloat oldY;
-
-@end
-
 @implementation MELCursorStrategy
 
 - (void)mouseDownAction:(NSEvent *)theEvent
 {
     NSPoint point = [self.ownerView convertPoint:[theEvent locationInWindow] fromView:nil];
     
-    [self.dataStore selectImageInPoint:point];
+    [self.dataStore selectElementInPoint:point];
 }
 
 #warning optimize deltaX, deltaY
@@ -47,28 +36,9 @@
     }
 }
 
-#pragma mark - MELCursorStrategySetters
-
-- (void)setDataStore:(MELDataStore *)dataStore
+- (void)mouseUpAction:(NSEvent *)theEvent
 {
-    _dataStore = dataStore;
-}
-
-- (void)setOwnerView:(NSView *)ownerView
-{
-    _ownerView = ownerView;
-}
-
-#pragma mark - MELCursorStrategyGetters
-
-- (MELDataStore *)dataStore
-{
-    return _dataStore;
-}
-
-- (NSView *)ownerView
-{
-    return _ownerView;
+    
 }
 
 @end

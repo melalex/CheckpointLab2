@@ -1,5 +1,5 @@
 //
-//  MELCursorStrategy.h
+//  MELOvalStrategy.h
 //  ImageKeeper
 //
 //  Created by Александр Мелащенко on 8/23/16.
@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MELStrategy.h"
 #import "MELPrimitiveStrategy.h"
 
-@interface MELCursorStrategy : MELPrimitiveStrategy
+@interface MELOvalStrategy : MELPrimitiveStrategy
 
 @end

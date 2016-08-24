@@ -11,6 +11,8 @@
 @class MELRect;
 @class MELVisitor;
 
+#warning Make hit test
+
 @protocol MELElement <NSObject, NSCoding>
 
 @property (retain) MELRect *frame;

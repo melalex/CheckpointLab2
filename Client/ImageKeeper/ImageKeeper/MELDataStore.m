@@ -57,12 +57,12 @@ static NSString *const kNib = @"nib";
     [super dealloc];
 }
 
-- (void)selectImageInPoint:(NSPoint)point
+- (void)selectElementInPoint:(NSPoint)point
 {
     self.selectedElement = [self.documentModel takeTopElementInPoint:point];
 }
 
-- (void)deselectImage
+- (void)deselectElement
 {
     self.selectedElement = nil;
 }
