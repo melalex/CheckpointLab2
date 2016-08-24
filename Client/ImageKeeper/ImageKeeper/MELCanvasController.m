@@ -29,7 +29,7 @@ static NSString *const kLayer = @"layer";
 static CGFloat const kDefaultDeltaX = 1.0;
 static CGFloat const kDefaultDeltaY = 1.0;
 
-static CGFloat const kFocusRingThickness = 4.0;
+static CGFloat const kFocusRingThickness = 5.0;
 
 @interface MELCanvasController ()
 {
@@ -314,35 +314,37 @@ static CGFloat const kFocusRingThickness = 4.0;
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
     {
-        NSRect rect = [aKeyPath isEqualToString:kLayer] ? [[(id<MELElement>)anObject frame] rect] : [(MELRect *)anObject rect];
+        NSRect newRect = [aKeyPath isEqualToString:kLayer] ? [[(id<MELElement>)anObject frame] rect] : [(MELRect *)anObject rect];
+        
+        newRect.origin.x -= kFocusRingThickness;
+        newRect.origin.y -= kFocusRingThickness;
+        newRect.size.width += kFocusRingThickness * 2;
+        newRect.size.height += kFocusRingThickness * 2;
+        
+        NSRect oldRekt = newRect;
         CGFloat oldValue = [aChange[kOld] doubleValue];
         
         if ([aKeyPath isEqualToString:kX])
         {
-            NSInteger dX = fabs(oldValue - rect.origin.x);
-            rect.size.width += dX + kFocusRingThickness * 2 + 2.0;
-            rect.origin.x -= kFocusRingThickness + 1.0;
-            rect.origin.x = fmin(rect.origin.x, oldValue);
+            oldRekt.origin.x = oldValue - kFocusRingThickness;
         }
         else if ([aKeyPath isEqualToString:kY])
         {
-            NSInteger dY = fabs(oldValue - rect.origin.y);
-            rect.size.height += dY + kFocusRingThickness * 2;
-            rect.origin.y -= kFocusRingThickness;
-            rect.origin.y = fmin(rect.origin.y, oldValue);
+            oldRekt.origin.y = oldValue - kFocusRingThickness;
         }
         else if ([aKeyPath isEqualToString:kWidth])
         {
-            rect.size.width += fmax(rect.size.width, oldValue);
+            oldRekt.size.width = oldValue + 2 * kFocusRingThickness;
         }
         else if ([aKeyPath isEqualToString:kHeight])
         {
-            rect.size.height += fmax(rect.size.height, oldValue);
+            oldRekt.size.height = oldValue + 2 * kFocusRingThickness;
         }
         
         self.canvas.elements = self.dataStore.documentModel.elements;
 
-        [self.view setNeedsDisplayInRect:rect];
+        [self.view setNeedsDisplayInRect:newRect];
+        [self.view setNeedsDisplayInRect:oldRekt];
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged))
     {
