@@ -10,16 +10,25 @@
 #import "MELCanvasController.h"
 #import "MELCursorStrategy.h"
 #import "MELLineStrategy.h"
+#import "MELOvalStrategy.h"
+#import "MELRectangleStrategy.h"
+#import "MELCurveStrategy.h"
 
 @interface MELInstrumentPanelController ()
 {
     MELCanvasController *_canvasController;
     MELCursorStrategy *_cursorStrategy;
     MELLineStrategy *_lineStrategy;
+    MELOvalStrategy *_ovalStrategy;
+    MELRectangleStrategy *_rectangleStrategy;
+    MELCurveStrategy *_curveStrategy;
 }
 
 @property (retain, readonly) MELCursorStrategy *cursorStrategy;
 @property (retain, readonly) MELLineStrategy *lineStrategy;
+@property (retain, readonly) MELOvalStrategy *ovalStrategy;
+@property (retain, readonly) MELRectangleStrategy *rectangleStrategy;
+@property (retain, readonly) MELCurveStrategy *curveStrategy;
 
 @end
 
@@ -51,17 +60,17 @@
 
 - (IBAction)rectangleSelected:(id)sender
 {
-    
+    self.canvasController.strategy = self.rectangleStrategy;
 }
 
 - (IBAction)ovalSelected:(id)sender
 {
-    
+    self.canvasController.strategy = self.ovalStrategy;
 }
 
 - (IBAction)brushSelected:(id)sender
 {
-    
+    self.canvasController.strategy = self.curveStrategy;
 }
 
 #pragma mark - MELCursorStrategySetters
@@ -100,6 +109,33 @@
         _lineStrategy = [[MELLineStrategy alloc] init];
     }
     return _lineStrategy;
+}
+
+- (MELOvalStrategy *)ovalStrategy
+{
+    if (!_ovalStrategy)
+    {
+        _ovalStrategy = [[MELOvalStrategy alloc] init];
+    }
+    return _ovalStrategy;
+}
+
+- (MELRectangleStrategy *)rectangleStrategy
+{
+    if (!_rectangleStrategy)
+    {
+        _rectangleStrategy = [[MELRectangleStrategy alloc] init];
+    }
+    return _rectangleStrategy;
+}
+
+- (MELCurveStrategy *)curveStrategy
+{
+    if (!_curveStrategy)
+    {
+        _curveStrategy = [[MELCurveStrategy alloc] init];
+    }
+    return _curveStrategy;
 }
 
 @end

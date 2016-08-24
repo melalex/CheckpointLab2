@@ -320,8 +320,8 @@ static CGFloat const kFocusRingThickness = 4.0;
         if ([aKeyPath isEqualToString:kX])
         {
             NSInteger dX = fabs(oldValue - rect.origin.x);
-            rect.size.width += dX + kFocusRingThickness * 2 + 1;
-            rect.origin.x -= kFocusRingThickness;
+            rect.size.width += dX + kFocusRingThickness * 2 + 2.0;
+            rect.origin.x -= kFocusRingThickness + 1.0;
             rect.origin.x = fmin(rect.origin.x, oldValue);
         }
         else if ([aKeyPath isEqualToString:kY])

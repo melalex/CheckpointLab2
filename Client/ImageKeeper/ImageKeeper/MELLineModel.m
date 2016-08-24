@@ -49,6 +49,8 @@
 {
     NSPoint result;
     
+#warning Create is.. method
+    
     if ((self.innerFirstPoint.x < self.innerSecondPoint.x && self.innerFirstPoint.y < self.innerSecondPoint.y) ||
         (self.innerFirstPoint.x > self.innerSecondPoint.x && self.innerFirstPoint.y > self.innerSecondPoint.y))
     {
