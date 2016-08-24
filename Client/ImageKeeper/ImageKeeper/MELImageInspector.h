@@ -7,12 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-@class MELDataStore;
+#import "MELDataStoreProtocols.h"
 
 @interface MELImageInspector : NSWindowController
 
-@property (retain) MELDataStore *dataStore;
+@property (retain) id<MELImageInspectorModelController> dataStore;
 
 @property CGFloat xCoordinate;
 @property CGFloat yCoordinate;

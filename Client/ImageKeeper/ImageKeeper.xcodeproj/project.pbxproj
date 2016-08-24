@@ -145,6 +145,7 @@
 		DDA6663E1D6DE2F60079220F /* __Interface__Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Line.png; path = Interface/__Interface__Line.png; sourceTree = "<group>"; };
 		DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Oval.png; path = Interface/__Interface__Oval.png; sourceTree = "<group>"; };
 		DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Rectangle.png; path = Interface/__Interface__Rectangle.png; sourceTree = "<group>"; };
+		DDA6664C1D6DEA660079220F /* MELDataStoreProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDataStoreProtocols.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,8 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				DDA6661C1D6CBED10079220F /* Visitor */,
-				DDA665DC1D687F4A0079220F /* MELDataStore.h */,
-				DDA665DD1D687F4A0079220F /* MELDataStore.m */,
+				DDA666461D6DE90B0079220F /* DataStore */,
 				DDA665E21D689CEB0079220F /* MELDocumentModel.h */,
 				DDA665E31D689CEB0079220F /* MELDocumentModel.m */,
 				DDA665F81D6A12060079220F /* MELRect.h */,
@@ -363,6 +363,16 @@
 				DDA6661A1D6CBEC10079220F /* MELVisitor.m */,
 			);
 			name = Visitor;
+			sourceTree = "<group>";
+		};
+		DDA666461D6DE90B0079220F /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				DDA6664C1D6DEA660079220F /* MELDataStoreProtocols.h */,
+				DDA665DC1D687F4A0079220F /* MELDataStore.h */,
+				DDA665DD1D687F4A0079220F /* MELDataStore.m */,
+			);
+			name = DataStore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

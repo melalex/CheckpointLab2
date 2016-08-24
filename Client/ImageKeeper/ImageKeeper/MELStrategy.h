@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MELDataStoreProtocols.h"
 
 @class NSView;
 @class NSEvent;
-@class MELDataStore;
 
 @protocol MELStrategy <NSObject>
 
 @property (assign) NSView *ownerView;
-@property (assign) MELDataStore *dataStore;
+@property (assign) id<MELCanvasModelController> dataStore;
 
 - (void)mouseDownAction:(NSEvent *)theEvent;
 - (void)mouseDraggAction:(NSEvent *)theEvent;

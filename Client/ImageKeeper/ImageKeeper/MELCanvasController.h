@@ -9,20 +9,20 @@
 #import <Cocoa/Cocoa.h>
 #import "MELStrategy.h"
 #import "MELElement.h"
+#import "MELDataStoreProtocols.h"
 
-@class MELDataStore;
 @class MELCanvas;
 
 @interface MELCanvasController : NSViewController
 
 @property (retain) id<MELStrategy> strategy;
-@property (retain) MELDataStore *dataStore;
+@property (retain) id<MELCanvasModelController> dataStore;
 @property (readonly) MELCanvas *canvas;
 
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 
 - (BOOL)isSelected:(id<MELElement>)element;
-- (NSRect)selectedImageFrame;
+- (NSRect)selectedElementFrame;
 
 - (void)copySelectedImage;
 - (void)paste;

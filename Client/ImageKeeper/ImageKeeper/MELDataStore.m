@@ -67,6 +67,17 @@ static NSString *const kNib = @"nib";
     self.selectedElement = [self.documentModel takeTopElementInPoint:point];
 }
 
+- (void)shiftSelectedElementByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
+{
+    self.selectedElement.frame.x += deltaX;
+    self.selectedElement.frame.y -= deltaY;
+}
+
+- (NSRect)selectedElementFrame
+{
+    return self.selectedElement.frame.rect;
+}
+
 - (void)deselectElement
 {
     self.selectedElement = nil;
@@ -82,9 +93,40 @@ static NSString *const kNib = @"nib";
     
 }
 
+- (BOOL)isSelected:(id<MELElement>)element
+{
+    BOOL result = NO;
+    
+    if (element == self.selectedElement)
+    {
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (NSArray<id<MELElement>> *)getElements
+{
+    return self.documentModel.elements;
+}
+
 #pragma mark - MELDocumentModel modification
 
 #warning optimize layer
+
+- (void)putToDocumentModelImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
+{
+    NSImage *image = self.images[index];
+    
+    CGFloat width = image.size.width;
+    CGFloat height = image.size.height;
+    CGFloat x = point.x - image.size.width/2;
+    CGFloat y = point.y - image.size.height/2;
+    
+    MELRect *frame = [[MELRect alloc] initWithX:x y:y width:width height:height];
+    
+    [self putToDocumentModelImage:image inFrame:frame];
+}
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame
 {

@@ -88,8 +88,9 @@
 - (void)setLayer:(NSUInteger)layer
 {
     NSUInteger oldLayer = self.dataStore.selectedElement.layer;
+    NSArray<id<MELElement>> *elements = [self.dataStore getElements];
     
-    for (id<MELElement> element in self.dataStore.documentModel.elements)
+    for (id<MELElement> element in elements)
     {
         if (element.layer > oldLayer)
         {

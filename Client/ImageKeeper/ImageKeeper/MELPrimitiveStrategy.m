@@ -13,7 +13,7 @@
 
 @interface MELPrimitiveStrategy()
 {
-    MELDataStore *_dataStore;
+    id<MELCanvasModelController> _dataStore;
     NSView *_ownerView;
 }
 
@@ -38,7 +38,7 @@
 
 #pragma mark - MELPrimitiveStrategySetters
 
-- (void)setDataStore:(MELDataStore *)dataStore
+- (void)setDataStore:(id<MELCanvasModelController>)dataStore
 {
     _dataStore = dataStore;
 }
@@ -50,7 +50,7 @@
 
 #pragma mark - MELPrimitiveStrategyGetters
 
-- (MELDataStore *)dataStore
+- (id<MELCanvasModelController>)dataStore
 {
     return _dataStore;
 }

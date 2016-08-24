@@ -7,7 +7,6 @@
 //
 
 #import "MELCanvasController.h"
-#import "MELDataStore.h"
 #import "Macros.h"
 #import "MELCanvas.h"
 #import "MELDocumentModel.h"
@@ -33,7 +32,7 @@ static CGFloat const kFocusRingThickness = 5.0;
 
 @interface MELCanvasController ()
 {
-    MELDataStore *_dataStore;
+    id<MELCanvasModelController> _dataStore;
     id<MELStrategy> _strategy;
 }
 
@@ -65,39 +64,22 @@ static CGFloat const kFocusRingThickness = 5.0;
 
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point
 {
-    NSImage *image = self.dataStore.images[index];
- 
-    CGFloat width = image.size.width;
-    CGFloat height = image.size.height;
-    CGFloat x = point.x - image.size.width/2;
-    CGFloat y = point.y - image.size.height/2;
-
-    MELRect *frame = [[MELRect alloc] initWithX:x y:y width:width height:height];
-    
-    [self.dataStore putToDocumentModelImage:image inFrame:frame];
+    [self.dataStore putToDocumentModelImageFromLibraryAtIndex:index toPoint:point];
 }
 
 - (void)shiftByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
 {
-    self.dataStore.selectedElement.frame.x += deltaX;
-    self.dataStore.selectedElement.frame.y -= deltaY;
+    [self.dataStore shiftSelectedElementByDeltaX:deltaX deltaY:deltaY];
 }
 
 - (BOOL)isSelected:(id<MELElement>)element
 {
-    BOOL result = NO;
-    
-    if (element == self.dataStore.selectedElement)
-    {
-        result = YES;
-    }
-    
-    return result;
+    return [self.dataStore isSelected:element];;
 }
 
-- (NSRect)selectedImageFrame
+- (NSRect)selectedElementFrame;
 {
-    return self.dataStore.selectedElement.frame.rect;
+    return [self.dataStore selectedElementFrame];
 }
 
 #pragma mark - strategy
@@ -210,7 +192,7 @@ static CGFloat const kFocusRingThickness = 5.0;
 
 #pragma mark - MELCanvasController KVO
 
-- (void)setDataStore:(MELDataStore *)dataStore
+- (void)setDataStore:(id<MELCanvasModelController>)dataStore
 {
     if (_dataStore != dataStore)
     {
@@ -237,7 +219,7 @@ static CGFloat const kFocusRingThickness = 5.0;
     }
 }
 
-- (MELDataStore *)dataStore
+- (id<MELCanvasModelController>)dataStore
 {
     return _dataStore;
 }
