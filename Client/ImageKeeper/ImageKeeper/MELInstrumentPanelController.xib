@@ -23,7 +23,7 @@
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k5U-rl-3xH">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Cursor" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="0py-cw-0pC">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="__Interface__Cursor" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="0py-cw-0pC">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -33,7 +33,7 @@
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iod-fd-Lon">
                         <rect key="frame" x="49" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Line" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="eAp-Xg-tx6">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="__Interface__Line" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="eAp-Xg-tx6">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -43,7 +43,7 @@
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-s6-tsc">
                         <rect key="frame" x="147" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Oval" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8xf-An-o6V">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="__Interface__Oval" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8xf-An-o6V">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -53,7 +53,7 @@
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BoV-1o-MhY">
                         <rect key="frame" x="98" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Rectangle" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="nVR-Il-GlQ">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="__Interface__Rectangle" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="nVR-Il-GlQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -63,7 +63,7 @@
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJn-O7-gCt">
                         <rect key="frame" x="196" y="0.0" width="50" height="50"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Brush" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="oEf-YP-JVO">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="__Interface__Brush" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="oEf-YP-JVO">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -77,10 +77,10 @@
         </window>
     </objects>
     <resources>
-        <image name="Brush" width="512" height="512"/>
-        <image name="Cursor" width="20.803611755371094" height="20.803611755371094"/>
-        <image name="Line" width="512" height="512"/>
-        <image name="Oval" width="512" height="512"/>
-        <image name="Rectangle" width="512" height="512"/>
+        <image name="__Interface__Brush" width="512" height="512"/>
+        <image name="__Interface__Cursor" width="20.803611755371094" height="20.803611755371094"/>
+        <image name="__Interface__Line" width="512" height="512"/>
+        <image name="__Interface__Oval" width="512" height="512"/>
+        <image name="__Interface__Rectangle" width="512" height="512"/>
     </resources>
 </document>

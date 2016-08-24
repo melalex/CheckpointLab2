@@ -16,9 +16,11 @@
 
 @interface MELDataStore : NSObject
 
-@property (readonly, retain) NSArray<NSImage *> *images;
 @property (retain) MELDocumentModel *documentModel;
+@property (readonly, retain) NSArray<NSImage *> *images;
 @property (readonly, assign) id<MELElement> selectedElement;
+
+- (void)setDocumentModel:(MELDocumentModel *)documentModel;
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
 - (void)putToDocumentModelElement:(id<MELElement>)element;

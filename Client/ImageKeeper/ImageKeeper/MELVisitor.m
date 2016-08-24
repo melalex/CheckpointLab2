@@ -58,12 +58,15 @@
 - (void)performMELOvalModelTasks:(MELOvalModel *)object
 {
     NSBezierPath *oval = [NSBezierPath bezierPathWithOvalInRect:object.frame.rect];
+    
     [oval stroke];
 }
 
 - (void)performMELRectangleModelTasks:(MELRectangleModel *)object
 {
+    NSBezierPath *rectangle = [NSBezierPath bezierPathWithRect:object.frame.rect];
     
+    [rectangle stroke];
 }
 
 - (void)performMELCurveModelTasks:(MELCurveModel *)object

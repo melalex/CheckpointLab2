@@ -37,13 +37,18 @@ static NSString *const kNib = @"nib";
             if (![path hasSuffix:kLproj] && ![path hasSuffix:kNib])
             {
                 NSURL *imageURL = [NSURL fileURLWithPath:path];
-                NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
+                NSString *imageName = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
                 
-                imageObj.name = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
-                
-                [_mutableImages addObject:imageObj];
-                
-                [imageObj release];
+                if (![imageName hasPrefix:@"__Interface__"])
+                {
+                    NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
+                    
+                    imageObj.name = imageName;
+                    
+                    [_mutableImages addObject:imageObj];
+                    
+                    [imageObj release];
+                }
             }
         }
     }

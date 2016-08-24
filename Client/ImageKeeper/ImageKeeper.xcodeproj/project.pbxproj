@@ -33,11 +33,6 @@
 		DDA665FD1D6B86450079220F /* Jobs.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA665FB1D6B86450079220F /* Jobs.png */; };
 		DDA666041D6C8EE20079220F /* MELInstrumentPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666021D6C8EE20079220F /* MELInstrumentPanelController.m */; };
 		DDA666051D6C8EE20079220F /* MELInstrumentPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA666031D6C8EE20079220F /* MELInstrumentPanelController.xib */; };
-		DDA6660C1D6C93010079220F /* Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA666071D6C93010079220F /* Rectangle.png */; };
-		DDA6660D1D6C93010079220F /* Cursor.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA666081D6C93010079220F /* Cursor.png */; };
-		DDA6660E1D6C93010079220F /* Brush.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA666091D6C93010079220F /* Brush.png */; };
-		DDA6660F1D6C93010079220F /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6660A1D6C93010079220F /* Line.png */; };
-		DDA666101D6C93010079220F /* Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6660B1D6C93010079220F /* Oval.png */; };
 		DDA666151D6CA67D0079220F /* MELCursorStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666141D6CA67D0079220F /* MELCursorStrategy.m */; };
 		DDA6661B1D6CBEC10079220F /* MELVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6661A1D6CBEC10079220F /* MELVisitor.m */; };
 		DDA6661F1D6CBF790079220F /* MELLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6661E1D6CBF790079220F /* MELLineModel.m */; };
@@ -50,6 +45,11 @@
 		DDA666341D6CE1DB0079220F /* MELOvalStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666331D6CE1DB0079220F /* MELOvalStrategy.m */; };
 		DDA666371D6CE1F70079220F /* MELCurveStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666361D6CE1F70079220F /* MELCurveStrategy.m */; };
 		DDA6663B1D6D92050079220F /* MELPrimitiveStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6663A1D6D92050079220F /* MELPrimitiveStrategy.m */; };
+		DDA666411D6DE2F60079220F /* __Interface__Brush.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663C1D6DE2F60079220F /* __Interface__Brush.png */; };
+		DDA666421D6DE2F60079220F /* __Interface__Cursor.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663D1D6DE2F60079220F /* __Interface__Cursor.png */; };
+		DDA666431D6DE2F60079220F /* __Interface__Line.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663E1D6DE2F60079220F /* __Interface__Line.png */; };
+		DDA666441D6DE2F60079220F /* __Interface__Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */; };
+		DDA666451D6DE2F60079220F /* __Interface__Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,11 +114,6 @@
 		DDA666011D6C8EE20079220F /* MELInstrumentPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELInstrumentPanelController.h; sourceTree = "<group>"; };
 		DDA666021D6C8EE20079220F /* MELInstrumentPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELInstrumentPanelController.m; sourceTree = "<group>"; };
 		DDA666031D6C8EE20079220F /* MELInstrumentPanelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELInstrumentPanelController.xib; sourceTree = "<group>"; };
-		DDA666071D6C93010079220F /* Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rectangle.png; sourceTree = "<group>"; };
-		DDA666081D6C93010079220F /* Cursor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cursor.png; sourceTree = "<group>"; };
-		DDA666091D6C93010079220F /* Brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Brush.png; sourceTree = "<group>"; };
-		DDA6660A1D6C93010079220F /* Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Line.png; sourceTree = "<group>"; };
-		DDA6660B1D6C93010079220F /* Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Oval.png; sourceTree = "<group>"; };
 		DDA666121D6CA4EF0079220F /* MELStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELStrategy.h; sourceTree = "<group>"; };
 		DDA666131D6CA67D0079220F /* MELCursorStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELCursorStrategy.h; sourceTree = "<group>"; };
 		DDA666141D6CA67D0079220F /* MELCursorStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCursorStrategy.m; sourceTree = "<group>"; };
@@ -145,6 +140,11 @@
 		DDA666361D6CE1F70079220F /* MELCurveStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCurveStrategy.m; sourceTree = "<group>"; };
 		DDA666391D6D92050079220F /* MELPrimitiveStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELPrimitiveStrategy.h; sourceTree = "<group>"; };
 		DDA6663A1D6D92050079220F /* MELPrimitiveStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELPrimitiveStrategy.m; sourceTree = "<group>"; };
+		DDA6663C1D6DE2F60079220F /* __Interface__Brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Brush.png; path = Interface/__Interface__Brush.png; sourceTree = "<group>"; };
+		DDA6663D1D6DE2F60079220F /* __Interface__Cursor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Cursor.png; path = Interface/__Interface__Cursor.png; sourceTree = "<group>"; };
+		DDA6663E1D6DE2F60079220F /* __Interface__Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Line.png; path = Interface/__Interface__Line.png; sourceTree = "<group>"; };
+		DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Oval.png; path = Interface/__Interface__Oval.png; sourceTree = "<group>"; };
+		DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Rectangle.png; path = Interface/__Interface__Rectangle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,11 +306,11 @@
 		DDA666061D6C92B90079220F /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				DDA666071D6C93010079220F /* Rectangle.png */,
-				DDA666081D6C93010079220F /* Cursor.png */,
-				DDA666091D6C93010079220F /* Brush.png */,
-				DDA6660A1D6C93010079220F /* Line.png */,
-				DDA6660B1D6C93010079220F /* Oval.png */,
+				DDA6663C1D6DE2F60079220F /* __Interface__Brush.png */,
+				DDA6663D1D6DE2F60079220F /* __Interface__Cursor.png */,
+				DDA6663E1D6DE2F60079220F /* __Interface__Line.png */,
+				DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */,
+				DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -345,10 +345,10 @@
 				DDA6662A1D6CCD0E0079220F /* MELPrimitiveModel.m */,
 				DDA6661D1D6CBF790079220F /* MELLineModel.h */,
 				DDA6661E1D6CBF790079220F /* MELLineModel.m */,
-				DDA666201D6CBF8D0079220F /* MELOvalModel.h */,
-				DDA666211D6CBF8D0079220F /* MELOvalModel.m */,
 				DDA666231D6CBFA60079220F /* MELRectangleModel.h */,
 				DDA666241D6CBFA60079220F /* MELRectangleModel.m */,
+				DDA666201D6CBF8D0079220F /* MELOvalModel.h */,
+				DDA666211D6CBF8D0079220F /* MELOvalModel.m */,
 				DDA666261D6CC0410079220F /* MELCurveModel.h */,
 				DDA666271D6CC0410079220F /* MELCurveModel.m */,
 			);
@@ -469,20 +469,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA665F71D69EF2C0079220F /* MELImageInspector.xib in Resources */,
-				DDA6660D1D6C93010079220F /* Cursor.png in Resources */,
-				DDA6660C1D6C93010079220F /* Rectangle.png in Resources */,
 				DDA665CD1D685E520079220F /* Butterfly.jpg in Resources */,
 				DDA665A21D67636D0079220F /* Assets.xcassets in Resources */,
-				DDA6660E1D6C93010079220F /* Brush.png in Resources */,
+				DDA666421D6DE2F60079220F /* __Interface__Cursor.png in Resources */,
+				DDA666411D6DE2F60079220F /* __Interface__Brush.png in Resources */,
 				DDA665A01D67636D0079220F /* Document.xib in Resources */,
 				DDA665CF1D685E520079220F /* Balloons.jpg in Resources */,
 				DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */,
-				DDA6660F1D6C93010079220F /* Line.png in Resources */,
+				DDA666451D6DE2F60079220F /* __Interface__Rectangle.png in Resources */,
 				DDA665CE1D685E520079220F /* Husky.jpg in Resources */,
 				DDA665EC1D68A78A0079220F /* MELCanvasController.xib in Resources */,
-				DDA666101D6C93010079220F /* Oval.png in Resources */,
 				DDA666051D6C8EE20079220F /* MELInstrumentPanelController.xib in Resources */,
 				DDA665FD1D6B86450079220F /* Jobs.png in Resources */,
+				DDA666431D6DE2F60079220F /* __Interface__Line.png in Resources */,
+				DDA666441D6DE2F60079220F /* __Interface__Oval.png in Resources */,
 				DDA665A51D67636D0079220F /* MainMenu.xib in Resources */,
 				DDA665F21D69E7F80079220F /* Venice.jpg in Resources */,
 			);
