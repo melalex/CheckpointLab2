@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @class MELRect;
 @class MELVisitor;
 
 #warning Make hit test
 
-@protocol MELElement <NSObject, NSCoding>
+static NSString *const kMELElementUTI = @"kMELElementUTI";
+
+@protocol MELElement <NSObject, NSCoding, NSPasteboardWriting, NSPasteboardReading>
 
 @property (retain) MELRect *frame;
 @property  NSUInteger layer;

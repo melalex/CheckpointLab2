@@ -12,6 +12,12 @@
 #import "MELDocumentModel.h"
 #import "MELRect.h"
 
+#import "MELImageModel.h"
+#import "MELLineModel.h"
+#import "MELRectangleModel.h"
+#import "MELOvalModel.h"
+#import "MELCurveModel.h"
+
 static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasControllerContextImageToDraw";
 static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanvasControllerContextImageChangeFrame";
 static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELCanvasControllerContextSelectedImageChanged";
@@ -159,28 +165,30 @@ static CGFloat const kFocusRingThickness = 5.0;
     {
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:elementModel];
-        [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+        [pasteboard clearContents];
         
-        [pasteboard setData:data forType:NSStringPboardType];
+        NSArray *copiedObjects = [NSArray arrayWithObject:elementModel];
+        
+        [pasteboard writeObjects:copiedObjects];
     }
 }
 
 - (void)paste
 {
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-    NSData *data = [pasteboard dataForType:NSStringPboardType];
-    id<MELElement> elementModel = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSArray *classArray = [NSArray arrayWithObjects:[MELImageModel class], [MELLineModel class], [MELRectangleModel class], [MELOvalModel class], [MELCurveModel class], nil];
+    NSDictionary *options = [NSDictionary dictionary];
     
-    NSRect pointRect = NSMakeRect(NSEvent.mouseLocation.x - elementModel.frame.width / 2, NSEvent.mouseLocation.y - elementModel.frame.height / 2, 0, 0);
-    NSPoint mouseLocation = [self.view convertPoint:[self.view.window convertRectFromScreen:pointRect].origin
-                                           fromView:nil];
+    BOOL ok = [pasteboard canReadObjectForClasses:classArray options:options];
     
-    elementModel.frame.x = mouseLocation.x;
-    elementModel.frame.y = mouseLocation.y;
-
-    [self.dataStore putToDocumentModelElement:elementModel];
-
+    if (ok)
+    {
+        NSArray *objectsToPaste = [pasteboard readObjectsForClasses:classArray options:options];
+        
+        id<MELElement> image = [objectsToPaste objectAtIndex:0];
+        
+        [imageView setImage:image];
+    }
 }
 
 - (void)deleteSelectedImage

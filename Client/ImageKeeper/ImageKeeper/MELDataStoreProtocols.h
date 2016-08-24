@@ -9,22 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "MELElement.h"
 
-//@property (retain) MELDocumentModel *documentModel;
-//@property (readonly, retain) NSArray<NSImage *> *images;
-//@property (readonly, assign) id<MELElement> selectedElement;
-//
-//- (void)setDocumentModel:(MELDocumentModel *)documentModel;
-//
-//- (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
-//- (void)putToDocumentModelElement:(id<MELElement>)element;
-//
-//- (void)selectElementInPoint:(NSPoint)point;
-//- (void)deselectElement;
-//
-//- (void)addImage:(NSImage *)image;
-//- (void)removeImage:(NSImage *)image;
-//
-
 @class MELRect;
 @class MELDocumentModel;
 

@@ -26,7 +26,6 @@
 		DDA665E71D689E3B0079220F /* MELImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665E61D689E3B0079220F /* MELImageModel.m */; };
 		DDA665EB1D68A78A0079220F /* MELCanvasController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665E91D68A78A0079220F /* MELCanvasController.m */; };
 		DDA665EC1D68A78A0079220F /* MELCanvasController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665EA1D68A78A0079220F /* MELCanvasController.xib */; };
-		DDA665F21D69E7F80079220F /* Venice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA665F11D69E7F80079220F /* Venice.jpg */; };
 		DDA665F61D69EF2C0079220F /* MELImageInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665F41D69EF2C0079220F /* MELImageInspector.m */; };
 		DDA665F71D69EF2C0079220F /* MELImageInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665F51D69EF2C0079220F /* MELImageInspector.xib */; };
 		DDA665FA1D6A12060079220F /* MELRect.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665F91D6A12060079220F /* MELRect.m */; };
@@ -104,7 +103,6 @@
 		DDA665E91D68A78A0079220F /* MELCanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCanvasController.m; sourceTree = "<group>"; };
 		DDA665EA1D68A78A0079220F /* MELCanvasController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELCanvasController.xib; sourceTree = "<group>"; };
 		DDA665ED1D68B9AD0079220F /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
-		DDA665F11D69E7F80079220F /* Venice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Venice.jpg; sourceTree = "<group>"; };
 		DDA665F31D69EF2C0079220F /* MELImageInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELImageInspector.h; sourceTree = "<group>"; };
 		DDA665F41D69EF2C0079220F /* MELImageInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELImageInspector.m; sourceTree = "<group>"; };
 		DDA665F51D69EF2C0079220F /* MELImageInspector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELImageInspector.xib; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				DDA665FB1D6B86450079220F /* Jobs.png */,
-				DDA665F11D69E7F80079220F /* Venice.jpg */,
 				DDA665CA1D685E520079220F /* Butterfly.jpg */,
 				DDA665CB1D685E520079220F /* Husky.jpg */,
 				DDA665CC1D685E520079220F /* Balloons.jpg */,
@@ -494,7 +491,6 @@
 				DDA666431D6DE2F60079220F /* __Interface__Line.png in Resources */,
 				DDA666441D6DE2F60079220F /* __Interface__Oval.png in Resources */,
 				DDA665A51D67636D0079220F /* MainMenu.xib in Resources */,
-				DDA665F21D69E7F80079220F /* Venice.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -85,14 +85,26 @@
     return YES;
 }
 
+//- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)aSender
+//{
+//    return [self canReadFromPasteboard:aSender.draggingPasteboard];
+//}
+
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
     NSData *data = [[sender draggingPasteboard] dataForType:NSStringPboardType];
     NSArray *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    [self.controller addImageFromLibraryAtIndex:[rowIndexes[0] longLongValue] toPoint:sender.draggingLocation];
+    BOOL result = NO;
     
-    return YES;
+    if (rowIndexes)
+    {
+         [self.controller addImageFromLibraryAtIndex:[rowIndexes[0] longLongValue] toPoint:sender.draggingLocation];
+        
+        result = YES;
+    }
+    
+    return result;
 }
 
 @end
