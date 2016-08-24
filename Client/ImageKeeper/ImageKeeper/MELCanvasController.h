@@ -16,13 +16,12 @@
 @interface MELCanvasController : NSViewController
 
 @property (retain) id<MELStrategy> strategy;
-@property (retain) id<MELCanvasModelController> dataStore;
+@property (retain) NSObject<MELCanvasModelController> *dataStore;
 @property (readonly) MELCanvas *canvas;
 
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 
 - (BOOL)isSelected:(id<MELElement>)element;
-- (NSRect)selectedElementFrame;
 
 - (void)copySelectedImage;
 - (void)paste;

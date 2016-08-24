@@ -14,7 +14,7 @@
 
 #warning Make hit test
 
-static NSString *const kMELElementUTI = @"kMELElementUTI";
+static NSString *const kMELElementUTI = @"com.company.element";
 
 @protocol MELElement <NSObject, NSCoding, NSPasteboardWriting, NSPasteboardReading>
 

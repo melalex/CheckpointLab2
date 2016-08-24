@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MELPrimitiveModel.h"
 
-@interface MELCurveModel : NSObject 
+@interface MELCurveModel : MELPrimitiveModel
 
 @end

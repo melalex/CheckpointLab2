@@ -38,7 +38,7 @@ static CGFloat const kFocusRingThickness = 5.0;
 
 @interface MELCanvasController ()
 {
-    id<MELCanvasModelController> _dataStore;
+    NSObject<MELCanvasModelController> *_dataStore;
     id<MELStrategy> _strategy;
 }
 
@@ -81,11 +81,6 @@ static CGFloat const kFocusRingThickness = 5.0;
 - (BOOL)isSelected:(id<MELElement>)element
 {
     return [self.dataStore isSelected:element];;
-}
-
-- (NSRect)selectedElementFrame;
-{
-    return [self.dataStore selectedElementFrame];
 }
 
 #pragma mark - strategy
@@ -185,9 +180,16 @@ static CGFloat const kFocusRingThickness = 5.0;
     {
         NSArray *objectsToPaste = [pasteboard readObjectsForClasses:classArray options:options];
         
-        id<MELElement> image = [objectsToPaste objectAtIndex:0];
+        id<MELElement> elementModel = [objectsToPaste objectAtIndex:0];
         
-        [imageView setImage:image];
+        NSRect pointRect = NSMakeRect(NSEvent.mouseLocation.x - elementModel.frame.width / 2, NSEvent.mouseLocation.y - elementModel.frame.height / 2, 0, 0);
+        NSPoint mouseLocation = [self.view convertPoint:[self.view.window convertRectFromScreen:pointRect].origin
+                                               fromView:nil];
+        
+        elementModel.frame.x = mouseLocation.x;
+        elementModel.frame.y = mouseLocation.y;
+        
+        [self.dataStore putToDocumentModelElement:elementModel];
     }
 }
 
@@ -236,8 +238,8 @@ static CGFloat const kFocusRingThickness = 5.0;
 {
     if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw))
     {
-        id<MELElement> newElement = (id<MELElement>)[aChange[kNew] objectAtIndex:0];
-        id<MELElement> oldElement = (id<MELElement>)[aChange[kOld] objectAtIndex:0];
+        NSObject<MELElement> *newElement = (id<MELElement>)[aChange[kNew] objectAtIndex:0];
+        NSObject<MELElement> *oldElement = (id<MELElement>)[aChange[kOld] objectAtIndex:0];
         
         if (newElement)
         {

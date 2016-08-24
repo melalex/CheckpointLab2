@@ -51,52 +51,24 @@ static NSString *const kLayer = @"layer";
 
 - (NSArray *)writableTypesForPasteboard:(NSPasteboard *)pasteboard
 {
-    static NSArray *writableTypes = nil;
-    
-    if (!writableTypes)
-    {
-        writableTypes = [NSArray arrayWithObject:kMELElementUTI];
-    }
-    
-    return writableTypes;
+    return nil;
 }
 
 - (id)pasteboardPropertyListForType:(NSString *)type
 {
-    NSData *result = nil;
-    
-    if ([type isEqualToString:kMELElementUTI])
-    {
-        result = [NSKeyedArchiver archivedDataWithRootObject:self];
-    }
-    
-    return result;
+    return nil;
 }
 
 #pragma mark - NSPasteboardReading
 
 + (NSArray *)readableTypesForPasteboard:(NSPasteboard *)pasteboard
 {
-    static NSArray *readableTypes = nil;
-    
-    if (!readableTypes)
-    {
-        readableTypes = [NSArray arrayWithObject:kMELElementUTI];
-    }
-    
-    return readableTypes;
+    return nil;
 }
 
 + (NSPasteboardReadingOptions)readingOptionsForType:(NSString *)type pasteboard:(NSPasteboard *)pboard
 {
-    NSPasteboardReadingOptions result = 0;
-    
-    if ([type isEqualToString:kMELElementUTI])
-    {
-        result = NSPasteboardReadingAsKeyedArchive;
-    }
-    
-    return result;
+    return 0;
 }
 
 

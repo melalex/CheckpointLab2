@@ -120,8 +120,8 @@ static NSString *const kNib = @"nib";
     
     CGFloat width = image.size.width;
     CGFloat height = image.size.height;
-    CGFloat x = point.x - image.size.width/2;
-    CGFloat y = point.y - image.size.height/2;
+    CGFloat x = point.x - image.size.width / 2;
+    CGFloat y = point.y - image.size.height / 2;
     
     MELRect *frame = [[MELRect alloc] initWithX:x y:y width:width height:height];
     

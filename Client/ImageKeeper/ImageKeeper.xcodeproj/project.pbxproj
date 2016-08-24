@@ -49,6 +49,12 @@
 		DDA666431D6DE2F60079220F /* __Interface__Line.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663E1D6DE2F60079220F /* __Interface__Line.png */; };
 		DDA666441D6DE2F60079220F /* __Interface__Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */; };
 		DDA666451D6DE2F60079220F /* __Interface__Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */; };
+		DDA666521D6E20E90079220F /* Jobs.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665FB1D6B86450079220F /* Jobs.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DDA666531D6E20E90079220F /* Butterfly.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CA1D685E520079220F /* Butterfly.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DDA666541D6E20E90079220F /* Husky.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CB1D685E520079220F /* Husky.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DDA666551D6E20E90079220F /* Balloons.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CC1D685E520079220F /* Balloons.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		DDA666571D6E25500079220F /* Fjords.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
+		DDA666581D6E25860079220F /* Fjords.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,23 @@
 			remoteInfo = ImageKeeper;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DDA666511D6E202F0079220F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = Images;
+			dstSubfolderSpec = 7;
+			files = (
+				DDA666581D6E25860079220F /* Fjords.jpg in CopyFiles */,
+				DDA666521D6E20E90079220F /* Jobs.png in CopyFiles */,
+				DDA666531D6E20E90079220F /* Butterfly.jpg in CopyFiles */,
+				DDA666541D6E20E90079220F /* Husky.jpg in CopyFiles */,
+				DDA666551D6E20E90079220F /* Balloons.jpg in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DDA665921D67636D0079220F /* ImageKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +167,7 @@
 		DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Oval.png; path = Interface/__Interface__Oval.png; sourceTree = "<group>"; };
 		DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Rectangle.png; path = Interface/__Interface__Rectangle.png; sourceTree = "<group>"; };
 		DDA6664C1D6DEA660079220F /* MELDataStoreProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDataStoreProtocols.h; sourceTree = "<group>"; };
+		DDA666561D6E25500079220F /* Fjords.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fjords.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +260,7 @@
 		DDA665C91D685DE80079220F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DDA666561D6E25500079220F /* Fjords.jpg */,
 				DDA665FB1D6B86450079220F /* Jobs.png */,
 				DDA665CA1D685E520079220F /* Butterfly.jpg */,
 				DDA665CB1D685E520079220F /* Husky.jpg */,
@@ -382,6 +407,7 @@
 				DDA6658E1D67636D0079220F /* Sources */,
 				DDA6658F1D67636D0079220F /* Frameworks */,
 				DDA665901D67636D0079220F /* Resources */,
+				DDA666511D6E202F0079220F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -487,6 +513,7 @@
 				DDA665CE1D685E520079220F /* Husky.jpg in Resources */,
 				DDA665EC1D68A78A0079220F /* MELCanvasController.xib in Resources */,
 				DDA666051D6C8EE20079220F /* MELInstrumentPanelController.xib in Resources */,
+				DDA666571D6E25500079220F /* Fjords.jpg in Resources */,
 				DDA665FD1D6B86450079220F /* Jobs.png in Resources */,
 				DDA666431D6DE2F60079220F /* __Interface__Line.png in Resources */,
 				DDA666441D6DE2F60079220F /* __Interface__Oval.png in Resources */,
