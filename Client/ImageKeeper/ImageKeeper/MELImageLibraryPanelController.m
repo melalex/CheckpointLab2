@@ -10,11 +10,17 @@
 #import "MELDataStore.h"
 #import "MELDocumentModel.h"
 #import "MELRect.h"
+#import "MELTableView.h"
 
 static CGFloat const kDefaultX = 0.0;
 static CGFloat const kDefaultY = 0.0;
 
 @interface MELImageLibraryPanelController()
+{
+    MELTableView *_tableView;
+}
+
+@property (assign) IBOutlet MELTableView *tableView;
 
 @end
 
@@ -40,13 +46,30 @@ static CGFloat const kDefaultY = 0.0;
     }
 }
 
+- (void)addImage:(NSImage *)image;
+{
+    [self.dataStore addImage:image];
+}
+
 #pragma mark - MELImageLibraryPanelControllerSetters
+
+- (void)setTableView:(MELTableView *)tableView
+{
+    _tableView.controller = nil;
+    _tableView = tableView;
+    _tableView.controller = self;
+}
 
 #pragma mark - MELImageLibraryPanelControllerGetters
 
 - (NSArray<NSImage *> *)imagePreviewList
 {
     return self.dataStore.images;
+}
+
+- (MELTableView *)tableView
+{
+    return _tableView;
 }
 
 @end

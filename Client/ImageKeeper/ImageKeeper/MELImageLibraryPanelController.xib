@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MELImageLibraryPanelController">
             <connections>
+                <outlet property="tableView" destination="qHm-YE-gD9" id="4oG-eh-sNv"/>
                 <outlet property="window" destination="f8i-3g-JsU" id="6Sj-WB-yoS"/>
             </connections>
         </customObject>

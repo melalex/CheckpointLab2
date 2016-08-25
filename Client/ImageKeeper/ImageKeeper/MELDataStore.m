@@ -117,8 +117,6 @@ static NSString *const kNib = @"nib";
 
 #pragma mark - MELDocumentModel modification
 
-#warning optimize layer
-
 - (void)putToDocumentModelImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 {
     NSImage *image = self.images[index];

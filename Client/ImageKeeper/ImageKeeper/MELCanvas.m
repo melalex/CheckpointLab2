@@ -84,11 +84,6 @@
     return NSDragOperationCopy;
 }
 
-- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
-{
-    return NSDragOperationCopy;
-}
-
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
 {
     NSPasteboard *board = sender.draggingPasteboard;
@@ -113,6 +108,12 @@
     NSImage *image = nil;
     
     image = [[NSImage alloc] initWithPasteboard:board];
+    
+    if (!image)
+    {
+        NSURL *url = [NSURL URLFromPasteboard:board];
+        image = [[NSImage alloc] initWithContentsOfURL:url];
+    }
     
     if (image)
     {

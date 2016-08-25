@@ -117,17 +117,26 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 - (IBAction)copy:(id)sender
 {
-    [self.canvasController copySelectedImage];
+    if ([[NSApplication sharedApplication] keyWindow] == self.canvasController.view.window)
+    {
+        [self.canvasController copySelectedImage];
+    }
 }
 
 - (IBAction)paste:(id)sender
 {
-    [self.canvasController paste];
+    if ([[NSApplication sharedApplication] keyWindow] == self.canvasController.view.window)
+    {
+        [self.canvasController paste];
+    }
 }
 
 - (IBAction)delete:(id)sender
 {
-    [self.canvasController deleteSelectedImage];
+    if ([[NSApplication sharedApplication] keyWindow] == self.canvasController.view.window)
+    {
+        [self.canvasController deleteSelectedImage];
+    }
 }
 
 

@@ -10,6 +10,8 @@
 
 @interface MELImageView() <NSDraggingSource>
 
+@property (readonly) NSInteger row;
+
 @end
 
 @implementation MELImageView
@@ -36,7 +38,7 @@
 - (void)mouseDown:(NSEvent *)theEvent
 {
     NSImage *image = self.image;
-    
+        
     if (image)
     {
         NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:image];
@@ -65,5 +67,9 @@
     }
 }
 
+- (NSInteger)row
+{
+    return [(NSTableView *)self.superview.superview.superview rowForView:self];
+}
 
 @end

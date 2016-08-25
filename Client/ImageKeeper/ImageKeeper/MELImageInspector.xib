@@ -63,7 +63,12 @@
                         </textFieldCell>
                         <connections>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="L3B-Z5-Qtc"/>
-                            <binding destination="-2" name="value" keyPath="xCoordinate" id="8YF-66-OBm"/>
+                            <binding destination="-2" name="value" keyPath="xCoordinate" id="mGM-zj-yqf">
+                                <dictionary key="options">
+                                    <integer key="NSNullPlaceholder" value="0"/>
+                                    <string key="NSValueTransformerName">MELOriginValidation</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="atJ-V1-9bl">
@@ -76,33 +81,52 @@
                         </textFieldCell>
                         <connections>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="2Pf-0H-Pzx"/>
-                            <binding destination="-2" name="value" keyPath="yCoordinate" id="xZZ-bm-X72"/>
+                            <binding destination="-2" name="value" keyPath="yCoordinate" id="ZF0-Qo-ZvA">
+                                <dictionary key="options">
+                                    <integer key="NSNullPlaceholder" value="0"/>
+                                    <string key="NSValueTransformerName">MELOriginValidation</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qZQ-s1-uCx">
                         <rect key="frame" x="83" y="70" width="115" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="0fs-Fd-g6u">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="0va-BI-6Sh"/>
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="0va-BI-6Sh">
+                                <real key="minimum" value="10"/>
+                            </numberFormatter>
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="3KK-kx-les"/>
-                            <binding destination="-2" name="value" keyPath="width" id="MA8-BV-vYb"/>
+                            <binding destination="-2" name="value" keyPath="width" id="V7n-Yj-TtM">
+                                <dictionary key="options">
+                                    <integer key="NSNullPlaceholder" value="10"/>
+                                    <string key="NSValueTransformerName">MELSizeValidation</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hLg-om-cqu">
                         <rect key="frame" x="83" y="45" width="115" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="bWt-1Y-wPj">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="rGV-WP-BIz"/>
+                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="rGV-WP-BIz">
+                                <real key="minimum" value="10"/>
+                            </numberFormatter>
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="lkg-TS-dfL"/>
-                            <binding destination="-2" name="value" keyPath="height" id="dzz-5N-UTU"/>
+                            <binding destination="-2" name="value" keyPath="height" id="EWw-LC-Sy1">
+                                <dictionary key="options">
+                                    <integer key="NSNullPlaceholder" value="10"/>
+                                    <string key="NSValueTransformerName">MELSizeValidation</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pfd-UQ-ORx">
@@ -125,7 +149,12 @@
                         </textFieldCell>
                         <connections>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="M9s-DX-1Ac"/>
-                            <binding destination="-2" name="value" keyPath="layer" id="GMc-mQ-GXe"/>
+                            <binding destination="-2" name="value" keyPath="layer" id="ggd-uc-nLr">
+                                <dictionary key="options">
+                                    <integer key="NSNullPlaceholder" value="1"/>
+                                    <string key="NSValueTransformerName">MELLayerValidation</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </textField>
                 </subviews>

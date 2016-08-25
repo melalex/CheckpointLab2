@@ -14,4 +14,6 @@
 
 @property (retain) id<MELImageLibraryPanelModelController> dataStore;
 
+- (void)addImage:(NSImage *)image;
+
 @end

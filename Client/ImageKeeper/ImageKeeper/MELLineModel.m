@@ -26,6 +26,18 @@
     self.frame.height = fabs(self.innerFirstPoint.y - self.innerSecondPoint.y);
 }
 
+- (BOOL)isFirstOrThirdQuarter
+{
+    return (self.innerFirstPoint.x < self.innerSecondPoint.x && self.innerFirstPoint.y < self.innerSecondPoint.y) ||
+           (self.innerFirstPoint.x > self.innerSecondPoint.x && self.innerFirstPoint.y > self.innerSecondPoint.y);
+}
+
+- (BOOL)isSecondOrFourthQuarter
+{
+    return (self.innerFirstPoint.x < self.innerSecondPoint.x && self.innerFirstPoint.y > self.innerSecondPoint.y) ||
+           (self.innerFirstPoint.x > self.innerSecondPoint.x && self.innerFirstPoint.y < self.innerSecondPoint.y);
+}
+
 #pragma mark - MELLineModelSetters
 
 - (void)setFirstPoint:(NSPoint)firstPoint
@@ -48,16 +60,12 @@
 - (NSPoint)firstPoint
 {
     NSPoint result;
-    
-#warning Create is.. method
-    
-    if ((self.innerFirstPoint.x < self.innerSecondPoint.x && self.innerFirstPoint.y < self.innerSecondPoint.y) ||
-        (self.innerFirstPoint.x > self.innerSecondPoint.x && self.innerFirstPoint.y > self.innerSecondPoint.y))
+        
+    if ([self isFirstOrThirdQuarter])
     {
         result = NSMakePoint(NSMinX(self.frame.rect), NSMinY(self.frame.rect));
     }
-    else if ((self.innerFirstPoint.x < self.innerSecondPoint.x && self.innerFirstPoint.y > self.innerSecondPoint.y) ||
-             (self.innerFirstPoint.x > self.innerSecondPoint.x && self.innerFirstPoint.y < self.innerSecondPoint.y))
+    else if ([self isSecondOrFourthQuarter])
     {
         result = NSMakePoint(NSMinX(self.frame.rect), NSMaxY(self.frame.rect));
     }
@@ -69,13 +77,11 @@
 {
     NSPoint result;
     
-    if ((self.innerFirstPoint.x < self.innerSecondPoint.x && self.innerFirstPoint.y < self.innerSecondPoint.y) ||
-        (self.innerFirstPoint.x > self.innerSecondPoint.x && self.innerFirstPoint.y > self.innerSecondPoint.y))
+    if ([self isFirstOrThirdQuarter])
     {
         result = NSMakePoint(NSMaxX(self.frame.rect), NSMaxY(self.frame.rect));
     }
-    else if ((self.innerFirstPoint.x < self.innerSecondPoint.x && self.innerFirstPoint.y > self.innerSecondPoint.y) ||
-             (self.innerFirstPoint.x > self.innerSecondPoint.x && self.innerFirstPoint.y < self.innerSecondPoint.y))
+    else if ([self isSecondOrFourthQuarter])
     {
         result = NSMakePoint(NSMaxX(self.frame.rect), NSMinY(self.frame.rect));
     }
