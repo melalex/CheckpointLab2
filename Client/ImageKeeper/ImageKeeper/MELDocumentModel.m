@@ -67,14 +67,6 @@
 
 - (void)removeElement:(id<MELElement>)element;
 {
-    for (id<MELElement> element in self.mutableElements)
-    {
-        if (element.layer < element.layer)
-        {
-            element.layer--;
-        }
-    }
-    
     [self removeObjectFromElementsAtIndex:[self.mutableElements indexOfObject:element]];
 }
 

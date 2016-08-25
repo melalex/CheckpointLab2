@@ -20,6 +20,7 @@
 @property (readonly) MELCanvas *canvas;
 
 - (void)addImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
+- (void)addImage:(NSImage *)image toPoint:(NSPoint)point;
 
 - (BOOL)isSelected:(id<MELElement>)element;
 

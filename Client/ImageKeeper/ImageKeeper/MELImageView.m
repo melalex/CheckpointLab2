@@ -1,17 +1,18 @@
 //
-//  MELLibraryTableView.m
+//  MELImageView.m
 //  ImageKeeper
 //
-//  Created by Александр Мелащенко on 8/24/16.
+//  Created by Александр Мелащенко on 8/25/16.
 //  Copyright © 2016 Александр Мелащенко. All rights reserved.
 //
 
-#import "MELLibraryTableView.h"
+#import "MELImageView.h"
 
-@interface MELLibraryTableView() <NSDraggingSource>
+@interface MELImageView() <NSDraggingSource>
+
 @end
 
-@implementation MELLibraryTableView
+@implementation MELImageView
 
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -20,16 +21,26 @@
     // Drawing code here.
 }
 
+- (BOOL)becomeFirstResponder
+{
+    return YES;
+}
+
+- (NSDragOperation)draggingSession:(NSDraggingSession *)aSession sourceOperationMaskForDraggingContext:(NSDraggingContext)aContext
+{
+    return self.image ? NSDragOperationCopy : NSDragOperationNone;
+}
+
+#warning Dragg index
+
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSInteger row = self.selectedRow;
+    NSImage *image = self.image;
     
-    if (row >= 0)
+    if (image)
     {
-        NSImage *image = [self.imageLibraryPanelController imageAtIndex:row];
-
         NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:image];
-        NSPoint point = [NSEvent mouseLocation];
+        NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         
         dragItem.imageComponentsProvider = ^
         {
@@ -54,10 +65,5 @@
     }
 }
 
-
-- (NSDragOperation)draggingSession:(NSDraggingSession *)aSession sourceOperationMaskForDraggingContext:(NSDraggingContext)aContext
-{
-    return NSDragOperationCopy;
-}
 
 @end

@@ -73,6 +73,18 @@ static CGFloat const kFocusRingThickness = 5.0;
     [self.dataStore putToDocumentModelImageFromLibraryAtIndex:index toPoint:point];
 }
 
+- (void)addImage:(NSImage *)image toPoint:(NSPoint)point;
+{
+    MELRect *frame = [[MELRect alloc] initWithX:point.x - image.size.width / 2
+                                              y:point.y - image.size.height / 2
+                                          width:image.size.width
+                                         height:image.size.height];
+    
+    [self.dataStore putToDocumentModelImage:image inFrame:frame];
+    
+    [frame release];
+}
+
 - (void)shiftByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
 {
     [self.dataStore shiftSelectedElementByDeltaX:deltaX deltaY:deltaY];

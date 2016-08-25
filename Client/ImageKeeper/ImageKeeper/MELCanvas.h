@@ -11,7 +11,7 @@
 
 @class MELCanvasController;
 
-@interface MELCanvas : NSView<NSDraggingDestination>
+@interface MELCanvas : NSView
 
 @property (retain) NSArray<id<MELElement>> *elements;
 @property (assign) MELCanvasController *controller;

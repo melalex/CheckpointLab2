@@ -13,7 +13,6 @@
 
 @interface MELDocumentModel : NSObject
 
-#warning encapsulate
 @property (retain, readonly) NSArray<id<MELElement>> *elements;
 
 - (void)addElement:(id<MELElement>)element;

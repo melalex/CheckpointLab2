@@ -7,7 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MELImageLibraryPanelController">
             <connections>
-                <outlet property="tableView" destination="qHm-YE-gD9" id="TBS-Ga-8PN"/>
                 <outlet property="window" destination="f8i-3g-JsU" id="6Sj-WB-yoS"/>
             </connections>
         </customObject>
@@ -28,7 +27,7 @@
                             <rect key="frame" x="1" y="0.0" width="299" height="601"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" headerView="xu8-Sb-yOV" viewBased="YES" id="qHm-YE-gD9" customClass="MELLibraryTableView">
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" headerView="xu8-Sb-yOV" viewBased="YES" id="qHm-YE-gD9" customClass="MELTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="299" height="578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -52,7 +51,7 @@
                                                     <rect key="frame" x="1" y="1" width="150" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Zz-Lb-TLg">
+                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Zz-Lb-TLg" customClass="MELImageView">
                                                             <rect key="frame" x="40" y="0.0" width="70" height="70"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Oq7-Gx-2wT"/>
                                                             <connections>
@@ -103,7 +102,7 @@
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
-                                        <action trigger="doubleAction" selector="doubleClickActionHandler:" target="-2" id="rcA-kL-Axf"/>
+                                        <action trigger="doubleAction" selector="doubleClickActionHandler:" target="-2" id="OwB-AR-abr"/>
                                     </connections>
                                 </tableView>
                             </subviews>

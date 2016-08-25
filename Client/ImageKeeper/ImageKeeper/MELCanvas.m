@@ -11,7 +11,7 @@
 #import "MELVisitor.h"
 #import "MELRect.h"
 
-@interface MELCanvas()
+@interface MELCanvas() <NSDraggingDestination>
 
 @end
 
@@ -28,7 +28,9 @@
 
 - (void)awakeFromNib
 {
-    [self registerForDraggedTypes:[NSArray arrayWithObjects:NSTIFFPboardType, NSFilenamesPboardType, NSStringPboardType, nil]];
+    NSMutableArray *types = [NSMutableArray arrayWithArray:[NSImage imageTypes]];
+    [types addObjectsFromArray:[NSURL readableTypesForPasteboard:[NSPasteboard generalPasteboard]]];
+    [self registerForDraggedTypes:types];
 }
 
 - (void)dealloc
@@ -78,35 +80,48 @@
 #pragma mark - NSDraggingDestination
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
-{    
+{
+    return NSDragOperationCopy;
+}
+
+- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
+{
     return NSDragOperationCopy;
 }
 
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
 {
-    return YES;
-}
-
-//- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)aSender
-//{
-//    return [self canReadFromPasteboard:aSender.draggingPasteboard];
-//}
-
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
-{
-    NSData *data = [[sender draggingPasteboard] dataForType:NSStringPboardType];
-    NSArray *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSPasteboard *board = sender.draggingPasteboard;
     
-    BOOL result = NO;
+    BOOL result = [NSImage canInitWithPasteboard:board];
     
-    if (rowIndexes)
+    if (!result)
     {
-         [self.controller addImageFromLibraryAtIndex:[rowIndexes[0] longLongValue] toPoint:sender.draggingLocation];
-        
-        result = YES;
+        NSURL *url = [NSURL URLFromPasteboard:board];
+        if (url)
+        {
+            result = !![[NSImage alloc] initWithContentsOfURL:url];
+        }
     }
     
     return result;
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+{
+    NSPasteboard *board = sender.draggingPasteboard;
+    NSImage *image = nil;
+    
+    image = [[NSImage alloc] initWithPasteboard:board];
+    
+    if (image)
+    {
+        NSPoint point = [self convertPoint:sender.draggingLocation fromView:nil];
+
+        [self.controller addImage:image toPoint:point];
+    }
+    
+    return !!image;
 }
 
 @end

@@ -29,6 +29,7 @@
 @property (readonly, assign) id<MELElement> selectedElement;
 
 - (void)putToDocumentModelImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
+- (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
 
 - (void)selectElementInPoint:(NSPoint)point;
 - (void)shiftSelectedElementByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY;

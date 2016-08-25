@@ -64,7 +64,12 @@ static NSString *const kNib = @"nib";
 
 - (void)selectElementInPoint:(NSPoint)point
 {
-    self.selectedElement = [self.documentModel takeTopElementInPoint:point];
+    id<MELElement> newSelectedElement = [self.documentModel takeTopElementInPoint:point];
+    
+    if (newSelectedElement != self.selectedElement)
+    {
+        self.selectedElement = newSelectedElement;
+    }
 }
 
 - (void)shiftSelectedElementByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
@@ -130,14 +135,14 @@ static NSString *const kNib = @"nib";
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame
 {
-    NSUInteger layer = self.documentModel.elements.count + 1;
+    NSUInteger layer = self.documentModel.elements.lastObject.layer + 1;
     
     [self.documentModel addElement:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
 }
 
 - (void)putToDocumentModelElement:(id<MELElement>)element;
 {
-    element.layer = self.documentModel.elements.count + 1;
+    element.layer = self.documentModel.elements.lastObject.layer + 1;
     
     [self.documentModel addElement:element];
 }

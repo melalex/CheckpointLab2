@@ -55,7 +55,8 @@
 		DDA666551D6E20E90079220F /* Balloons.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CC1D685E520079220F /* Balloons.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DDA666571D6E25500079220F /* Fjords.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
 		DDA666581D6E25860079220F /* Fjords.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
-		DDA6665B1D6E31C40079220F /* MELLibraryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6665A1D6E31C40079220F /* MELLibraryTableView.m */; };
+		DDA6665E1D6EE5D10079220F /* MELImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6665D1D6EE5D10079220F /* MELImageView.m */; };
+		DDA666611D6EE9510079220F /* MELTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666601D6EE9510079220F /* MELTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,8 +170,10 @@
 		DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Rectangle.png; path = Interface/__Interface__Rectangle.png; sourceTree = "<group>"; };
 		DDA6664C1D6DEA660079220F /* MELDataStoreProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDataStoreProtocols.h; sourceTree = "<group>"; };
 		DDA666561D6E25500079220F /* Fjords.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fjords.jpg; sourceTree = "<group>"; };
-		DDA666591D6E31C40079220F /* MELLibraryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELLibraryTableView.h; sourceTree = "<group>"; };
-		DDA6665A1D6E31C40079220F /* MELLibraryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELLibraryTableView.m; sourceTree = "<group>"; };
+		DDA6665C1D6EE5D10079220F /* MELImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELImageView.h; sourceTree = "<group>"; };
+		DDA6665D1D6EE5D10079220F /* MELImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELImageView.m; sourceTree = "<group>"; };
+		DDA6665F1D6EE9510079220F /* MELTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELTableView.h; sourceTree = "<group>"; };
+		DDA666601D6EE9510079220F /* MELTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,8 +294,10 @@
 				DDA665DB1D687F0A0079220F /* XIBs */,
 				DDA665D01D68684A0079220F /* MELCanvas.h */,
 				DDA665D11D68684B0079220F /* MELCanvas.m */,
-				DDA666591D6E31C40079220F /* MELLibraryTableView.h */,
-				DDA6665A1D6E31C40079220F /* MELLibraryTableView.m */,
+				DDA6665C1D6EE5D10079220F /* MELImageView.h */,
+				DDA6665D1D6EE5D10079220F /* MELImageView.m */,
+				DDA6665F1D6EE9510079220F /* MELTableView.h */,
+				DDA666601D6EE9510079220F /* MELTableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -553,12 +558,13 @@
 				DDA665FA1D6A12060079220F /* MELRect.m in Sources */,
 				DDA665E41D689CEB0079220F /* MELDocumentModel.m in Sources */,
 				DDA6662E1D6CE1AD0079220F /* MELLineStrategy.m in Sources */,
+				DDA6665E1D6EE5D10079220F /* MELImageView.m in Sources */,
 				DDA666311D6CE1C80079220F /* MELRectangleStrategy.m in Sources */,
 				DDA665D21D68684B0079220F /* MELCanvas.m in Sources */,
-				DDA6665B1D6E31C40079220F /* MELLibraryTableView.m in Sources */,
 				DDA6662B1D6CCD0E0079220F /* MELPrimitiveModel.m in Sources */,
 				DDA666341D6CE1DB0079220F /* MELOvalStrategy.m in Sources */,
 				DDA665EB1D68A78A0079220F /* MELCanvasController.m in Sources */,
+				DDA666611D6EE9510079220F /* MELTableView.m in Sources */,
 				DDA6663B1D6D92050079220F /* MELPrimitiveStrategy.m in Sources */,
 				DDA665F61D69EF2C0079220F /* MELImageInspector.m in Sources */,
 				DDA6661B1D6CBEC10079220F /* MELVisitor.m in Sources */,
