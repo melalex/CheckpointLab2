@@ -15,7 +15,7 @@
     return YES;
 }
 
-- (id)transformedValue:(id)value
+- (id)reverseTransformedValue:(id)value
 {
     value = (value != nil) ? value : @0;
     return [value doubleValue] >= 10 ? value : @10;

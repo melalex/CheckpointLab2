@@ -16,8 +16,12 @@
 
 @property (readonly, retain) NSArray<NSImage *> *images;
 
-- (void)addImage:(NSImage *)image;
 - (void)removeImage:(NSImage *)image;
+- (NSArray<NSImage *> *)images;
+- (NSUInteger)countOfImages;
+- (id)objectInImagesAtIndex:(NSUInteger)index;
+- (void)insertObject:(NSImage *)object inImagesAtIndex:(NSUInteger)index;
+- (void)removeObjectFromImagesAtIndex:(NSUInteger)index;
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
 

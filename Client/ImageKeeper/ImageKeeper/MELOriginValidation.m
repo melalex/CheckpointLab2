@@ -15,7 +15,7 @@
     return YES;
 }
 
-- (id)transformedValue:(id)value
+- (id)reverseTransformedValue:(id)value
 {
     return (value != nil) ? value : @0;
 }

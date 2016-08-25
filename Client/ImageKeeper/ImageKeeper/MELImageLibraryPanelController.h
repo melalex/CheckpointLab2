@@ -9,11 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "MELDataStoreProtocols.h"
 
-
 @interface MELImageLibraryPanelController : NSWindowController
 
-@property (retain) id<MELImageLibraryPanelModelController> dataStore;
-
-- (void)addImage:(NSImage *)image;
+@property (retain) NSObject<MELImageLibraryPanelModelController> *dataStore;
+@property (retain, readonly) NSArray<NSImage *> *imagePreviewList;
 
 @end

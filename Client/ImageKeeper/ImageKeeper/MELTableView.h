@@ -7,10 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MELImageLibraryPanelController.h"
 
 @interface MELTableView : NSTableView
-
-@property (assign) MELImageLibraryPanelController *controller;
 
 @end

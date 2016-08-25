@@ -95,7 +95,7 @@
         NSURL *url = [NSURL URLFromPasteboard:board];
         if (url)
         {
-            result = !![[NSImage alloc] initWithContentsOfURL:url];
+            result = !![[[NSImage alloc] initWithContentsOfURL:url] autorelease];
         }
     }
     
@@ -122,7 +122,7 @@
         [self.controller addImage:image toPoint:point];
     }
     
-    return !!image;
+    return !![image autorelease];
 }
 
 @end

@@ -15,6 +15,8 @@
 static NSString *const kLproj = @"lproj";
 static NSString *const kNib = @"nib";
 
+static NSString *const kDefaultFileName = @"New Image";
+
 @interface MELDataStore()
 
 @property (retain) NSMutableArray<NSImage *> *mutableImages;
@@ -51,6 +53,32 @@ static NSString *const kNib = @"nib";
                 }
             }
         }
+        
+        NSString *pathToImageKeeperSupportDirectory = [self pathToImageKeeperSupportDirectory];
+        
+        NSError *error = nil;
+        paths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:pathToImageKeeperSupportDirectory
+                                                                    error:&error];
+        
+        if (error)
+        {
+            NSLog(@"error taking content: %@", error);
+        }
+        
+        for (NSString *path in paths)
+        {
+            NSURL *imageURL = [NSURL fileURLWithPath:[pathToImageKeeperSupportDirectory stringByAppendingPathComponent:path]];
+            NSString *imageName = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
+            
+            NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
+            
+            imageObj.name = imageName;
+            
+            [_mutableImages addObject:imageObj];
+            
+            [imageObj release];
+        }
+
     }
     return self;
 }
@@ -58,8 +86,58 @@ static NSString *const kNib = @"nib";
 - (void)dealloc
 {
     [_mutableImages release];
+    [_documentModel release];
     
     [super dealloc];
+}
+
+- (NSString *)putToApplicationSupportDirectoryImage:(NSImage *)image withName:(NSString *)fileName
+{
+    NSData *imageData = [image TIFFRepresentation];
+    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+    NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+
+    NSString *imageName = fileName;
+    NSString *pathToImageKeeperSupportDirectory = [self pathToImageKeeperSupportDirectory];
+    NSUInteger suffix = 1;
+
+    while ([fileManager fileExistsAtPath:[pathToImageKeeperSupportDirectory stringByAppendingPathComponent:imageName]])
+    {
+        imageName = [NSString stringWithFormat:@"%@ %lu", kDefaultFileName, suffix];
+        suffix++;
+    }
+    
+    NSError *error = nil;
+    [imageData writeToFile:[pathToImageKeeperSupportDirectory stringByAppendingPathComponent:imageName] options:NSDataWritingWithoutOverwriting error:&error];
+    
+    if (error)
+    {
+        NSLog(@"error creating image: %@", error);
+    }
+    
+    return imageName;
+}
+
+- (NSString *)pathToImageKeeperSupportDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *applicationSupportDirectory = [paths firstObject];
+    applicationSupportDirectory = [applicationSupportDirectory stringByAppendingPathComponent:@"ImageKeeper"];
+    
+    NSError * error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtPath:applicationSupportDirectory
+                              withIntermediateDirectories:YES
+                                               attributes:nil
+                                                    error:&error];
+    if (error != nil)
+    {
+        NSLog(@"error creating directory: %@", error);
+    }
+    
+    return applicationSupportDirectory;
 }
 
 - (void)selectElementInPoint:(NSPoint)point
@@ -86,16 +164,6 @@ static NSString *const kNib = @"nib";
 - (void)deselectElement
 {
     self.selectedElement = nil;
-}
-
-- (void)addImage:(NSImage *)image
-{
-    
-}
-
-- (void)removeImage:(NSImage *)image
-{
-    
 }
 
 - (BOOL)isSelected:(id<MELElement>)element
@@ -145,11 +213,42 @@ static NSString *const kNib = @"nib";
     [self.documentModel addElement:element];
 }
 
-#pragma mark - MELDataStoreGetters
+#pragma mark - MELDocumentModel KVC Support
+
+- (void)removeImage:(NSImage *)image
+{
+    [self removeObjectFromImagesAtIndex:[self.mutableImages indexOfObject:image]];
+}
 
 - (NSArray<NSImage *> *)images
 {
     return [[(NSArray<NSImage *> *)self.mutableImages copy] autorelease];
 }
+
+- (NSUInteger)countOfImages
+{
+    return self.mutableImages.count;
+}
+
+- (id)objectInImagesAtIndex:(NSUInteger)index
+{
+    return self.mutableImages[index];
+}
+
+- (void)insertObject:(NSImage *)object inImagesAtIndex:(NSUInteger)index
+{
+    if (object)
+    {
+        [self.mutableImages insertObject:object atIndex:index];
+        
+        object.name = [self putToApplicationSupportDirectoryImage:object withName:kDefaultFileName];
+    }
+}
+
+- (void)removeObjectFromImagesAtIndex:(NSUInteger)index
+{
+    [self.mutableImages removeObjectAtIndex:index];
+}
+
 
 @end

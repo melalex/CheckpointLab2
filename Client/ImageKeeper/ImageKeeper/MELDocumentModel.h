@@ -16,6 +16,7 @@
 @property (retain, readonly) NSArray<id<MELElement>> *elements;
 
 - (void)addElement:(id<MELElement>)element;
+- (void)insertObject:(id<MELElement>)object inElementsAtIndex:(NSUInteger)index;
 - (void)removeElement:(id<MELElement>)element;
 
 - (id<MELElement>)takeTopElementInPoint:(NSPoint)point;
