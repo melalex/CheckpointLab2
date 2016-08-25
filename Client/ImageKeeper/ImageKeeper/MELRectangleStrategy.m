@@ -44,6 +44,8 @@ static CGFloat const kDefaultHeight = 20.0;
     self.firstPoint = point;
     
     [self.dataStore putToDocumentModelElement:self.rectangleModel];
+    
+    [defaultFrame release];
 }
 
 - (void)mouseDraggAction:(NSEvent *)theEvent

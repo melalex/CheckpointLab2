@@ -61,6 +61,8 @@
             [NSGraphicsContext restoreGraphicsState];
         }
     }
+    
+    [drawer release];
 }
 
 - (BOOL)isFlipped

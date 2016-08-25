@@ -15,4 +15,6 @@
 @property (retain) id<MELImageLibraryPanelModelController> dataStore;
 @property (retain, readonly) NSArray<NSImage *> *imagePreviewList;
 
+- (NSImage *)imageAtIndex:(NSUInteger)index;
+
 @end

@@ -55,6 +55,7 @@
 		DDA666551D6E20E90079220F /* Balloons.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CC1D685E520079220F /* Balloons.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		DDA666571D6E25500079220F /* Fjords.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
 		DDA666581D6E25860079220F /* Fjords.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
+		DDA6665B1D6E31C40079220F /* MELLibraryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6665A1D6E31C40079220F /* MELLibraryTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,8 @@
 		DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Rectangle.png; path = Interface/__Interface__Rectangle.png; sourceTree = "<group>"; };
 		DDA6664C1D6DEA660079220F /* MELDataStoreProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDataStoreProtocols.h; sourceTree = "<group>"; };
 		DDA666561D6E25500079220F /* Fjords.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fjords.jpg; sourceTree = "<group>"; };
+		DDA666591D6E31C40079220F /* MELLibraryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELLibraryTableView.h; sourceTree = "<group>"; };
+		DDA6665A1D6E31C40079220F /* MELLibraryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELLibraryTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +291,8 @@
 				DDA665DB1D687F0A0079220F /* XIBs */,
 				DDA665D01D68684A0079220F /* MELCanvas.h */,
 				DDA665D11D68684B0079220F /* MELCanvas.m */,
+				DDA666591D6E31C40079220F /* MELLibraryTableView.h */,
+				DDA6665A1D6E31C40079220F /* MELLibraryTableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				DDA6662E1D6CE1AD0079220F /* MELLineStrategy.m in Sources */,
 				DDA666311D6CE1C80079220F /* MELRectangleStrategy.m in Sources */,
 				DDA665D21D68684B0079220F /* MELCanvas.m in Sources */,
+				DDA6665B1D6E31C40079220F /* MELLibraryTableView.m in Sources */,
 				DDA6662B1D6CCD0E0079220F /* MELPrimitiveModel.m in Sources */,
 				DDA666341D6CE1DB0079220F /* MELOvalStrategy.m in Sources */,
 				DDA665EB1D68A78A0079220F /* MELCanvasController.m in Sources */,

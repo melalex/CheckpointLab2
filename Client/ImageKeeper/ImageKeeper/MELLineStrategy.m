@@ -43,6 +43,8 @@ static CGFloat const kDefaultHeight = 20.0;
     self.lineModel.firstPoint = point;
     
     [self.dataStore putToDocumentModelElement:self.lineModel];
+    
+    [defaultFrame release];
 }
 
 - (void)mouseDraggAction:(NSEvent *)theEvent

@@ -53,17 +53,17 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     dataStore.documentModel = documentModel;
     [documentModel release];
     
-    self.imageInspector = [[MELImageInspector alloc] initWithWindowNibName:kMELImageInspector];
+    self.imageInspector = [[[MELImageInspector alloc] initWithWindowNibName:kMELImageInspector] autorelease];
     self.imageInspector.dataStore = dataStore;
     
-    self.imageLibraryPanelController = [[MELImageLibraryPanelController alloc] initWithWindowNibName:kMELImageLibraryPanelController];
+    self.imageLibraryPanelController = [[[MELImageLibraryPanelController alloc] initWithWindowNibName:kMELImageLibraryPanelController] autorelease];
     self.imageLibraryPanelController.dataStore = dataStore;
     
-    self.canvasController = [[MELCanvasController alloc] initWithNibName:kMELCanvasController bundle:[NSBundle mainBundle]];
+    self.canvasController = [[[MELCanvasController alloc] initWithNibName:kMELCanvasController bundle:[NSBundle mainBundle]] autorelease];
     self.canvasController.dataStore = dataStore;
     self.canvasController.canvas.controller = self.canvasController;
     
-    self.instrumentPanelController = [[MELInstrumentPanelController alloc] initWithWindowNibName:kMELInstrumentPanelController];
+    self.instrumentPanelController = [[[MELInstrumentPanelController alloc] initWithWindowNibName:kMELInstrumentPanelController] autorelease];
     self.instrumentPanelController.canvasController = self.canvasController;
     
     Document *document = [[NSDocumentController sharedDocumentController] documents][0];
