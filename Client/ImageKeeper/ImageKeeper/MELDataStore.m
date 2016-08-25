@@ -32,6 +32,8 @@ static NSString *const kDefaultFileName = @"New Image";
     {
         _mutableImages = [[NSMutableArray alloc] init];
         
+#warning add subdirectory
+        
         NSArray *paths = [[NSBundle mainBundle] pathsForResourcesOfType:nil inDirectory:nil];
         
         for (NSString *path in paths)

@@ -30,6 +30,7 @@
 {
     NSMutableArray *types = [NSMutableArray arrayWithArray:[NSImage imageTypes]];
     [types addObjectsFromArray:[NSURL readableTypesForPasteboard:[NSPasteboard generalPasteboard]]];
+    [types addObject:NSPasteboardTypeString];
     [self registerForDraggedTypes:types];
 }
 
@@ -113,6 +114,11 @@
     {
         NSURL *url = [NSURL URLFromPasteboard:board];
         image = [[NSImage alloc] initWithContentsOfURL:url];
+    }
+    
+    if (!image)
+    {
+        
     }
     
     if (image)
