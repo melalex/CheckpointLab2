@@ -9,10 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "MELDataStoreProtocols.h"
 
+@class MELImagePreviewModel;
+
 @interface MELImageLibraryPanelController : NSWindowController
 
 @property (retain) NSObject<MELImageLibraryPanelModelController> *dataStore;
-@property (retain, readonly) NSArray<NSImage *> *imagePreviewList;
+@property (retain, readonly) NSArray<MELImagePreviewModel *> *imagePreviewList;
 
 - (void)deleteSelectedRow;
 

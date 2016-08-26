@@ -652,6 +652,31 @@ CA
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Panels" id="B3b-Ox-ayZ" userLabel="Panels">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Panels" id="lIf-Ur-ACT">
+                        <items>
+                            <menuItem title="Image inspector panel" id="ZFW-5y-hCm" userLabel="Image inspector panel">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showImageInspectorPanel:" target="Voe-Tx-rLC" id="ldU-5C-7n5"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Instrument panel" id="d5f-U2-f1z" userLabel="Instrument panel">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showInstrumentPanel:" target="Voe-Tx-rLC" id="ShW-Oz-vJK"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Image library panel" id="vLU-Tm-rMt" userLabel="Image library panel">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showImageLibraryPanel:" target="Voe-Tx-rLC" id="dBC-uJ-qxR"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Help" id="wpr-3q-Mcd">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">

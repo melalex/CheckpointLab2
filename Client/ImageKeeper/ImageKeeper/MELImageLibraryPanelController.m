@@ -11,6 +11,7 @@
 #import "MELDocumentModel.h"
 #import "MELRect.h"
 #import "Macros.h"
+#import "MELImagePreviewModel.h"
 
 static CGFloat const kDefaultX = 0.0;
 static CGFloat const kDefaultY = 0.0;
@@ -22,7 +23,7 @@ static NSString *const kMELImageLibraryPanelControllerContextImagesGhanged = @"k
     NSObject<MELImageLibraryPanelModelController> *_dataStore;
 }
 
-@property (retain) NSArray<NSImage *> *imagePreviewList;
+@property (retain) NSArray<MELImagePreviewModel *> *imagePreviewList;
 
 @property (assign) IBOutlet NSTableView *tableView;
 
@@ -53,7 +54,7 @@ static NSString *const kMELImageLibraryPanelControllerContextImagesGhanged = @"k
     
     if (selectedRow >= 0)
     {
-        NSImage *image = self.dataStore.images[selectedRow];
+        NSImage *image = [self.dataStore.images[selectedRow] image];
         MELRect *frame = [[MELRect alloc] initWithX:kDefaultX y:kDefaultY width:image.size.width height:image.size.height];
         
         [self.dataStore putToDocumentModelImage:image inFrame:frame];
@@ -144,6 +145,28 @@ static NSString *const kMELImageLibraryPanelControllerContextImagesGhanged = @"k
 - (NSObject<MELImageLibraryPanelModelController> *)dataStore
 {
     return _dataStore;
+}
+
+#pragma mark - MELImageLibraryPanelController KVC Support
+
+- (NSUInteger)countOfImagePreviewList
+{
+    return self.imagePreviewList.count;
+}
+
+- (id)objectInImagePreviewListAtIndex:(NSUInteger)index
+{
+    return self.imagePreviewList[index];
+}
+
+- (void)insertObject:(MELImagePreviewModel *)object inImagePreviewListAtIndex:(NSUInteger)index
+{
+    
+}
+
+- (void)removeObjectFromImagePreviewListAtIndex:(NSUInteger)index
+{
+    
 }
 
 @end

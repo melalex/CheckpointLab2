@@ -11,18 +11,26 @@
 #import "MELDocumentModel.h"
 #import "MELImageModel.h"
 #import "MELRect.h"
+#import "MELImagePreviewModel.h"
+#import "Macros.h"
+
+static NSString *const kOld = @"old";
+static NSString *const kNew = @"new";
 
 static NSString *const kDefaultFileName = @"New Image";
 static NSString *const kDefaultImages = @"DefaultImages";
 static NSString *const kProductName = @"ImageKeeper";
+
+static NSString *const kMELDataStoreContextNameChanged = @"kMELDataStoreContextNameChanged";
+
 
 @interface MELDataStore()
 {
     NSString *_pathToImageKeeperSupportDirectory;
 }
 
-@property (retain) NSMutableArray<NSImage *> *mutableImages;
-@property (retain) NSArray<NSImage *> *defaultImages;
+@property (retain) NSMutableArray<MELImagePreviewModel *> *mutableImages;
+@property (retain) NSArray<MELImagePreviewModel *> *defaultImages;
 
 @property (assign) id<MELElement> selectedElement;
 
@@ -83,9 +91,13 @@ static NSString *const kProductName = @"ImageKeeper";
     NSString *imageName = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
     NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
     
-    imageObj.name = imageName;
+    MELImagePreviewModel *imagePreviewModel = [MELImagePreviewModel imagePreviewModelWithImage:imageObj name:imageName];
     
-    [self.mutableImages addObject:imageObj];
+    [self.mutableImages addObject:imagePreviewModel];
+    
+    [imagePreviewModel addObserver:self forKeyPath:@OBJECT_KEY_PATH(imagePreviewModel, name)
+                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                           context:kMELDataStoreContextNameChanged];
     
     [imageObj release];
 }
@@ -186,11 +198,39 @@ static NSString *const kProductName = @"ImageKeeper";
     return self.documentModel.elements;
 }
 
+- (void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject change:(NSDictionary<NSString *,id> *)aChange context:(void *)aContext
+{
+    if (aContext == (__bridge void * _Nullable)(kMELDataStoreContextNameChanged))
+    {
+        NSString *newName = (NSString *)aChange[kNew];
+        NSString *oldName = (NSString *)aChange[kOld];
+        
+        if (![newName isEqualToString:oldName])
+        {
+            oldName = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:oldName];
+            newName = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:newName];
+
+            NSError *error = nil;
+            [[NSFileManager defaultManager] moveItemAtPath:oldName toPath:newName error:&error];
+            
+            if (error)
+            {
+                NSLog(@"error renaming image: %@", [error localizedDescription]);
+            }
+        }
+    }
+    else
+    {
+        [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
+    }
+}
+
+
 #pragma mark - MELDocumentModel modification
 
 - (void)putToDocumentModelImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 {
-    NSImage *image = self.images[index];
+    NSImage *image = [self.images[index] image];
     
     CGFloat width = image.size.width;
     CGFloat height = image.size.height;
@@ -224,11 +264,6 @@ static NSString *const kProductName = @"ImageKeeper";
 
 #pragma mark - MELDocumentModel KVC Support
 
-- (void)removeImage:(NSImage *)image
-{
-    [self removeObjectFromImagesAtIndex:[self.mutableImages indexOfObject:image]];
-}
-
 - (NSArray<NSImage *> *)images
 {
     return [[(NSArray<NSImage *> *)self.mutableImages copy] autorelease];
@@ -248,21 +283,34 @@ static NSString *const kProductName = @"ImageKeeper";
 {
     if (object)
     {
-        [self.mutableImages insertObject:object atIndex:index];
+        NSString *name = [self putToApplicationSupportDirectoryImage:object withName:kDefaultFileName];
         
-        object.name = [self putToApplicationSupportDirectoryImage:object withName:kDefaultFileName];
+        MELImagePreviewModel *imagePreviewModel = [MELImagePreviewModel imagePreviewModelWithImage:object name:name];
+
+        
+        [imagePreviewModel addObserver:self forKeyPath:@OBJECT_KEY_PATH(imagePreviewModel, name)
+                               options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                               context:kMELDataStoreContextNameChanged];
+
+        [self.mutableImages insertObject:imagePreviewModel atIndex:index];
     }
 }
 
+#warning empty name
+
 - (void)removeObjectFromImagesAtIndex:(NSUInteger)index
 {
-    if (![self.defaultImages containsObject:self.mutableImages[index]])
+    MELImagePreviewModel *imagePreviewModel = self.mutableImages[index];
+    
+    if (![self.defaultImages containsObject:imagePreviewModel])
     {
-        NSString *imagePath = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:[self.mutableImages[index] name]];
+        NSString *imagePath = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:imagePreviewModel.name];
         NSError *error = nil;
         
-        [self.mutableImages[index] setName:nil];
-        
+        [imagePreviewModel removeObserver:self
+                               forKeyPath:@OBJECT_KEY_PATH(imagePreviewModel, name)
+                                  context:(__bridge void * _Nullable)(kMELDataStoreContextNameChanged)];
+
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&error];
 
         if (error)

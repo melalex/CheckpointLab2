@@ -11,13 +11,12 @@
 
 @class MELRect;
 @class MELDocumentModel;
+@class MELImagePreviewModel;
 
 @protocol MELImageLibraryPanelModelController <NSObject>
 
-@property (readonly, retain) NSArray<NSImage *> *images;
+@property (readonly, retain) NSArray<MELImagePreviewModel *> *images;
 
-- (void)removeImage:(NSImage *)image;
-- (NSArray<NSImage *> *)images;
 - (NSUInteger)countOfImages;
 - (id)objectInImagesAtIndex:(NSUInteger)index;
 - (void)insertObject:(NSImage *)object inImagesAtIndex:(NSUInteger)index;

@@ -11,11 +11,12 @@
 #import "MELDataStoreProtocols.h"
 
 @class MELDocumentModel;
+@class MELImagePreviewModel;
 @class MELRect;
 
 @interface MELDataStore : NSObject<MELImageLibraryPanelModelController, MELCanvasModelController, MELImageInspectorModelController>
 
-@property (readonly, retain) NSArray<NSImage *> *images;
+@property (readonly, retain) NSArray<MELImagePreviewModel *> *images;
 @property (readonly, assign) id<MELElement> selectedElement;
 @property (retain) MELDocumentModel *documentModel;
 

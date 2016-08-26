@@ -33,6 +33,8 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 @property (readonly) NSWindow *keyWindow;
 
+@property (readonly) Document *currentDocument;
+
 @end
 
 @implementation AppDelegate
@@ -68,41 +70,31 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     self.instrumentPanelController = [[[MELInstrumentPanelController alloc] initWithWindowNibName:kMELInstrumentPanelController] autorelease];
     self.instrumentPanelController.canvasController = self.canvasController;
     
-    Document *document = [[NSDocumentController sharedDocumentController] documents][0];
+    Document *document = self.currentDocument;
     
+    [[document.windowControllers[0] window] makeKeyWindow];
+     
     [document.canvas addSubview:self.canvasController.view];
     [self.canvasController.view setFrame:document.canvas.bounds];
     
     [dataStore release];
 
 #pragma mark - Windows position
-
+    
     NSRect documentFrame = [[document.windowControllers[0] window] frame];
-    NSRect imageInspectorFrame = self.imageInspector.window.frame;
-    NSRect imageLibraryFrame = self.imageLibraryPanelController.window.frame;
-    NSRect instrumentPanelFrame = self.instrumentPanelController.window.frame;
     
     NSRect screenFrame = [[NSScreen mainScreen] frame];
     
 #warning for screenFrame > documentFrame
     
-    documentFrame.origin.y = (screenFrame.size.height - documentFrame.size.height)/2;
-    documentFrame.origin.x = (screenFrame.size.width - documentFrame.size.width)/2;
-
-    imageInspectorFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageInspectorFrame.size.height;
-    imageInspectorFrame.origin.x = documentFrame.origin.x - imageInspectorFrame.size.width - kDistanceBetweenWindows;
-   
-    imageLibraryFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageLibraryFrame.size.height;
-    imageLibraryFrame.origin.x = documentFrame.origin.x + documentFrame.size.width + kDistanceBetweenWindows;
-    
-    instrumentPanelFrame.origin.y = documentFrame.origin.y + documentFrame.size.height + kDistanceBetweenWindows;
-    instrumentPanelFrame.origin.x = documentFrame.origin.x + documentFrame.size.width / 2 - instrumentPanelFrame.size.width / 2;
-
-    [self.imageInspector.window setFrame:imageInspectorFrame display:YES];
-    [self.imageLibraryPanelController.window setFrame:imageLibraryFrame display:YES];
-    [self.instrumentPanelController.window setFrame:instrumentPanelFrame display:YES];
+    documentFrame.origin.y = (screenFrame.size.height - documentFrame.size.height) / 2;
+    documentFrame.origin.x = (screenFrame.size.width - documentFrame.size.width) / 2;
 
     [[document.windowControllers[0] window] setFrame:documentFrame display:YES];
+
+    [self showInstrumentPanel:nil];
+    [self showImageInspectorPanel:nil];
+    [self showImageLibraryPanel:nil];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -113,6 +105,47 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return YES;
+}
+
+#pragma mark - Panels menu
+
+- (IBAction)showImageInspectorPanel:(id)sender
+{
+    NSRect documentFrame = [[self.currentDocument.windowControllers[0] window] frame];
+    NSRect imageInspectorFrame = self.imageInspector.window.frame;
+    
+    imageInspectorFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageInspectorFrame.size.height;
+    imageInspectorFrame.origin.x = documentFrame.origin.x - imageInspectorFrame.size.width - kDistanceBetweenWindows;
+
+    [self.imageInspector.window setFrame:imageInspectorFrame display:YES];
+    
+    [self.imageInspector showWindow:self];
+}
+
+- (IBAction)showInstrumentPanel:(id)sender
+{
+    NSRect documentFrame = [[self.currentDocument.windowControllers[0] window] frame];
+    NSRect instrumentPanelFrame = self.instrumentPanelController.window.frame;
+
+    instrumentPanelFrame.origin.y = documentFrame.origin.y + documentFrame.size.height + kDistanceBetweenWindows;
+    instrumentPanelFrame.origin.x = documentFrame.origin.x + documentFrame.size.width / 2 - instrumentPanelFrame.size.width / 2;
+
+    [self.instrumentPanelController.window setFrame:instrumentPanelFrame display:YES];
+    
+    [self.imageInspector showWindow:self];
+}
+
+- (IBAction)showImageLibraryPanel:(id)sender
+{
+    NSRect documentFrame = [[self.currentDocument.windowControllers[0] window] frame];
+    NSRect imageLibraryFrame = self.imageLibraryPanelController.window.frame;
+
+    imageLibraryFrame.origin.y = documentFrame.origin.y + documentFrame.size.height - imageLibraryFrame.size.height;
+    imageLibraryFrame.origin.x = documentFrame.origin.x + documentFrame.size.width + kDistanceBetweenWindows;
+
+    [self.imageLibraryPanelController.window setFrame:imageLibraryFrame display:YES];
+    
+    [self.imageInspector showWindow:self];
 }
 
 #pragma mark - Edit commands
@@ -145,9 +178,23 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     }
 }
 
+#pragma mark -  Getters
+
 - (NSWindow *)keyWindow
 {
     return [[NSApplication sharedApplication] keyWindow];
+}
+
+- (Document *)currentDocument
+{
+    Document *document = [[NSDocumentController sharedDocumentController] currentDocument];
+    
+    if(!document)
+    {
+        document = [[NSDocumentController sharedDocumentController] documents][0];
+    }
+    
+    return document;
 }
 
 @end
