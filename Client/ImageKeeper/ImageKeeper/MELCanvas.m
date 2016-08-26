@@ -10,6 +10,7 @@
 #import "MELCanvasController.h"
 #import "MELVisitor.h"
 #import "MELRect.h"
+#import "MELNumber.h"
 
 @interface MELCanvas() <NSDraggingDestination>
 
@@ -30,7 +31,7 @@
 {
     NSMutableArray *types = [NSMutableArray arrayWithArray:[NSImage imageTypes]];
     [types addObjectsFromArray:[NSURL readableTypesForPasteboard:[NSPasteboard generalPasteboard]]];
-    [types addObject:NSPasteboardTypeString];
+    [types addObject:kMELNumberUTI];
     [self registerForDraggedTypes:types];
 }
 
@@ -107,7 +108,8 @@
 {
     NSPasteboard *board = sender.draggingPasteboard;
     NSImage *image = nil;
-    
+    NSPoint point = [self convertPoint:sender.draggingLocation fromView:nil];
+
     image = [[NSImage alloc] initWithPasteboard:board];
     
     if (!image)
@@ -116,16 +118,25 @@
         image = [[NSImage alloc] initWithContentsOfURL:url];
     }
     
-    if (!image)
-    {
-        
-    }
-    
     if (image)
     {
-        NSPoint point = [self convertPoint:sender.draggingLocation fromView:nil];
-
         [self.controller addImage:image toPoint:point];
+    }
+    else
+    {
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        NSArray *classArray = [NSArray arrayWithObject:[MELNumber class]];
+        NSDictionary *options = [NSDictionary dictionary];
+        
+        BOOL ok = [pasteboard canReadObjectForClasses:classArray options:options];
+        
+        if (ok)
+        {
+            NSArray *objectsToPaste = [pasteboard readObjectsForClasses:classArray options:options];
+            MELNumber *row = [objectsToPaste objectAtIndex:0];
+            
+            [self.controller addImageFromLibraryAtIndex:[row longLongValue] toPoint:point];
+        }
     }
     
     return !![image autorelease];

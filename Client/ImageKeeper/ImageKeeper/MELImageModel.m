@@ -14,7 +14,6 @@ static NSString *const kImage = @"image";
 static NSString *const kFrame = @"frame";
 static NSString *const kLayer = @"layer";
 
-
 @interface MELImageModel()
 {
     MELRect *_frame;

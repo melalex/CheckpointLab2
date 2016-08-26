@@ -7,6 +7,16 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
+				<string>com.company.number</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>com.company.number</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
 				<string>com.company.element</string>
 			</array>
 			<key>UTTypeIdentifier</key>

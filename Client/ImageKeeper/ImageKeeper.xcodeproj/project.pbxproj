@@ -60,6 +60,7 @@
 		DDA666671D6F20070079220F /* MELOriginValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666661D6F20070079220F /* MELOriginValidation.m */; };
 		DDA6666A1D6F201B0079220F /* MELSizeValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666691D6F201B0079220F /* MELSizeValidation.m */; };
 		DDA6666D1D6F20390079220F /* MELLayerValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6666C1D6F20390079220F /* MELLayerValidation.m */; };
+		DDA666761D6F878A0079220F /* MELNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666751D6F878A0079220F /* MELNumber.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,8 @@
 		DDA666691D6F201B0079220F /* MELSizeValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELSizeValidation.m; sourceTree = "<group>"; };
 		DDA6666B1D6F20390079220F /* MELLayerValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELLayerValidation.h; sourceTree = "<group>"; };
 		DDA6666C1D6F20390079220F /* MELLayerValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELLayerValidation.m; sourceTree = "<group>"; };
+		DDA666741D6F878A0079220F /* MELNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELNumber.h; sourceTree = "<group>"; };
+		DDA666751D6F878A0079220F /* MELNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELNumber.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +296,8 @@
 				DDA665E31D689CEB0079220F /* MELDocumentModel.m */,
 				DDA665F81D6A12060079220F /* MELRect.h */,
 				DDA665F91D6A12060079220F /* MELRect.m */,
+				DDA666741D6F878A0079220F /* MELNumber.h */,
+				DDA666751D6F878A0079220F /* MELNumber.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -572,6 +577,7 @@
 				DDA666281D6CC0410079220F /* MELCurveModel.m in Sources */,
 				DDA665FA1D6A12060079220F /* MELRect.m in Sources */,
 				DDA665E41D689CEB0079220F /* MELDocumentModel.m in Sources */,
+				DDA666761D6F878A0079220F /* MELNumber.m in Sources */,
 				DDA6662E1D6CE1AD0079220F /* MELLineStrategy.m in Sources */,
 				DDA6665E1D6EE5D10079220F /* MELImageView.m in Sources */,
 				DDA666311D6CE1C80079220F /* MELRectangleStrategy.m in Sources */,

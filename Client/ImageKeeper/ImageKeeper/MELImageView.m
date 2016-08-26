@@ -7,6 +7,7 @@
 //
 
 #import "MELImageView.h"
+#import "MELNumber.h"
 
 @interface MELImageView() <NSDraggingSource>
 
@@ -41,7 +42,7 @@
         
     if (image)
     {
-        NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:image];
+        NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:[MELNumber numberWithItegerValue:self.row]];
         NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         
         dragItem.imageComponentsProvider = ^

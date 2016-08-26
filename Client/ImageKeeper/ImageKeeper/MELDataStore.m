@@ -123,6 +123,8 @@ static NSString *const kDefaultFileName = @"New Image";
     return imageName;
 }
 
+#warning make property
+
 - (NSString *)pathToImageKeeperSupportDirectory
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
