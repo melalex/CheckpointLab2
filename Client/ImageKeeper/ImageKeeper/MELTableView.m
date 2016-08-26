@@ -23,7 +23,8 @@
 
 - (void)awakeFromNib
 {
-    NSArray *types = [NSArray arrayWithArray:[NSURL readableTypesForPasteboard:[NSPasteboard generalPasteboard]]];
+    NSMutableArray *types = [NSMutableArray arrayWithArray:[NSImage imageTypes]];
+    [types addObjectsFromArray:[NSURL readableTypesForPasteboard:[NSPasteboard generalPasteboard]]];
     [self registerForDraggedTypes:types];
 }
 

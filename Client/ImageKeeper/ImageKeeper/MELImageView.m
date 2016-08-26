@@ -10,9 +10,12 @@
 #import "MELNumber.h"
 
 @interface MELImageView() <NSDraggingSource>
+{
+    NSTableView *_tableView;
+}
 
 @property (readonly) NSInteger row;
-
+@property (readonly) NSTableView *tableView;
 @end
 
 @implementation MELImageView
@@ -34,14 +37,14 @@
     return self.image ? NSDragOperationCopy : NSDragOperationNone;
 }
 
-#warning Dragg index
-
 - (void)mouseDown:(NSEvent *)theEvent
 {
     NSImage *image = self.image;
         
     if (image)
     {
+        [self selectCurrentRow];
+        
         NSDraggingItem *dragItem = [[NSDraggingItem alloc] initWithPasteboardWriter:[MELNumber numberWithItegerValue:self.row]];
         NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
         
@@ -61,6 +64,8 @@
         
         session.animatesToStartingPositionsOnCancelOrFail = YES;
         session.draggingFormation = NSDraggingFormationNone;
+        
+        [dragItem release];
     }
     else
     {
@@ -68,9 +73,24 @@
     }
 }
 
+- (void)selectCurrentRow
+{
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:self.row];
+    [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
+}
+
 - (NSInteger)row
 {
-    return [(NSTableView *)self.superview.superview.superview rowForView:self];
+    return [self.tableView rowForView:self];
+}
+
+- (NSTableView *)tableView
+{
+    if (!_tableView)
+    {
+        _tableView = (NSTableView *)self.superview.superview.superview;
+    }
+    return _tableView;
 }
 
 @end

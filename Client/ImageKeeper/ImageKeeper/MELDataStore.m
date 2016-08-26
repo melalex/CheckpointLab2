@@ -12,15 +12,19 @@
 #import "MELImageModel.h"
 #import "MELRect.h"
 
-static NSString *const kLproj = @"lproj";
-static NSString *const kNib = @"nib";
-
 static NSString *const kDefaultFileName = @"New Image";
+static NSString *const kDefaultImages = @"DefaultImages";
+static NSString *const kProductName = @"ImageKeeper";
 
 @interface MELDataStore()
+{
+    NSString *_pathToImageKeeperSupportDirectory;
+}
 
 @property (retain) NSMutableArray<NSImage *> *mutableImages;
 @property (assign) id<MELElement> selectedElement;
+
+@property (readonly, retain) NSString *pathToImageKeeperSupportDirectory;
 
 @end
 
@@ -32,28 +36,11 @@ static NSString *const kDefaultFileName = @"New Image";
     {
         _mutableImages = [[NSMutableArray alloc] init];
         
-#warning add subdirectory
-        
-        NSArray *paths = [[NSBundle mainBundle] pathsForResourcesOfType:nil inDirectory:nil];
+        NSArray *paths = [[NSBundle mainBundle] pathsForResourcesOfType:nil inDirectory:kDefaultImages];
         
         for (NSString *path in paths)
         {
-            if (![path hasSuffix:kLproj] && ![path hasSuffix:kNib])
-            {
-                NSURL *imageURL = [NSURL fileURLWithPath:path];
-                NSString *imageName = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
-                
-                if (![imageName hasPrefix:@"__Interface__"])
-                {
-                    NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
-                    
-                    imageObj.name = imageName;
-                    
-                    [_mutableImages addObject:imageObj];
-                    
-                    [imageObj release];
-                }
-            }
+            [self uploadImageForPath:path];
         }
         
         NSString *pathToImageKeeperSupportDirectory = [self pathToImageKeeperSupportDirectory];
@@ -69,16 +56,7 @@ static NSString *const kDefaultFileName = @"New Image";
         
         for (NSString *path in paths)
         {
-            NSURL *imageURL = [NSURL fileURLWithPath:[pathToImageKeeperSupportDirectory stringByAppendingPathComponent:path]];
-            NSString *imageName = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
-            
-            NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
-            
-            imageObj.name = imageName;
-            
-            [_mutableImages addObject:imageObj];
-            
-            [imageObj release];
+            [self uploadImageForPath:[pathToImageKeeperSupportDirectory stringByAppendingPathComponent:path]];
         }
 
     }
@@ -89,8 +67,22 @@ static NSString *const kDefaultFileName = @"New Image";
 {
     [_mutableImages release];
     [_documentModel release];
+    [_pathToImageKeeperSupportDirectory release];
     
     [super dealloc];
+}
+
+- (void)uploadImageForPath:(NSString *)path
+{
+    NSURL *imageURL = [NSURL fileURLWithPath:path];
+    NSString *imageName = [[[imageURL pathComponents] lastObject] componentsSeparatedByString:@"."][0];
+    NSImage *imageObj = [[NSImage alloc] initWithContentsOfURL:imageURL];
+    
+    imageObj.name = imageName;
+    
+    [self.mutableImages addObject:imageObj];
+    
+    [imageObj release];
 }
 
 - (NSString *)putToApplicationSupportDirectoryImage:(NSImage *)image withName:(NSString *)fileName
@@ -123,25 +115,27 @@ static NSString *const kDefaultFileName = @"New Image";
     return imageName;
 }
 
-#warning make property
-
 - (NSString *)pathToImageKeeperSupportDirectory
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *applicationSupportDirectory = [paths firstObject];
-    applicationSupportDirectory = [applicationSupportDirectory stringByAppendingPathComponent:@"ImageKeeper"];
-    
-    NSError * error = nil;
-    [[NSFileManager defaultManager] createDirectoryAtPath:applicationSupportDirectory
-                              withIntermediateDirectories:YES
-                                               attributes:nil
-                                                    error:&error];
-    if (error != nil)
+    if (!_pathToImageKeeperSupportDirectory)
     {
-        NSLog(@"error creating directory: %@", error);
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+        NSString *applicationSupportDirectory = [paths firstObject];
+        applicationSupportDirectory = [applicationSupportDirectory stringByAppendingPathComponent:kProductName];
+        
+        NSError * error = nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:applicationSupportDirectory
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:&error];
+        if (error != nil)
+        {
+            NSLog(@"error creating directory: %@", error);
+        }
+        
+        _pathToImageKeeperSupportDirectory = [applicationSupportDirectory retain];
     }
-    
-    return applicationSupportDirectory;
+    return _pathToImageKeeperSupportDirectory;
 }
 
 - (void)selectElementInPoint:(NSPoint)point

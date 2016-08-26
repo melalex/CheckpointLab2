@@ -131,6 +131,8 @@
     {
         [self.controller addImage:image toPoint:point];
         
+        [image release];
+        
         result = YES;
     }
     else

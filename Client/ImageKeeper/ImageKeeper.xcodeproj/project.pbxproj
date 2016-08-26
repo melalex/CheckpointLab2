@@ -15,9 +15,6 @@
 		DDA665A51D67636D0079220F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665A31D67636D0079220F /* MainMenu.xib */; };
 		DDA665B01D67636D0079220F /* ImageKeeperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665AF1D67636D0079220F /* ImageKeeperTests.m */; };
 		DDA665BB1D67636D0079220F /* ImageKeeperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665BA1D67636D0079220F /* ImageKeeperUITests.m */; };
-		DDA665CD1D685E520079220F /* Butterfly.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA665CA1D685E520079220F /* Butterfly.jpg */; };
-		DDA665CE1D685E520079220F /* Husky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA665CB1D685E520079220F /* Husky.jpg */; };
-		DDA665CF1D685E520079220F /* Balloons.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA665CC1D685E520079220F /* Balloons.jpg */; };
 		DDA665D21D68684B0079220F /* MELCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665D11D68684B0079220F /* MELCanvas.m */; };
 		DDA665D91D687EAE0079220F /* MELImageLibraryPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665D71D687EAE0079220F /* MELImageLibraryPanelController.m */; };
 		DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665D81D687EAE0079220F /* MELImageLibraryPanelController.xib */; };
@@ -29,7 +26,6 @@
 		DDA665F61D69EF2C0079220F /* MELImageInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665F41D69EF2C0079220F /* MELImageInspector.m */; };
 		DDA665F71D69EF2C0079220F /* MELImageInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA665F51D69EF2C0079220F /* MELImageInspector.xib */; };
 		DDA665FA1D6A12060079220F /* MELRect.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665F91D6A12060079220F /* MELRect.m */; };
-		DDA665FD1D6B86450079220F /* Jobs.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA665FB1D6B86450079220F /* Jobs.png */; };
 		DDA666041D6C8EE20079220F /* MELInstrumentPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666021D6C8EE20079220F /* MELInstrumentPanelController.m */; };
 		DDA666051D6C8EE20079220F /* MELInstrumentPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDA666031D6C8EE20079220F /* MELInstrumentPanelController.xib */; };
 		DDA666151D6CA67D0079220F /* MELCursorStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666141D6CA67D0079220F /* MELCursorStrategy.m */; };
@@ -49,18 +45,13 @@
 		DDA666431D6DE2F60079220F /* __Interface__Line.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663E1D6DE2F60079220F /* __Interface__Line.png */; };
 		DDA666441D6DE2F60079220F /* __Interface__Oval.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */; };
 		DDA666451D6DE2F60079220F /* __Interface__Rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */; };
-		DDA666521D6E20E90079220F /* Jobs.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665FB1D6B86450079220F /* Jobs.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		DDA666531D6E20E90079220F /* Butterfly.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CA1D685E520079220F /* Butterfly.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		DDA666541D6E20E90079220F /* Husky.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CB1D685E520079220F /* Husky.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		DDA666551D6E20E90079220F /* Balloons.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA665CC1D685E520079220F /* Balloons.jpg */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		DDA666571D6E25500079220F /* Fjords.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
-		DDA666581D6E25860079220F /* Fjords.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA666561D6E25500079220F /* Fjords.jpg */; };
 		DDA6665E1D6EE5D10079220F /* MELImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6665D1D6EE5D10079220F /* MELImageView.m */; };
 		DDA666611D6EE9510079220F /* MELTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666601D6EE9510079220F /* MELTableView.m */; };
 		DDA666671D6F20070079220F /* MELOriginValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666661D6F20070079220F /* MELOriginValidation.m */; };
 		DDA6666A1D6F201B0079220F /* MELSizeValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666691D6F201B0079220F /* MELSizeValidation.m */; };
 		DDA6666D1D6F20390079220F /* MELLayerValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6666C1D6F20390079220F /* MELLayerValidation.m */; };
 		DDA666761D6F878A0079220F /* MELNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA666751D6F878A0079220F /* MELNumber.m */; };
+		DDA6667A1D706D180079220F /* DefaultImages in Resources */ = {isa = PBXBuildFile; fileRef = DDA666791D706D180079220F /* DefaultImages */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,11 +78,6 @@
 			dstPath = Images;
 			dstSubfolderSpec = 7;
 			files = (
-				DDA666581D6E25860079220F /* Fjords.jpg in CopyFiles */,
-				DDA666521D6E20E90079220F /* Jobs.png in CopyFiles */,
-				DDA666531D6E20E90079220F /* Butterfly.jpg in CopyFiles */,
-				DDA666541D6E20E90079220F /* Husky.jpg in CopyFiles */,
-				DDA666551D6E20E90079220F /* Balloons.jpg in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -114,9 +100,6 @@
 		DDA665B61D67636D0079220F /* ImageKeeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageKeeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA665BA1D67636D0079220F /* ImageKeeperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageKeeperUITests.m; sourceTree = "<group>"; };
 		DDA665BC1D67636D0079220F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDA665CA1D685E520079220F /* Butterfly.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Butterfly.jpg; sourceTree = "<group>"; };
-		DDA665CB1D685E520079220F /* Husky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Husky.jpg; sourceTree = "<group>"; };
-		DDA665CC1D685E520079220F /* Balloons.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Balloons.jpg; sourceTree = "<group>"; };
 		DDA665D01D68684A0079220F /* MELCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELCanvas.h; sourceTree = "<group>"; };
 		DDA665D11D68684B0079220F /* MELCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELCanvas.m; sourceTree = "<group>"; };
 		DDA665D61D687EAE0079220F /* MELImageLibraryPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELImageLibraryPanelController.h; sourceTree = "<group>"; };
@@ -137,7 +120,6 @@
 		DDA665F51D69EF2C0079220F /* MELImageInspector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELImageInspector.xib; sourceTree = "<group>"; };
 		DDA665F81D6A12060079220F /* MELRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELRect.h; sourceTree = "<group>"; };
 		DDA665F91D6A12060079220F /* MELRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELRect.m; sourceTree = "<group>"; };
-		DDA665FB1D6B86450079220F /* Jobs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jobs.png; sourceTree = "<group>"; };
 		DDA666011D6C8EE20079220F /* MELInstrumentPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELInstrumentPanelController.h; sourceTree = "<group>"; };
 		DDA666021D6C8EE20079220F /* MELInstrumentPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELInstrumentPanelController.m; sourceTree = "<group>"; };
 		DDA666031D6C8EE20079220F /* MELInstrumentPanelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MELInstrumentPanelController.xib; sourceTree = "<group>"; };
@@ -173,7 +155,6 @@
 		DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Oval.png; path = Interface/__Interface__Oval.png; sourceTree = "<group>"; };
 		DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = __Interface__Rectangle.png; path = Interface/__Interface__Rectangle.png; sourceTree = "<group>"; };
 		DDA6664C1D6DEA660079220F /* MELDataStoreProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELDataStoreProtocols.h; sourceTree = "<group>"; };
-		DDA666561D6E25500079220F /* Fjords.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fjords.jpg; sourceTree = "<group>"; };
 		DDA6665C1D6EE5D10079220F /* MELImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELImageView.h; sourceTree = "<group>"; };
 		DDA6665D1D6EE5D10079220F /* MELImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELImageView.m; sourceTree = "<group>"; };
 		DDA6665F1D6EE9510079220F /* MELTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELTableView.h; sourceTree = "<group>"; };
@@ -186,6 +167,7 @@
 		DDA6666C1D6F20390079220F /* MELLayerValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELLayerValidation.m; sourceTree = "<group>"; };
 		DDA666741D6F878A0079220F /* MELNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELNumber.h; sourceTree = "<group>"; };
 		DDA666751D6F878A0079220F /* MELNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELNumber.m; sourceTree = "<group>"; };
+		DDA666791D706D180079220F /* DefaultImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DefaultImages; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,7 +223,7 @@
 				DDA665D51D6878AB0079220F /* Controllers */,
 				DDA665981D67636D0079220F /* Supporting Files */,
 				DDA666061D6C92B90079220F /* Interface */,
-				DDA665C91D685DE80079220F /* Resources */,
+				DDA666791D706D180079220F /* DefaultImages */,
 				DDA665A11D67636D0079220F /* Assets.xcassets */,
 				DDA665A61D67636D0079220F /* Info.plist */,
 			);
@@ -273,18 +255,6 @@
 				DDA665BC1D67636D0079220F /* Info.plist */,
 			);
 			path = ImageKeeperUITests;
-			sourceTree = "<group>";
-		};
-		DDA665C91D685DE80079220F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DDA666561D6E25500079220F /* Fjords.jpg */,
-				DDA665FB1D6B86450079220F /* Jobs.png */,
-				DDA665CA1D685E520079220F /* Butterfly.jpg */,
-				DDA665CB1D685E520079220F /* Husky.jpg */,
-				DDA665CC1D685E520079220F /* Balloons.jpg */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		DDA665D31D6878900079220F /* Models */ = {
@@ -532,20 +502,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA665F71D69EF2C0079220F /* MELImageInspector.xib in Resources */,
-				DDA665CD1D685E520079220F /* Butterfly.jpg in Resources */,
 				DDA665A21D67636D0079220F /* Assets.xcassets in Resources */,
 				DDA666421D6DE2F60079220F /* __Interface__Cursor.png in Resources */,
 				DDA666411D6DE2F60079220F /* __Interface__Brush.png in Resources */,
 				DDA665A01D67636D0079220F /* Document.xib in Resources */,
-				DDA665CF1D685E520079220F /* Balloons.jpg in Resources */,
 				DDA665DA1D687EAE0079220F /* MELImageLibraryPanelController.xib in Resources */,
 				DDA666451D6DE2F60079220F /* __Interface__Rectangle.png in Resources */,
-				DDA665CE1D685E520079220F /* Husky.jpg in Resources */,
 				DDA665EC1D68A78A0079220F /* MELCanvasController.xib in Resources */,
 				DDA666051D6C8EE20079220F /* MELInstrumentPanelController.xib in Resources */,
-				DDA666571D6E25500079220F /* Fjords.jpg in Resources */,
-				DDA665FD1D6B86450079220F /* Jobs.png in Resources */,
 				DDA666431D6DE2F60079220F /* __Interface__Line.png in Resources */,
+				DDA6667A1D706D180079220F /* DefaultImages in Resources */,
 				DDA666441D6DE2F60079220F /* __Interface__Oval.png in Resources */,
 				DDA665A51D67636D0079220F /* MainMenu.xib in Resources */,
 			);

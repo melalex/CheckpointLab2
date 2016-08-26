@@ -15,8 +15,8 @@
 
 @interface MELDataStore : NSObject<MELImageLibraryPanelModelController, MELCanvasModelController, MELImageInspectorModelController>
 
-@property (retain) MELDocumentModel *documentModel;
 @property (readonly, retain) NSArray<NSImage *> *images;
 @property (readonly, assign) id<MELElement> selectedElement;
+@property (retain) MELDocumentModel *documentModel;
 
 @end
