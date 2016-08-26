@@ -22,6 +22,8 @@ static NSString *const kProductName = @"ImageKeeper";
 }
 
 @property (retain) NSMutableArray<NSImage *> *mutableImages;
+@property (retain) NSArray<NSImage *> *defaultImages;
+
 @property (assign) id<MELElement> selectedElement;
 
 @property (readonly, retain) NSString *pathToImageKeeperSupportDirectory;
@@ -43,6 +45,8 @@ static NSString *const kProductName = @"ImageKeeper";
             [self uploadImageForPath:path];
         }
         
+        _defaultImages = [[NSArray alloc] initWithArray:_mutableImages];
+        
         NSString *pathToImageKeeperSupportDirectory = [self pathToImageKeeperSupportDirectory];
         
         NSError *error = nil;
@@ -51,7 +55,7 @@ static NSString *const kProductName = @"ImageKeeper";
         
         if (error)
         {
-            NSLog(@"error taking content: %@", error);
+            NSLog(@"error taking content: %@", [error localizedDescription]);
         }
         
         for (NSString *path in paths)
@@ -68,6 +72,7 @@ static NSString *const kProductName = @"ImageKeeper";
     [_mutableImages release];
     [_documentModel release];
     [_pathToImageKeeperSupportDirectory release];
+    [_defaultImages release];
     
     [super dealloc];
 }
@@ -109,7 +114,7 @@ static NSString *const kProductName = @"ImageKeeper";
     
     if (error)
     {
-        NSLog(@"error creating image: %@", error);
+        NSLog(@"error creating image: %@", [error localizedDescription]);
     }
     
     return imageName;
@@ -123,14 +128,14 @@ static NSString *const kProductName = @"ImageKeeper";
         NSString *applicationSupportDirectory = [paths firstObject];
         applicationSupportDirectory = [applicationSupportDirectory stringByAppendingPathComponent:kProductName];
         
-        NSError * error = nil;
+        NSError *error = nil;
         [[NSFileManager defaultManager] createDirectoryAtPath:applicationSupportDirectory
                                   withIntermediateDirectories:YES
                                                    attributes:nil
                                                         error:&error];
-        if (error != nil)
+        if (error)
         {
-            NSLog(@"error creating directory: %@", error);
+            NSLog(@"error creating directory: %@", [error localizedDescription]);
         }
         
         _pathToImageKeeperSupportDirectory = [applicationSupportDirectory retain];
@@ -251,8 +256,22 @@ static NSString *const kProductName = @"ImageKeeper";
 
 - (void)removeObjectFromImagesAtIndex:(NSUInteger)index
 {
-    [self.mutableImages removeObjectAtIndex:index];
-}
+    if (![self.defaultImages containsObject:self.mutableImages[index]])
+    {
+        NSString *imagePath = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:[self.mutableImages[index] name]];
+        NSError *error = nil;
+        
+        [self.mutableImages[index] setName:nil];
+        
+        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:&error];
 
+        if (error)
+        {
+            NSLog(@"error removing image: %@", [error localizedDescription]);
+        }
+
+        [self.mutableImages removeObjectAtIndex:index];
+    }
+}
 
 @end

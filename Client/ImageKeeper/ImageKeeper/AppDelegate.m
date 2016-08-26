@@ -31,6 +31,8 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 @property (retain) MELImageInspector *imageInspector;
 @property (retain) MELInstrumentPanelController *instrumentPanelController;
 
+@property (readonly) NSWindow *keyWindow;
+
 @end
 
 @implementation AppDelegate
@@ -117,7 +119,7 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 - (IBAction)copy:(id)sender
 {
-    if ([[NSApplication sharedApplication] keyWindow] == self.canvasController.view.window)
+    if (self.keyWindow == self.canvasController.view.window)
     {
         [self.canvasController copySelectedImage];
     }
@@ -125,7 +127,7 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 - (IBAction)paste:(id)sender
 {
-    if ([[NSApplication sharedApplication] keyWindow] == self.canvasController.view.window)
+    if (self.keyWindow == self.canvasController.view.window)
     {
         [self.canvasController paste];
     }
@@ -133,11 +135,19 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 - (IBAction)delete:(id)sender
 {
-    if ([[NSApplication sharedApplication] keyWindow] == self.canvasController.view.window)
+    if (self.keyWindow == self.canvasController.view.window)
     {
         [self.canvasController deleteSelectedImage];
     }
+    else if (self.keyWindow == self.imageLibraryPanelController.window)
+    {
+        [self.imageLibraryPanelController deleteSelectedRow];
+    }
 }
 
+- (NSWindow *)keyWindow
+{
+    return [[NSApplication sharedApplication] keyWindow];
+}
 
 @end

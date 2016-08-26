@@ -14,4 +14,6 @@
 @property (retain) NSObject<MELImageLibraryPanelModelController> *dataStore;
 @property (retain, readonly) NSArray<NSImage *> *imagePreviewList;
 
+- (void)deleteSelectedRow;
+
 @end

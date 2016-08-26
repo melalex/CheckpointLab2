@@ -24,6 +24,8 @@ static NSString *const kMELImageLibraryPanelControllerContextImagesGhanged = @"k
 
 @property (retain) NSArray<NSImage *> *imagePreviewList;
 
+@property (assign) IBOutlet NSTableView *tableView;
+
 @end
 
 @implementation MELImageLibraryPanelController
@@ -60,6 +62,22 @@ static NSString *const kMELImageLibraryPanelControllerContextImagesGhanged = @"k
     }
 }
 
+- (void)deleteSelectedRow
+{
+    NSInteger selectedRow = self.tableView.selectedRow;
+    
+    if (selectedRow >= 0)
+    {
+        [self.dataStore removeObjectFromImagesAtIndex:selectedRow];
+        
+        NSInteger maxIndex = (self.dataStore.images.count - 1);
+        selectedRow = selectedRow < maxIndex ? selectedRow : maxIndex;
+        
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:selectedRow];
+        [self.tableView selectRowIndexes:indexSet byExtendingSelection:NO];
+    }
+}
+
 + (NSSet *)keyPathsForValuesAffectingDataStore
 {
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageLibraryPanelController, dataStore.images), nil];
@@ -74,8 +92,6 @@ static NSString *const kMELImageLibraryPanelControllerContextImagesGhanged = @"k
 {
     NSPasteboard *board = info.draggingPasteboard;
     NSImage *image = [[NSImage alloc] initWithPasteboard:board];
-    
-#warning NSImage don't support
     
     if (!image)
     {

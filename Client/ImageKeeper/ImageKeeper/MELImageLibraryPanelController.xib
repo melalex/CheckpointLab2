@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MELImageLibraryPanelController">
             <connections>
+                <outlet property="tableView" destination="qHm-YE-gD9" id="TE5-lp-2wC"/>
                 <outlet property="window" destination="f8i-3g-JsU" id="6Sj-WB-yoS"/>
             </connections>
         </customObject>
@@ -84,7 +85,7 @@
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7uN-PX-0Cd">
                                                             <rect key="frame" x="0.0" y="53" width="100" height="17"/>
-                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="BrX-1t-1N4">
+                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Table View Cell" id="BrX-1t-1N4">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
