@@ -14,7 +14,7 @@
 @class MELImagePreviewModel;
 @class MELRect;
 
-@interface MELDataStore : NSObject<MELImageLibraryPanelModelController, MELCanvasModelController, MELImageInspectorModelController>
+@interface MELDataStore : NSObject<MELImageLibraryPanelModelController, MELCanvasModelController, MELImageInspectorModelController, MELDocumentModelProtocol>
 
 @property (readonly, retain) NSArray<MELImagePreviewModel *> *images;
 @property (readonly, assign) id<MELElement> selectedElement;

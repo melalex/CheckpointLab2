@@ -11,7 +11,7 @@
 
 @class MELRect;
 
-@interface MELDocumentModel : NSObject
+@interface MELDocumentModel : NSObject<NSCoding>
 
 @property (retain, readonly) NSArray<id<MELElement>> *elements;
 

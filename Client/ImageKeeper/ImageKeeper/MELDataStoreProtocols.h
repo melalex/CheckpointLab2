@@ -51,3 +51,10 @@
 - (NSArray<id<MELElement>> *)getElements;
 
 @end
+
+
+@protocol MELDocumentModelProtocol <NSObject>
+
+@property (retain) MELDocumentModel *documentModel;
+
+@end

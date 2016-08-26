@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD1C02AC1D70CFD900B488E6 /* File-Picture-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DD1C02AB1D70CFD900B488E6 /* File-Picture-icon.png */; };
 		DDA665971D67636D0079220F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665961D67636D0079220F /* AppDelegate.m */; };
 		DDA6659A1D67636D0079220F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665991D67636D0079220F /* main.m */; };
 		DDA6659D1D67636D0079220F /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6659C1D67636D0079220F /* Document.m */; };
@@ -85,6 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DD1C02AB1D70CFD900B488E6 /* File-Picture-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "File-Picture-icon.png"; sourceTree = "<group>"; };
 		DDA665921D67636D0079220F /* ImageKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA665951D67636D0079220F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DDA665961D67636D0079220F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				DDA6663E1D6DE2F60079220F /* __Interface__Line.png */,
 				DDA6663F1D6DE2F60079220F /* __Interface__Oval.png */,
 				DDA666401D6DE2F60079220F /* __Interface__Rectangle.png */,
+				DD1C02AB1D70CFD900B488E6 /* File-Picture-icon.png */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA665F71D69EF2C0079220F /* MELImageInspector.xib in Resources */,
+				DD1C02AC1D70CFD900B488E6 /* File-Picture-icon.png in Resources */,
 				DDA665A21D67636D0079220F /* Assets.xcassets in Resources */,
 				DDA666421D6DE2F60079220F /* __Interface__Cursor.png in Resources */,
 				DDA666411D6DE2F60079220F /* __Interface__Brush.png in Resources */,

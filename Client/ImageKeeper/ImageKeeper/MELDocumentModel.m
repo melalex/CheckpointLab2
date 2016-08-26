@@ -9,6 +9,8 @@
 #import "MELDocumentModel.h"
 #import "MELRect.h"
 
+static NSString *const kMutableElements = @"mutableElements";
+
 @interface MELDocumentModel()
 
 @property NSMutableArray<id<MELElement>> *mutableElements;
@@ -31,6 +33,22 @@
     [_mutableElements release];
     
     [super dealloc];
+}
+
+#pragma mark - NSCoding
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [self init])
+    {
+        _mutableElements = [[aDecoder decodeObjectForKey:kMutableElements] retain];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.mutableElements forKey:kMutableElements];
 }
 
 #pragma mark - Work with layers

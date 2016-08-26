@@ -24,6 +24,8 @@
     MELCurveStrategy *_curveStrategy;
 }
 
+#warning create protocol
+
 @property (retain, readonly) MELCursorStrategy *cursorStrategy;
 @property (retain, readonly) MELLineStrategy *lineStrategy;
 @property (retain, readonly) MELOvalStrategy *ovalStrategy;

@@ -52,6 +52,7 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 {
     
 #pragma mark - App App dependencies
+    Document *document = self.currentDocument;
     MELDocumentModel *documentModel = [[MELDocumentModel alloc] init];
     MELDataStore *dataStore =[[MELDataStore alloc] init];
     dataStore.documentModel = documentModel;
@@ -70,10 +71,7 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     self.instrumentPanelController = [[[MELInstrumentPanelController alloc] initWithWindowNibName:kMELInstrumentPanelController] autorelease];
     self.instrumentPanelController.canvasController = self.canvasController;
     
-    Document *document = self.currentDocument;
-    
-    [[document.windowControllers[0] window] makeKeyWindow];
-     
+    document.dataStore = dataStore;
     [document.canvas addSubview:self.canvasController.view];
     [self.canvasController.view setFrame:document.canvas.bounds];
     

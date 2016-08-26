@@ -7,10 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MELDataStoreProtocols.h"
 
 @class MELCanvas;
 
 @interface Document : NSDocument
+
+@property (retain) id<MELDocumentModelProtocol> dataStore;
 
 @property (assign) IBOutlet MELCanvas *canvas;
 
