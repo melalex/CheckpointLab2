@@ -101,6 +101,14 @@
         }
     }
     
+    if (!result)
+    {
+        NSArray *classArray = [NSArray arrayWithObject:[MELNumber class]];
+        NSDictionary *options = [NSDictionary dictionary];
+        
+        result = [board canReadObjectForClasses:classArray options:options];
+    }
+    
     return result;
 }
 
@@ -109,7 +117,8 @@
     NSPasteboard *board = sender.draggingPasteboard;
     NSImage *image = nil;
     NSPoint point = [self convertPoint:sender.draggingLocation fromView:nil];
-
+    BOOL result = NO;
+    
     image = [[NSImage alloc] initWithPasteboard:board];
     
     if (!image)
@@ -121,25 +130,28 @@
     if (image)
     {
         [self.controller addImage:image toPoint:point];
+        
+        result = YES;
     }
     else
     {
-        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         NSArray *classArray = [NSArray arrayWithObject:[MELNumber class]];
         NSDictionary *options = [NSDictionary dictionary];
         
-        BOOL ok = [pasteboard canReadObjectForClasses:classArray options:options];
+        BOOL ok = [board canReadObjectForClasses:classArray options:options];
         
         if (ok)
         {
-            NSArray *objectsToPaste = [pasteboard readObjectsForClasses:classArray options:options];
+            NSArray *objectsToPaste = [board readObjectsForClasses:classArray options:options];
             MELNumber *row = [objectsToPaste objectAtIndex:0];
             
-            [self.controller addImageFromLibraryAtIndex:[row longLongValue] toPoint:point];
+            [self.controller addImageFromLibraryAtIndex:[row integerValue] toPoint:point];
+            
+            result = YES;
         }
     }
     
-    return !![image autorelease];
+    return result;
 }
 
 @end

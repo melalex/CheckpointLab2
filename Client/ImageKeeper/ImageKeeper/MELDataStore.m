@@ -201,13 +201,19 @@ static NSString *const kDefaultFileName = @"New Image";
     MELRect *frame = [[MELRect alloc] initWithX:x y:y width:width height:height];
     
     [self putToDocumentModelImage:image inFrame:frame];
+    
+    [frame release];
 }
 
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame
 {
     NSUInteger layer = self.documentModel.elements.lastObject.layer + 1;
     
-    [self.documentModel addElement:[[MELImageModel alloc] initWithImage:image frame:frame layer:layer]];
+    MELImageModel *imageModel = [[MELImageModel alloc] initWithImage:image frame:frame layer:layer];
+    
+    [self.documentModel addElement:imageModel];
+    
+    [imageModel release];
 }
 
 - (void)putToDocumentModelElement:(id<MELElement>)element;

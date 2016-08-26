@@ -18,7 +18,7 @@
     
     if (!writableTypes)
     {
-        writableTypes = [NSArray arrayWithObject:kMELElementUTI];
+        writableTypes = [[NSArray alloc] initWithObjects:kMELElementUTI, nil];
     }
     
     return writableTypes;
@@ -44,7 +44,7 @@
     
     if (!readableTypes)
     {
-        readableTypes = [NSArray arrayWithObject:kMELElementUTI];
+        readableTypes = [[NSArray alloc] initWithObjects:kMELElementUTI, nil];
     }
     
     return readableTypes;

@@ -175,9 +175,7 @@ static CGFloat const kFocusRingThickness = 5.0;
         [pasteboard clearContents];
         
         NSArray *copiedObjects = [NSArray arrayWithObject:elementModel];
-        
-#warning EXC_BAD_ACCES
-        
+                
         [pasteboard writeObjects:copiedObjects];
     }
 }

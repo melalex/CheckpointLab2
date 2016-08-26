@@ -44,7 +44,7 @@ NSString * const kMELNumberIntegerValue = @"integerValue";
     
     if (!writableTypes)
     {
-        writableTypes = [NSArray arrayWithObject:kMELNumberUTI];
+        writableTypes = [[NSArray alloc] initWithObjects:kMELNumberUTI, nil];
     }
     
     return writableTypes;
@@ -70,7 +70,7 @@ NSString * const kMELNumberIntegerValue = @"integerValue";
     
     if (!readableTypes)
     {
-        readableTypes = [NSArray arrayWithObject:kMELNumberUTI];
+        readableTypes = [[NSArray alloc] initWithObjects:kMELNumberUTI, nil];
     }
     
     return readableTypes;

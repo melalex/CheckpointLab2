@@ -55,7 +55,7 @@ static NSString *const kLayer = @"layer";
     
     if (!writableTypes)
     {
-        writableTypes = [NSArray arrayWithObject:kMELElementUTI];
+        writableTypes = [[NSArray alloc] initWithObjects:kMELElementUTI, nil];
     }
     
     return writableTypes;
@@ -81,7 +81,7 @@ static NSString *const kLayer = @"layer";
     
     if (!readableTypes)
     {
-        readableTypes = [NSArray arrayWithObject:kMELElementUTI];
+        readableTypes = [[NSArray alloc] initWithObjects:kMELElementUTI, nil];
     }
     
     return readableTypes;
