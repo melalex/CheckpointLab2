@@ -10,10 +10,11 @@
 #import "MELStrategy.h"
 #import "MELElement.h"
 #import "MELDataStoreProtocols.h"
+#import "MELChangeableStrategy.h"
 
 @class MELCanvas;
 
-@interface MELCanvasController : NSViewController
+@interface MELCanvasController : NSViewController<MELChangeableStrategy>
 
 @property (retain) id<MELStrategy> strategy;
 @property (retain) NSObject<MELCanvasModelController> *dataStore;
@@ -27,5 +28,7 @@
 - (void)copySelectedImage;
 - (void)paste;
 - (void)deleteSelectedImage;
+
+- (NSImage *)imageFromCanvas;
 
 @end

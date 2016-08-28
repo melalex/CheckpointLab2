@@ -103,6 +103,31 @@
                                     <action selector="saveDocumentAs:" target="-1" id="mDf-zr-I0C"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Export" id="Hv1-qo-kgm">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" id="ANm-DY-KDv">
+                                    <items>
+                                        <menuItem title=".png" id="Ix8-co-cVg">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="saveAsPng:" target="Voe-Tx-rLC" id="xex-9j-cfe"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title=".tiff" id="250-8I-UGC">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="saveAsTiff:" target="Voe-Tx-rLC" id="1Je-xF-dwb"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title=".jpeg" id="mkR-2U-NpH">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="saveAsJpeg:" target="Voe-Tx-rLC" id="gSd-uL-l36"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Revert to Saved" id="KaW-ft-85H">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

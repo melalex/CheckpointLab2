@@ -41,7 +41,7 @@
 
 - (void)performMELImageModelTasks:(MELImageModel *)object
 {
-    [object.image drawInRect:object.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceAtop fraction:1.0f];
+    [object.image drawInRect:object.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 }
 
 - (void)performMELLineModelTasks:(MELLineModel *)object

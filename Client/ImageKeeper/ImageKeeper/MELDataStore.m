@@ -205,7 +205,7 @@ static NSString *const kMELDataStoreContextNameChanged = @"kMELDataStoreContextN
         NSString *newName = (NSString *)aChange[kNew];
         NSString *oldName = (NSString *)aChange[kOld];
         
-        if (![newName isEqualToString:oldName])
+        if (![newName isEqualToString:oldName] && [self.defaultImages containsObject:(MELImagePreviewModel *)anObject])
         {
             oldName = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:oldName];
             newName = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:newName];

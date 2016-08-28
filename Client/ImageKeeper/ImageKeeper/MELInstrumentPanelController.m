@@ -7,7 +7,6 @@
 //
 
 #import "MELInstrumentPanelController.h"
-#import "MELCanvasController.h"
 #import "MELCursorStrategy.h"
 #import "MELLineStrategy.h"
 #import "MELOvalStrategy.h"
@@ -16,15 +15,13 @@
 
 @interface MELInstrumentPanelController ()
 {
-    MELCanvasController *_canvasController;
+    id<MELChangeableStrategy> _canvasController;
     MELCursorStrategy *_cursorStrategy;
     MELLineStrategy *_lineStrategy;
     MELOvalStrategy *_ovalStrategy;
     MELRectangleStrategy *_rectangleStrategy;
     MELCurveStrategy *_curveStrategy;
 }
-
-#warning create protocol
 
 @property (retain, readonly) MELCursorStrategy *cursorStrategy;
 @property (retain, readonly) MELLineStrategy *lineStrategy;
@@ -77,7 +74,7 @@
 
 #pragma mark - MELCursorStrategySetters
 
-- (void)setCanvasController:(MELCanvasController *)canvasController
+- (void)setCanvasController:(id<MELChangeableStrategy>)canvasController
 {
     if (_canvasController != canvasController)
     {
@@ -90,7 +87,7 @@
 
 #pragma mark - MELCursorStrategyGetters
 
-- (MELCanvasController *)canvasController
+- (id<MELChangeableStrategy>)canvasController
 {
     return _canvasController;
 }

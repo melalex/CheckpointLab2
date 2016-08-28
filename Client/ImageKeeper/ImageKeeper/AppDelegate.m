@@ -17,6 +17,8 @@
 #import "MELRect.h"
 #import "MELInstrumentPanelController.h"
 
+static NSString *const kFileExtension = @".ikf";
+
 static CGFloat const kDistanceBetweenWindows = 20.0;
 
 static NSString *const kMELImageInspector = @"MELImageInspector";
@@ -105,6 +107,11 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     return YES;
 }
 
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
+{
+    return [filename hasSuffix:kFileExtension];
+}
+
 #pragma mark - Panels menu
 
 - (IBAction)showImageInspectorPanel:(id)sender
@@ -144,6 +151,50 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     [self.imageLibraryPanelController.window setFrame:imageLibraryFrame display:YES];
     
     [self.imageInspector showWindow:self];
+}
+
+#pragma mark - Export
+- (IBAction)saveAsPng:(id)sender
+{
+    NSImage *image = [self.canvasController imageFromCanvas];
+
+    CGImageRef cgRef = [image CGImageForProposedRect:NULL
+                                             context:nil
+                                               hints:nil];
+    
+    NSBitmapImageRep *newRep = [[NSBitmapImageRep alloc] initWithCGImage:cgRef];
+    [newRep setSize:[image size]];
+    
+    NSNumber *compressionFactor = [NSNumber numberWithFloat:0.9];
+    NSDictionary *imageProps = [NSDictionary dictionaryWithObject:compressionFactor
+                                                           forKey:NSImageCompressionFactor];
+    
+    NSData *imageData = [newRep representationUsingType:NSPNGFileType properties:imageProps];
+    
+    [imageData writeToFile:@"/Users/melalex/Desktop/foo.png" atomically:YES];
+    [newRep autorelease];
+}
+
+- (IBAction)saveAsTiff:(id)sender
+{
+    NSImage *image = [self.canvasController imageFromCanvas];
+    
+    [[image TIFFRepresentation] writeToFile:@"/Users/melalex/Desktop/foo.tiff" atomically:NO];
+}
+
+- (IBAction)saveAsJpeg:(id)sender
+{
+    NSImage *image = [self.canvasController imageFromCanvas];
+
+    NSData *imageData = [image TIFFRepresentation];
+    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+    
+    NSNumber *compressionFactor = [NSNumber numberWithFloat:0.9];
+    NSDictionary *imageProps = [NSDictionary dictionaryWithObject:compressionFactor
+                                                           forKey:NSImageCompressionFactor];
+    
+    imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+    [imageData writeToFile:@"/Users/melalex/Desktop/foo.jpeg" atomically:YES];
 }
 
 #pragma mark - Edit commands

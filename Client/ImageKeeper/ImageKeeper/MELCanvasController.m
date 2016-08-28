@@ -11,6 +11,7 @@
 #import "MELCanvas.h"
 #import "MELDocumentModel.h"
 #import "MELRect.h"
+#import "MELVisitor.h"
 
 #import "MELImageModel.h"
 #import "MELLineModel.h"
@@ -95,6 +96,48 @@ static CGFloat const kFocusRingThickness = 5.0;
     return [self.dataStore isSelected:element];;
 }
 
+- (NSImage *)imageFromCanvas
+{
+    NSRect rect = self.view.bounds;
+    
+    NSImage *image = [[NSImage alloc] initWithSize:rect.size];
+    NSBitmapImageRep *representation = [[NSBitmapImageRep alloc]
+                                        initWithBitmapDataPlanes:NULL
+                                        pixelsWide:rect.size.width
+                                        pixelsHigh:rect.size.height
+                                        bitsPerSample:8
+                                        samplesPerPixel:4
+                                        hasAlpha:YES
+                                        isPlanar:NO
+                                        colorSpaceName:NSCalibratedRGBColorSpace
+                                        bytesPerRow:0
+                                        bitsPerPixel:0];
+    
+    [image addRepresentation:representation];
+    
+    [image lockFocus];
+    
+    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextClearRect(ctx, rect);
+    CGContextSetFillColorWithColor(ctx, [[NSColor blueColor] CGColor]);
+    
+    NSArray *elements = self.dataStore.documentModel.elements;
+    
+    MELVisitor *drawer = [[MELVisitor alloc] init];
+    
+    for (id<MELElement> element in elements)
+    {
+        [element acceptVisitor:drawer];
+    }
+    
+    [image unlockFocus];
+    
+    [representation release];
+    [drawer release];
+        
+    return [image autorelease];
+}
+
 #pragma mark - strategy
 
 - (void)setStrategy:(id<MELStrategy>)strategy
@@ -132,6 +175,8 @@ static CGFloat const kFocusRingThickness = 5.0;
 }
 
 #pragma mark - keyboardEvents
+
+#warning make without keyDown
 
 - (void)keyDown:(NSEvent *)theEvent
 {

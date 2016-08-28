@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-@class MELCanvasController;
+#import "MELChangeableStrategy.h"
 
 @interface MELInstrumentPanelController : NSWindowController
 
-@property (retain) MELCanvasController *canvasController;
+@property (retain) id<MELChangeableStrategy> canvasController;
 
 @end

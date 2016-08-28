@@ -87,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		DD1C02AB1D70CFD900B488E6 /* File-Picture-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "File-Picture-icon.png"; sourceTree = "<group>"; };
+		DD1C02AD1D72EEFA00B488E6 /* MELChangeableStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELChangeableStrategy.h; sourceTree = "<group>"; };
 		DDA665921D67636D0079220F /* ImageKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA665951D67636D0079220F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DDA665961D67636D0079220F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -348,6 +349,7 @@
 		DDA666111D6CA4920079220F /* Strategy */ = {
 			isa = PBXGroup;
 			children = (
+				DD1C02AD1D72EEFA00B488E6 /* MELChangeableStrategy.h */,
 				DDA666121D6CA4EF0079220F /* MELStrategy.h */,
 				DDA666391D6D92050079220F /* MELPrimitiveStrategy.h */,
 				DDA6663A1D6D92050079220F /* MELPrimitiveStrategy.m */,

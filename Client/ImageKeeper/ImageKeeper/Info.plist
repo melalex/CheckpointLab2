@@ -25,6 +25,8 @@
 			<array>
 				<string>com.company.ImageKeeperFile</string>
 			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>0</integer>
 			<key>NSDocumentClass</key>
 			<string>Document</string>
 		</dict>
@@ -60,10 +62,14 @@
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>com.company.ImageKeeperFile</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>ImageKeeperFile</string>
 			<key>UTTypeIconFile</key>
 			<string>File-Picture-icon</string>
 			<key>UTTypeIdentifier</key>
