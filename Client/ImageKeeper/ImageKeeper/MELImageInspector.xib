@@ -120,13 +120,13 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="isSelected" id="lkg-TS-dfL"/>
                             <binding destination="-2" name="value" keyPath="height" id="EWw-LC-Sy1">
                                 <dictionary key="options">
                                     <integer key="NSNullPlaceholder" value="10"/>
                                     <string key="NSValueTransformerName">MELSizeValidation</string>
                                 </dictionary>
                             </binding>
+                            <binding destination="-2" name="enabled" keyPath="isSelected" id="lkg-TS-dfL"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pfd-UQ-ORx">

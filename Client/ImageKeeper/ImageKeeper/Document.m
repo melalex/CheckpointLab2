@@ -9,8 +9,11 @@
 #import "Document.h"
 #import "MELCanvas.h"
 #import "MELDocumentModel.h"
+#import "MELCanvasController.h"
 
 @interface Document ()
+
+@property (assign) IBOutlet MELCanvas *canvas;
 
 @end
 
@@ -28,6 +31,12 @@
 + (BOOL)autosavesInPlace
 {
     return YES;
+}
+
+- (void)setCanvasController:(MELCanvasController *)canvasController
+{
+    self.canvas.controller = canvasController;
+    canvasController.view = self.canvas;
 }
 
 - (NSString *)windowNibName

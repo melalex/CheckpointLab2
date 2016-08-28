@@ -10,12 +10,13 @@
 #import "MELDataStoreProtocols.h"
 
 @class MELCanvas;
+@class MELCanvasController;
 
 @interface Document : NSDocument
 
 @property (retain) id<MELDocumentModelProtocol> dataStore;
 
-@property (assign) IBOutlet MELCanvas *canvas;
+- (void)setCanvasController:(MELCanvasController *)canvasController;
 
 @end
 

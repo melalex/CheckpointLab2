@@ -23,7 +23,6 @@ static CGFloat const kDistanceBetweenWindows = 20.0;
 
 static NSString *const kMELImageInspector = @"MELImageInspector";
 static NSString *const kMELImageLibraryPanelController = @"MELImageLibraryPanelController";
-static NSString *const kMELCanvasController = @"MELCanvasController";
 static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelController";
 
 @interface AppDelegate ()
@@ -66,16 +65,14 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     self.imageLibraryPanelController = [[[MELImageLibraryPanelController alloc] initWithWindowNibName:kMELImageLibraryPanelController] autorelease];
     self.imageLibraryPanelController.dataStore = dataStore;
     
-    self.canvasController = [[[MELCanvasController alloc] initWithNibName:kMELCanvasController bundle:[NSBundle mainBundle]] autorelease];
+    self.canvasController = [[[MELCanvasController alloc] init] autorelease];
     self.canvasController.dataStore = dataStore;
-    self.canvasController.canvas.controller = self.canvasController;
+    
+    document.dataStore = dataStore;
+    [document setCanvasController:self.canvasController];
     
     self.instrumentPanelController = [[[MELInstrumentPanelController alloc] initWithWindowNibName:kMELInstrumentPanelController] autorelease];
     self.instrumentPanelController.canvasController = self.canvasController;
-    
-    document.dataStore = dataStore;
-    [document.canvas addSubview:self.canvasController.view];
-    [self.canvasController.view setFrame:document.canvas.bounds];
     
     [dataStore release];
 
@@ -92,9 +89,9 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
     [[document.windowControllers[0] window] setFrame:documentFrame display:YES];
 
-    [self showInstrumentPanel:nil];
-    [self showImageInspectorPanel:nil];
-    [self showImageLibraryPanel:nil];
+    [self showInstrumentPanel:self];
+    [self showImageInspectorPanel:self];
+    [self showImageLibraryPanel:self];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
