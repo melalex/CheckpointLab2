@@ -21,6 +21,12 @@ static NSString *const kMELElementUTI = @"com.company.element";
 @property (retain) MELRect *frame;
 @property  NSUInteger layer;
 
+@property CGFloat rotation;
+@property CGFloat transparency;
+
 - (void)acceptVisitor:(MELVisitor *)visitor;
+
+- (void)addObserver:(id)observer context:(NSString *)context;
+- (void)removeObserver:(id)observer context:(NSString *)context;
 
 @end

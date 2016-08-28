@@ -54,7 +54,6 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 #pragma mark - App App dependencies
-    Document *document = self.currentDocument;
     MELDocumentModel *documentModel = [[MELDocumentModel alloc] init];
     MELDataStore *dataStore =[[MELDataStore alloc] init];
     dataStore.documentModel = documentModel;
@@ -71,6 +70,7 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     self.canvasController = [[[MELCanvasController alloc] init] autorelease];
     self.canvasController.dataStore = dataStore;
     
+    Document *document = self.currentDocument;
     document.dataStore = dataStore;
     [document setCanvasController:self.canvasController];
     
@@ -288,11 +288,13 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 - (Document *)currentDocument
 {
-    Document *document = [[NSDocumentController sharedDocumentController] currentDocument];
+    NSDocumentController *documentController = [NSDocumentController sharedDocumentController];
+    Document *document = [documentController currentDocument];
+    NSArray *documents = [documentController documents];
     
     if(!document)
     {
-        document = [[NSDocumentController sharedDocumentController] documents][0];
+        document = documents[0];
     }
     
     return document;

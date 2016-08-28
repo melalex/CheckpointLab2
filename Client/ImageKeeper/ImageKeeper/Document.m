@@ -40,7 +40,8 @@
 
 + (BOOL)autosavesInPlace
 {
-    return YES;
+#warning warning
+    return NO;
 }
 
 - (void)setCanvasController:(MELCanvasController *)canvasController

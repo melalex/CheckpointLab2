@@ -49,6 +49,16 @@
     selectedElement.color = sender.color;
 }
 
+- (IBAction)rotationChanged:(NSSlider *)sender
+{
+    self.dataStore.selectedElement.rotation = M_PI * sender.floatValue / 50.0;
+}
+
+- (IBAction)transparencyChanged:(NSSlider *)sender
+{
+    self.dataStore.selectedElement.transparency = 1.0 - sender.floatValue / 100.0;
+}
+
 #pragma mark - MELImageInspector Bindings Support
 
 + (NSSet *)keyPathsForValuesAffectingXCoordinate

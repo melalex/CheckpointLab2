@@ -39,14 +39,29 @@
     @throw myException;
 }
 
+#warning undo for color and rotating
+
 - (void)performMELImageModelTasks:(MELImageModel *)object
 {
-    [object.image drawInRect:object.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+    NSAffineTransform *rotate = [[NSAffineTransform alloc] init];
+    NSGraphicsContext *context = [NSGraphicsContext currentContext];
+    
+    [context saveGraphicsState];
+    [rotate rotateByRadians:object.rotation];
+    [rotate translateXBy:-(object.frame.width / 2) yBy:-(object.frame.height / 2)];
+    [rotate concat];
+    
+    [object.image drawInRect:object.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:object.transparency];
+    
+    [rotate release];
+    [context restoreGraphicsState];
 }
 
 - (void)performMELLineModelTasks:(MELLineModel *)object
 {
     NSBezierPath *path = [NSBezierPath bezierPath];
+    
+    CGAffineTransformMakeRotation(object.rotation);
     
     [path setLineWidth:object.thickness];
     [object.color set];
@@ -54,13 +69,14 @@
     [path  moveToPoint:object.firstPoint];
     [path lineToPoint:object.secondPoint];
     
-    [[NSColor blackColor] set];
     [path stroke];
 }
 
 - (void)performMELOvalModelTasks:(MELOvalModel *)object
 {
     NSBezierPath *oval = [NSBezierPath bezierPathWithOvalInRect:object.frame.rect];
+
+    CGAffineTransformMakeRotation(object.rotation);
     
     [oval setLineWidth:object.thickness];
     [object.color set];
@@ -71,6 +87,8 @@
 - (void)performMELRectangleModelTasks:(MELRectangleModel *)object
 {
     NSBezierPath *rectangle = [NSBezierPath bezierPathWithRect:object.frame.rect];
+    
+    CGAffineTransformMakeRotation(object.rotation);
     
     [rectangle setLineWidth:object.thickness];
     [object.color set];

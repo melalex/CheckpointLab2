@@ -31,7 +31,6 @@ static NSString *const kX = @"x";
 static NSString *const kY = @"y";
 static NSString *const kWidth = @"width";
 static NSString *const kHeight = @"height";
-static NSString *const kLayer = @"layer";
 
 static CGFloat const kDefaultDeltaX = 10.0;
 static CGFloat const kDefaultDeltaY = 10.0;
@@ -321,30 +320,7 @@ static CGFloat const kFocusRingThickness = 5.0;
         {
             MELRect *frame = newElement.frame;
             
-            [frame addObserver:self
-                    forKeyPath:@OBJECT_KEY_PATH(frame, x)
-                       options:NSKeyValueObservingOptionOld
-                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-            
-            [frame addObserver:self
-                    forKeyPath:@OBJECT_KEY_PATH(frame, y)
-                       options:NSKeyValueObservingOptionOld
-                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-            
-            [frame addObserver:self
-                    forKeyPath:@OBJECT_KEY_PATH(frame, width)
-                       options:NSKeyValueObservingOptionOld
-                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-            
-            [frame addObserver:self
-                    forKeyPath:@OBJECT_KEY_PATH(frame, height)
-                       options:NSKeyValueObservingOptionOld
-                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
-            
-            [newElement addObserver:self
-                         forKeyPath:@OBJECT_KEY_PATH(newElement, layer)
-                            options:NSKeyValueObservingOptionOld
-                            context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
+            [newElement addObserver:self context:kMELCanvasControllerContextImageChangeFrame];
             
             [self.dataStore.undoManager registerUndoWithTarget:self.dataStore.documentModel
                                                       selector:@selector(removeElement:)
@@ -358,25 +334,7 @@ static CGFloat const kFocusRingThickness = 5.0;
         {
             MELRect *frame = oldElement.frame;
             
-            [frame removeObserver:self
-                       forKeyPath:@OBJECT_KEY_PATH(frame, x)
-                          context:kMELCanvasControllerContextImageChangeFrame];
-            
-            [frame removeObserver:self
-                       forKeyPath:@OBJECT_KEY_PATH(frame, y)
-                          context:kMELCanvasControllerContextImageChangeFrame];
-            
-            [frame removeObserver:self
-                       forKeyPath:@OBJECT_KEY_PATH(frame, width)
-                          context:kMELCanvasControllerContextImageChangeFrame];
-            
-            [frame removeObserver:self
-                       forKeyPath:@OBJECT_KEY_PATH(frame, height)
-                          context:kMELCanvasControllerContextImageChangeFrame];
-            
-            [oldElement removeObserver:self
-                            forKeyPath:@OBJECT_KEY_PATH(oldElement, layer)
-                               context:kMELCanvasControllerContextImageChangeFrame];
+            [oldElement removeObserver:self context:kMELCanvasControllerContextImageChangeFrame];
             
             [self.dataStore.undoManager registerUndoWithTarget:self.dataStore.documentModel
                                                       selector:@selector(addElement:)
@@ -390,7 +348,21 @@ static CGFloat const kFocusRingThickness = 5.0;
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
     {
-        NSRect newRect = [aKeyPath isEqualToString:kLayer] ? [[(id<MELElement>)anObject frame] rect] : [(MELRect *)anObject rect];
+        NSRect newRect;
+        CGFloat oldValue = 0.0;
+        
+        if ([aKeyPath isEqualToString:kX] ||
+            [aKeyPath isEqualToString:kY] ||
+            [aKeyPath isEqualToString:kWidth] ||
+            [aKeyPath isEqualToString:kHeight])
+        {
+            newRect = [(MELRect *)anObject rect];
+            oldValue = [aChange[kOld] doubleValue];
+        }
+        else
+        {
+            newRect = [[(id<MELElement>)anObject frame] rect];
+        }
         
         newRect.origin.x -= kFocusRingThickness;
         newRect.origin.y -= kFocusRingThickness;
@@ -398,7 +370,6 @@ static CGFloat const kFocusRingThickness = 5.0;
         newRect.size.height += kFocusRingThickness * 2;
         
         NSRect oldRekt = newRect;
-        CGFloat oldValue = [aChange[kOld] doubleValue];
         
         if ([aKeyPath isEqualToString:kX])
         {

@@ -223,15 +223,17 @@
                     </popUpButton>
                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYd-B4-J9e">
                         <rect key="frame" x="109" y="43" width="119" height="21"/>
-                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="aOT-LQ-gvy"/>
+                        <sliderCell key="cell" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="aOT-LQ-gvy"/>
                         <connections>
+                            <action selector="rotationChanged:" target="-2" id="uAN-rK-sGA"/>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="WLY-sd-5vG"/>
                         </connections>
                     </slider>
                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uhP-LQ-abG">
-                        <rect key="frame" x="109" y="18" width="119" height="21"/>
+                        <rect key="frame" x="109" y="19" width="119" height="21"/>
                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="DUh-OA-fxf"/>
                         <connections>
+                            <action selector="transparencyChanged:" target="-2" id="UH6-ZI-uyi"/>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="r2M-1q-HTO"/>
                         </connections>
                     </slider>

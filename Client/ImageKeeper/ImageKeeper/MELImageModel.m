@@ -9,10 +9,13 @@
 #import "MELImageModel.h"
 #import "MELRect.h"
 #import "MELVisitor.h"
+#import "Macros.h"
 
 static NSString *const kImage = @"image";
 static NSString *const kFrame = @"frame";
 static NSString *const kLayer = @"layer";
+static NSString *const kRotation = @"rotation";
+static NSString *const kTransparency = @"transparency";
 
 @interface MELImageModel()
 {
@@ -23,6 +26,19 @@ static NSString *const kLayer = @"layer";
 @end
 
 @implementation MELImageModel
+
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        _image = nil;
+        _frame = nil;
+        _layer = 0;
+        _rotation = 0;
+        _transparency = 1.0;
+    }
+    return self;
+}
 
 - (instancetype)initWithImage:(NSImage *)image frame:(MELRect *)frame layer:(NSUInteger)layer;
 {
@@ -45,6 +61,75 @@ static NSString *const kLayer = @"layer";
 - (void)acceptVisitor:(MELVisitor *)visitor
 {
     [visitor performTasks:self];
+}
+
+- (void)addObserver:(id)observer context:(NSString *)context;
+{
+    [self.frame addObserver:observer
+            forKeyPath:@OBJECT_KEY_PATH(self.frame, x)
+               options:NSKeyValueObservingOptionOld
+               context:(__bridge void * _Nullable)(context)];
+    
+    [self.frame addObserver:observer
+            forKeyPath:@OBJECT_KEY_PATH(self.frame, y)
+               options:NSKeyValueObservingOptionOld
+               context:(__bridge void * _Nullable)(context)];
+    
+    [self.frame addObserver:observer
+            forKeyPath:@OBJECT_KEY_PATH(self.frame, width)
+               options:NSKeyValueObservingOptionOld
+               context:(__bridge void * _Nullable)(context)];
+    
+    [self.frame addObserver:observer
+            forKeyPath:@OBJECT_KEY_PATH(self.frame, height)
+               options:NSKeyValueObservingOptionOld
+               context:(__bridge void * _Nullable)(context)];
+    
+    [self addObserver:observer
+           forKeyPath:@OBJECT_KEY_PATH(self, layer)
+              options:NSKeyValueObservingOptionOld
+              context:(__bridge void * _Nullable)(context)];
+    
+    [self addObserver:observer
+           forKeyPath:@OBJECT_KEY_PATH(self, rotation)
+              options:NSKeyValueObservingOptionOld
+              context:(__bridge void * _Nullable)(context)];
+    
+    [self addObserver:observer
+           forKeyPath:@OBJECT_KEY_PATH(self, transparency)
+              options:NSKeyValueObservingOptionOld
+              context:(__bridge void * _Nullable)(context)];
+}
+
+- (void)removeObserver:(id)observer context:(NSString *)context
+{
+    [self.frame removeObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(self.frame, x)
+                       context:context];
+    
+    [self.frame removeObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(self.frame, y)
+                       context:context];
+    
+    [self.frame removeObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(self.frame, width)
+                       context:context];
+    
+    [self.frame removeObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(self.frame, height)
+                       context:context];
+    
+    [self removeObserver:self
+              forKeyPath:@OBJECT_KEY_PATH(self, layer)
+                 context:context];
+    
+    [self removeObserver:self
+              forKeyPath:@OBJECT_KEY_PATH(self, rotation)
+                 context:context];
+    
+    [self removeObserver:self
+              forKeyPath:@OBJECT_KEY_PATH(self, transparency)
+                 context:context];
 }
 
 #pragma mark - NSPasteboardWriting
@@ -109,6 +194,8 @@ static NSString *const kLayer = @"layer";
         _image = [[aDecoder decodeObjectForKey:kImage] retain];
         _frame = [[aDecoder decodeObjectForKey:kFrame] retain];
         _layer = [aDecoder decodeIntegerForKey:kLayer];
+        _rotation = [aDecoder decodeDoubleForKey:kRotation];
+        _transparency = [aDecoder decodeDoubleForKey:kTransparency];
     }
     return self;
 }
@@ -118,6 +205,8 @@ static NSString *const kLayer = @"layer";
     [aCoder encodeObject:self.image forKey:kImage];
     [aCoder encodeObject:self.frame forKey:kFrame];
     [aCoder encodeInteger:self.layer forKey:kLayer];
+    [aCoder encodeDouble:self.rotation forKey:kRotation];
+    [aCoder encodeDouble:self.transparency forKey:kTransparency];
 }
 
 #pragma mark - MELImageModelSetters

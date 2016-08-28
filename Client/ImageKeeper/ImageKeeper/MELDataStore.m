@@ -227,7 +227,6 @@ static NSString *const kMELDataStoreContextNameChanged = @"kMELDataStoreContextN
     }
 }
 
-
 #pragma mark - MELDocumentModel modification
 
 - (void)setDocumentModel:(MELDocumentModel *)documentModel
