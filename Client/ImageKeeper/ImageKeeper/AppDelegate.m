@@ -27,6 +27,8 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 @interface AppDelegate ()
 
+@property (retain) id<MELAppDelegateUndoProtocol> dataStoreUndo;
+
 @property (retain) MELImageLibraryPanelController *imageLibraryPanelController;
 @property (retain) MELCanvasController *canvasController;
 @property (retain) MELImageInspector *imageInspector;
@@ -51,13 +53,14 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    
 #pragma mark - App App dependencies
     Document *document = self.currentDocument;
     MELDocumentModel *documentModel = [[MELDocumentModel alloc] init];
     MELDataStore *dataStore =[[MELDataStore alloc] init];
     dataStore.documentModel = documentModel;
     [documentModel release];
+    
+    self.dataStoreUndo = dataStore;
     
     self.imageInspector = [[[MELImageInspector alloc] initWithWindowNibName:kMELImageInspector] autorelease];
     self.imageInspector.dataStore = dataStore;
@@ -109,6 +112,24 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     return [filename hasSuffix:kFileExtension];
 }
 
+#pragma mark - Undo/Redo
+
+- (IBAction)undo:(id)sender
+{
+    if (self.keyWindow == self.canvasController.view.window)
+    {
+        [self.dataStoreUndo.undoManager undo];
+    }
+}
+
+- (IBAction)redo:(id)sender
+{
+    if (self.keyWindow == self.canvasController.view.window)
+    {
+        [self.dataStoreUndo.undoManager redo];
+    }
+}
+
 #pragma mark - Panels menu
 
 - (IBAction)showImageInspectorPanel:(id)sender
@@ -151,6 +172,7 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
 }
 
 #pragma mark - Export
+
 - (IBAction)saveAsPng:(id)sender
 {
     NSImage *image = [self.canvasController imageFromCanvas];
@@ -160,23 +182,45 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
                                                hints:nil];
     
     NSBitmapImageRep *newRep = [[NSBitmapImageRep alloc] initWithCGImage:cgRef];
+    
     [newRep setSize:[image size]];
     
     NSNumber *compressionFactor = [NSNumber numberWithFloat:0.9];
     NSDictionary *imageProps = [NSDictionary dictionaryWithObject:compressionFactor
                                                            forKey:NSImageCompressionFactor];
-    
     NSData *imageData = [newRep representationUsingType:NSPNGFileType properties:imageProps];
     
-    [imageData writeToFile:@"/Users/melalex/Desktop/foo.png" atomically:YES];
-    [newRep autorelease];
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    
+    [panel setNameFieldStringValue:@"NewFile.png"];
+    
+    [panel beginWithCompletionHandler:^(NSInteger result)
+     {
+         if (result == NSFileHandlingPanelOKButton)
+         {
+             NSURL *saveURL = [panel URL];
+             [imageData writeToURL:saveURL atomically:YES];
+         }
+     }];
+
+    [newRep release];
 }
 
 - (IBAction)saveAsTiff:(id)sender
 {
     NSImage *image = [self.canvasController imageFromCanvas];
+    NSSavePanel *panel = [NSSavePanel savePanel];
     
-    [[image TIFFRepresentation] writeToFile:@"/Users/melalex/Desktop/foo.tiff" atomically:NO];
+    [panel setNameFieldStringValue:@"NewFile.tiff"];
+    
+    [panel beginWithCompletionHandler:^(NSInteger result)
+    {
+        if (result == NSFileHandlingPanelOKButton)
+        {
+            NSURL *saveURL = [panel URL];
+            [[image TIFFRepresentation] writeToURL:saveURL atomically:NO];
+        }
+    }];
 }
 
 - (IBAction)saveAsJpeg:(id)sender
@@ -189,9 +233,20 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     NSNumber *compressionFactor = [NSNumber numberWithFloat:0.9];
     NSDictionary *imageProps = [NSDictionary dictionaryWithObject:compressionFactor
                                                            forKey:NSImageCompressionFactor];
-    
     imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
-    [imageData writeToFile:@"/Users/melalex/Desktop/foo.jpeg" atomically:YES];
+
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    
+    [panel setNameFieldStringValue:@"NewFile.jpeg"];
+    
+    [panel beginWithCompletionHandler:^(NSInteger result)
+    {
+         if (result == NSFileHandlingPanelOKButton)
+         {
+             NSURL *saveURL = [panel URL];
+             [imageData writeToURL:saveURL atomically:YES];
+         }
+    }];
 }
 
 #pragma mark - Edit commands

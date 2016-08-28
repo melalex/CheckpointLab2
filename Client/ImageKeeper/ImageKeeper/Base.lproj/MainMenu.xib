@@ -103,9 +103,9 @@
                                     <action selector="saveDocumentAs:" target="-1" id="mDf-zr-I0C"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Export" id="Hv1-qo-kgm">
+                            <menuItem title="Export to..." id="Hv1-qo-kgm">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" id="ANm-DY-KDv">
+                                <menu key="submenu" title="Export to..." id="ANm-DY-KDv">
                                     <items>
                                         <menuItem title=".png" id="Ix8-co-cVg">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -155,12 +155,12 @@
                         <items>
                             <menuItem title="Undo" keyEquivalent="z" id="dRJ-4n-Yzg">
                                 <connections>
-                                    <action selector="undo:" target="-1" id="M6e-cu-g7V"/>
+                                    <action selector="undo:" target="Voe-Tx-rLC" id="AHq-ig-0hh"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Redo" keyEquivalent="Z" id="6dh-zS-Vam">
                                 <connections>
-                                    <action selector="redo:" target="-1" id="oIA-Rs-6OD"/>
+                                    <action selector="redo:" target="Voe-Tx-rLC" id="0la-N7-rNg"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="WRV-NI-Exz"/>

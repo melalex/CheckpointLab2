@@ -14,6 +14,8 @@
 
 static NSString *const kFrame = @"frame";
 static NSString *const kLayer = @"layer";
+static NSString *const kFigureColor = @"color";
+static NSString *const kThickness = @"thickness";
 
 @interface MELPrimitiveModel()
 {
@@ -38,6 +40,7 @@ static NSString *const kLayer = @"layer";
 - (void)dealloc
 {
     [_frame release];
+    [_color release];
     
     [super dealloc];
 }
@@ -78,6 +81,8 @@ static NSString *const kLayer = @"layer";
 {
     if (self = [self init])
     {
+        _color = [[aDecoder decodeObjectForKey:kFigureColor] retain];
+        _thickness = [aDecoder decodeIntegerForKey:kThickness];
         _frame = [[aDecoder decodeObjectForKey:kFrame] retain];
         _layer = [aDecoder decodeIntegerForKey:kLayer];
     }
@@ -86,6 +91,8 @@ static NSString *const kLayer = @"layer";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
+    [aCoder encodeObject:self.color forKey:kFigureColor];
+    [aCoder encodeInteger:self.thickness forKey:kThickness];
     [aCoder encodeObject:self.frame forKey:kFrame];
     [aCoder encodeInteger:self.layer forKey:kLayer];
 }

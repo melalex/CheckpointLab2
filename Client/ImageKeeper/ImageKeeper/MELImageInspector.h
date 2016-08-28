@@ -20,5 +20,6 @@
 @property NSUInteger layer;
 
 @property (readonly) BOOL isSelected;
+@property (readonly) BOOL isFigure;
 
 @end

@@ -11,6 +11,9 @@
 
 @interface MELPrimitiveModel : NSObject<MELElement>
 
+@property (retain) NSColor *color;
+@property CGFloat thickness;
+
 - (instancetype)initWithFrame:(MELRect *)frame layer:(NSUInteger)layer;
 
 @end

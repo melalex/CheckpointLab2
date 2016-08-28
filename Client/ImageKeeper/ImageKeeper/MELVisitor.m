@@ -46,8 +46,11 @@
 
 - (void)performMELLineModelTasks:(MELLineModel *)object
 {
-    NSBezierPath * path = [NSBezierPath bezierPath];
-        
+    NSBezierPath *path = [NSBezierPath bezierPath];
+    
+    [path setLineWidth:object.thickness];
+    [object.color set];
+    
     [path  moveToPoint:object.firstPoint];
     [path lineToPoint:object.secondPoint];
     
@@ -59,12 +62,18 @@
 {
     NSBezierPath *oval = [NSBezierPath bezierPathWithOvalInRect:object.frame.rect];
     
+    [oval setLineWidth:object.thickness];
+    [object.color set];
+    
     [oval stroke];
 }
 
 - (void)performMELRectangleModelTasks:(MELRectangleModel *)object
 {
     NSBezierPath *rectangle = [NSBezierPath bezierPathWithRect:object.frame.rect];
+    
+    [rectangle setLineWidth:object.thickness];
+    [object.color set];
     
     [rectangle stroke];
 }

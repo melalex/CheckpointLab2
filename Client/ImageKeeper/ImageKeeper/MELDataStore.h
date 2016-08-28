@@ -14,10 +14,12 @@
 @class MELImagePreviewModel;
 @class MELRect;
 
-@interface MELDataStore : NSObject<MELImageLibraryPanelModelController, MELCanvasModelController, MELImageInspectorModelController, MELDocumentModelProtocol>
+@interface MELDataStore : NSObject<MELImageLibraryPanelModelController, MELCanvasModelController, MELImageInspectorModelController, MELDocumentModelProtocol, MELAppDelegateUndoProtocol>
 
 @property (readonly, retain) NSArray<MELImagePreviewModel *> *images;
 @property (readonly, assign) id<MELElement> selectedElement;
 @property (retain) MELDocumentModel *documentModel;
+
+@property (retain) NSUndoManager *undoManager;
 
 @end

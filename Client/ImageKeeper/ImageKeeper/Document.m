@@ -12,6 +12,9 @@
 #import "MELCanvasController.h"
 
 @interface Document ()
+{
+    id<MELDocumentModelProtocol> _dataStore;
+}
 
 @property (assign) IBOutlet MELCanvas *canvas;
 
@@ -26,6 +29,13 @@
 
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [_dataStore release];
+    
+    [super dealloc];
 }
 
 + (BOOL)autosavesInPlace
@@ -76,6 +86,22 @@
     }
     
     return readSuccess;
+}
+
+- (void)setDataStore:(id<MELDocumentModelProtocol>)dataStore
+{
+    if(_dataStore != dataStore)
+    {
+        [_dataStore release];
+        _dataStore = [dataStore retain];
+        
+        _dataStore.undoManager = self.undoManager;
+    }
+}
+
+- (id<MELDocumentModelProtocol>)dataStore
+{
+    return _dataStore;
 }
 
 @end

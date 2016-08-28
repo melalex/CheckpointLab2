@@ -22,6 +22,7 @@
 static NSString *const kMELCanvasControllerContextImageToDraw = @"kMELCanvasControllerContextImageToDraw";
 static NSString *const kMELCanvasControllerContextImageChangeFrame = @"kMELCanvasControllerContextImageChangeFrame";
 static NSString *const kMELCanvasControllerContextSelectedImageChanged = @"kMELCanvasControllerContextSelectedImageChanged";
+static NSString *const kMELCanvasControllerContextDocumentModelChanged = @"kMELCanvasControllerContextDocumentModelChanged";
 
 static NSString *const kOld = @"old";
 static NSString *const kNew = @"new";
@@ -32,8 +33,8 @@ static NSString *const kWidth = @"width";
 static NSString *const kHeight = @"height";
 static NSString *const kLayer = @"layer";
 
-static CGFloat const kDefaultDeltaX = 1.0;
-static CGFloat const kDefaultDeltaY = 1.0;
+static CGFloat const kDefaultDeltaX = 10.0;
+static CGFloat const kDefaultDeltaY = 10.0;
 
 static CGFloat const kFocusRingThickness = 5.0;
 
@@ -42,6 +43,7 @@ static CGFloat const kFocusRingThickness = 5.0;
     NSObject<MELCanvasModelController> *_dataStore;
     id<MELStrategy> _strategy;
 }
+
 
 @end
 
@@ -56,6 +58,10 @@ static CGFloat const kFocusRingThickness = 5.0;
     [_dataStore removeObserver:self
                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedElement)
                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
+    
+    [_dataStore removeObserver:self
+                    forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel)
+                       context:(__bridge void * _Nullable)(kMELCanvasControllerContextDocumentModelChanged)];
 
     [_dataStore release];
     [_strategy release];
@@ -88,6 +94,8 @@ static CGFloat const kFocusRingThickness = 5.0;
 
 - (void)shiftByDeltaX:(CGFloat)deltaX deltaY:(CGFloat)deltaY
 {
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] shiftByDeltaX:-deltaX deltaY:-deltaY];
+
     [self.dataStore shiftSelectedElementByDeltaX:deltaX deltaY:deltaY];
 }
 
@@ -209,6 +217,8 @@ static CGFloat const kFocusRingThickness = 5.0;
 
 #pragma mark - Edit commands
 
+#warning make buffer
+
 - (void)copySelectedImage
 {
     id<MELElement> elementModel = self.dataStore.selectedElement;
@@ -270,6 +280,10 @@ static CGFloat const kFocusRingThickness = 5.0;
         [_dataStore removeObserver:self
                         forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedElement)
                            context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
+        
+        [_dataStore removeObserver:self
+                        forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel)
+                           context:(__bridge void * _Nullable)(kMELCanvasControllerContextDocumentModelChanged)];
 
         [_dataStore release];
         _dataStore = [dataStore retain];
@@ -283,6 +297,11 @@ static CGFloat const kFocusRingThickness = 5.0;
                      forKeyPath:@OBJECT_KEY_PATH(_dataStore, selectedElement)
                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                         context:(__bridge void * _Nullable)(kMELCanvasControllerContextSelectedImageChanged)];
+        
+        [_dataStore addObserver:self
+                     forKeyPath:@OBJECT_KEY_PATH(_dataStore, documentModel)
+                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                        context:(__bridge void * _Nullable)(kMELCanvasControllerContextDocumentModelChanged)];
     }
 }
 
@@ -327,6 +346,9 @@ static CGFloat const kFocusRingThickness = 5.0;
                             options:NSKeyValueObservingOptionOld
                             context:(__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame)];
             
+            [self.dataStore.undoManager registerUndoWithTarget:self.dataStore.documentModel
+                                                      selector:@selector(removeElement:)
+                                                        object:newElement];
             
             self.canvas.elements = self.dataStore.documentModel.elements;
             
@@ -355,6 +377,11 @@ static CGFloat const kFocusRingThickness = 5.0;
             [oldElement removeObserver:self
                             forKeyPath:@OBJECT_KEY_PATH(oldElement, layer)
                                context:kMELCanvasControllerContextImageChangeFrame];
+            
+            [self.dataStore.undoManager registerUndoWithTarget:self.dataStore.documentModel
+                                                      selector:@selector(addElement:)
+                                                        object:oldElement];
+
             
             self.canvas.elements = self.dataStore.documentModel.elements;
 
@@ -421,6 +448,12 @@ static CGFloat const kFocusRingThickness = 5.0;
             [self.view setNeedsDisplayInRect:newValue];
         }
 
+    }
+    else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextDocumentModelChanged))
+    {
+        self.canvas.elements = self.dataStore.documentModel.elements;
+        
+        self.canvas.needsDisplay = YES;
     }
     else
     {

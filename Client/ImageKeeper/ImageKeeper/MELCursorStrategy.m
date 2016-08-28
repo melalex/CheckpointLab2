@@ -17,6 +17,8 @@
 
 @property NSPoint mouseOld;
 
+@property BOOL isStartDragging;
+
 @end
 
 @implementation MELCursorStrategy
@@ -28,6 +30,8 @@
     [self.dataStore selectElementInPoint:point];
     
     self.mouseOld = point;
+    
+    self.isStartDragging = YES;
 }
 
 - (void)mouseDraggAction:(NSEvent *)theEvent
@@ -40,6 +44,14 @@
         CGFloat deltaX = self.mouseOld.x - point.x;
         CGFloat deltaY = self.mouseOld.y - point.y;
 
+        if (self.isStartDragging)
+        {
+            [[self.dataStore.undoManager prepareWithInvocationTarget:self.dataStore.selectedElement.frame] setX:self.dataStore.selectedElement.frame.x];
+            [[self.dataStore.undoManager prepareWithInvocationTarget:self.dataStore.selectedElement.frame] setY:self.dataStore.selectedElement.frame.y];
+
+            self.isStartDragging = NO;
+        }
+        
         self.dataStore.selectedElement.frame.x -= deltaX;
         self.dataStore.selectedElement.frame.y -= deltaY;
         

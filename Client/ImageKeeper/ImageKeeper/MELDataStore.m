@@ -27,6 +27,8 @@ static NSString *const kMELDataStoreContextNameChanged = @"kMELDataStoreContextN
 @interface MELDataStore()
 {
     NSString *_pathToImageKeeperSupportDirectory;
+    
+    MELDocumentModel *_documentModel;
 }
 
 @property (retain) NSMutableArray<MELImagePreviewModel *> *mutableImages;
@@ -205,7 +207,7 @@ static NSString *const kMELDataStoreContextNameChanged = @"kMELDataStoreContextN
         NSString *newName = (NSString *)aChange[kNew];
         NSString *oldName = (NSString *)aChange[kOld];
         
-        if (![newName isEqualToString:oldName] && [self.defaultImages containsObject:(MELImagePreviewModel *)anObject])
+        if (![newName isEqualToString:oldName] && ![self.defaultImages containsObject:(MELImagePreviewModel *)anObject])
         {
             oldName = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:oldName];
             newName = [self.pathToImageKeeperSupportDirectory stringByAppendingPathComponent:newName];
@@ -227,6 +229,22 @@ static NSString *const kMELDataStoreContextNameChanged = @"kMELDataStoreContextN
 
 
 #pragma mark - MELDocumentModel modification
+
+- (void)setDocumentModel:(MELDocumentModel *)documentModel
+{
+    if (_documentModel != documentModel)
+    {
+        [self.undoManager removeAllActions];
+        
+        [_documentModel release];
+        _documentModel = [documentModel retain];
+    }
+}
+
+- (MELDocumentModel *)documentModel
+{
+    return _documentModel;
+}
 
 - (void)putToDocumentModelImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 {

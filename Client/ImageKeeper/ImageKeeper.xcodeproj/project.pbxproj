@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DD1C02AC1D70CFD900B488E6 /* File-Picture-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DD1C02AB1D70CFD900B488E6 /* File-Picture-icon.png */; };
+		DD1C02B21D733D7900B488E6 /* MELImageStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1C02B11D733D7900B488E6 /* MELImageStrategy.m */; };
+		DD1C02B51D733DA300B488E6 /* MELFigureStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1C02B41D733DA300B488E6 /* MELFigureStrategy.m */; };
 		DDA665971D67636D0079220F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665961D67636D0079220F /* AppDelegate.m */; };
 		DDA6659A1D67636D0079220F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA665991D67636D0079220F /* main.m */; };
 		DDA6659D1D67636D0079220F /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA6659C1D67636D0079220F /* Document.m */; };
@@ -87,6 +89,11 @@
 /* Begin PBXFileReference section */
 		DD1C02AB1D70CFD900B488E6 /* File-Picture-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "File-Picture-icon.png"; sourceTree = "<group>"; };
 		DD1C02AD1D72EEFA00B488E6 /* MELChangeableStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELChangeableStrategy.h; sourceTree = "<group>"; };
+		DD1C02AF1D733CDB00B488E6 /* MELInspectorStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELInspectorStrategy.h; sourceTree = "<group>"; };
+		DD1C02B01D733D7900B488E6 /* MELImageStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELImageStrategy.h; sourceTree = "<group>"; };
+		DD1C02B11D733D7900B488E6 /* MELImageStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELImageStrategy.m; sourceTree = "<group>"; };
+		DD1C02B31D733DA300B488E6 /* MELFigureStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MELFigureStrategy.h; sourceTree = "<group>"; };
+		DD1C02B41D733DA300B488E6 /* MELFigureStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MELFigureStrategy.m; sourceTree = "<group>"; };
 		DDA665921D67636D0079220F /* ImageKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA665951D67636D0079220F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DDA665961D67636D0079220F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -199,6 +206,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD1C02AE1D733C8900B488E6 /* Inspector strategy */ = {
+			isa = PBXGroup;
+			children = (
+				DD1C02AF1D733CDB00B488E6 /* MELInspectorStrategy.h */,
+				DD1C02B01D733D7900B488E6 /* MELImageStrategy.h */,
+				DD1C02B11D733D7900B488E6 /* MELImageStrategy.m */,
+				DD1C02B31D733DA300B488E6 /* MELFigureStrategy.h */,
+				DD1C02B41D733DA300B488E6 /* MELFigureStrategy.m */,
+			);
+			name = "Inspector strategy";
+			sourceTree = "<group>";
+		};
 		DDA665891D67636D0079220F = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +314,7 @@
 		DDA665D51D6878AB0079220F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DD1C02AE1D733C8900B488E6 /* Inspector strategy */,
 				DDA666111D6CA4920079220F /* Strategy */,
 				DDA665951D67636D0079220F /* AppDelegate.h */,
 				DDA665961D67636D0079220F /* AppDelegate.m */,
@@ -546,6 +566,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA665D91D687EAE0079220F /* MELImageLibraryPanelController.m in Sources */,
+				DD1C02B21D733D7900B488E6 /* MELImageStrategy.m in Sources */,
 				DDA666151D6CA67D0079220F /* MELCursorStrategy.m in Sources */,
 				DDA666281D6CC0410079220F /* MELCurveModel.m in Sources */,
 				DDA665FA1D6A12060079220F /* MELRect.m in Sources */,
@@ -574,6 +595,7 @@
 				DDA6666A1D6F201B0079220F /* MELSizeValidation.m in Sources */,
 				DDA6661F1D6CBF790079220F /* MELLineModel.m in Sources */,
 				DDA666371D6CE1F70079220F /* MELCurveStrategy.m in Sources */,
+				DD1C02B51D733DA300B488E6 /* MELFigureStrategy.m in Sources */,
 				DDA6659A1D67636D0079220F /* main.m in Sources */,
 				DDA665971D67636D0079220F /* AppDelegate.m in Sources */,
 			);

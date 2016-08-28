@@ -12,6 +12,7 @@
 #import "MELRect.h"
 #import "MELDocumentModel.h"
 #import "MELElement.h"
+#import "MELPrimitiveModel.h"
 
 @interface MELImageInspector ()
 
@@ -31,7 +32,24 @@
     [super dealloc];
 }
 
-#pragma mark MELImageInspector Bindings Support
+#pragma mark - ui events
+
+- (IBAction)thicknessChanged:(NSPopUpButton *)sender
+{
+    MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
+    CGFloat newThickness = sender.indexOfSelectedItem + 1;
+    
+    selectedElement.thickness = newThickness;
+}
+
+- (IBAction)colorChanged:(NSColorWell *)sender
+{
+    MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
+
+    selectedElement.color = sender.color;
+}
+
+#pragma mark - MELImageInspector Bindings Support
 
 + (NSSet *)keyPathsForValuesAffectingXCoordinate
 {
@@ -63,25 +81,38 @@
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement), nil];
 }
 
++ (NSSet *)keyPathsForValuesAffectingIsFigure
+{
+    return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement), nil];
+}
+
 #pragma mark - MELImageInspectorSetters
 
 - (void)setXCoordinate:(CGFloat)xCoordinate
 {
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setXCoordinate:self.dataStore.selectedElement.frame.x];
+
     self.dataStore.selectedElement.frame.x = xCoordinate;
 }
 
 - (void)setYCoordinate:(CGFloat)yCoordinate
 {
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setYCoordinate:self.dataStore.selectedElement.frame.y];
+
     self.dataStore.selectedElement.frame.y = yCoordinate;
 }
 
 - (void)setWidth:(CGFloat)width
 {
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setWidth:self.dataStore.selectedElement.frame.width];
+
     self.dataStore.selectedElement.frame.width = width;
 }
 
 - (void)setHeight:(CGFloat)height
 {
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setHeight:self.dataStore.selectedElement.frame.height];
+
     self.dataStore.selectedElement.frame.height = height;
 }
 
@@ -104,6 +135,8 @@
     }
 
     self.dataStore.selectedElement.layer = layer;
+    
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setLayer:oldLayer];
 }
 
 #pragma mark - MELImageInspectorGetters
@@ -135,14 +168,12 @@
 
 - (BOOL)isSelected
 {
-    BOOL result = NO;
-    
-    if (self.dataStore.selectedElement)
-    {
-        result = YES;
-    }
-    
-    return  result;
+    return self.dataStore.selectedElement != nil;
+}
+
+- (BOOL)isFigure
+{
+    return [self.dataStore.selectedElement isKindOfClass:[MELPrimitiveModel class]];
 }
 
 @end

@@ -31,6 +31,8 @@
 @property (retain) MELDocumentModel *documentModel;
 @property (readonly, assign) id<MELElement> selectedElement;
 
+@property (retain) NSUndoManager *undoManager;
+
 - (void)putToDocumentModelImageFromLibraryAtIndex:(NSUInteger)index toPoint:(NSPoint)point;
 - (void)putToDocumentModelImage:(NSImage *)image inFrame:(MELRect *)frame;
 
@@ -48,6 +50,8 @@
 
 @property (readonly, assign) id<MELElement> selectedElement;
 
+@property (retain) NSUndoManager *undoManager;
+
 - (NSArray<id<MELElement>> *)getElements;
 
 @end
@@ -57,4 +61,13 @@
 
 @property (retain) MELDocumentModel *documentModel;
 
+@property (retain) NSUndoManager *undoManager;
+
 @end
+
+@protocol MELAppDelegateUndoProtocol <NSObject>
+
+@property (retain) NSUndoManager *undoManager;
+
+@end
+
