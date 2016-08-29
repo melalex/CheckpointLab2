@@ -14,7 +14,6 @@
 @property (retain) NSColor *color;
 @property CGFloat thickness;
 
-@property CGFloat rotation;
 @property CGFloat transparency;
 
 - (instancetype)initWithFrame:(MELRect *)frame layer:(NSUInteger)layer;

@@ -24,6 +24,7 @@ static NSString *const kTransparency = @"transparency";
 {
     MELRect *_frame;
     NSUInteger _layer;
+    CGFloat _rotation;
 }
 
 @end
@@ -223,6 +224,12 @@ static NSString *const kTransparency = @"transparency";
     _layer = layer;
 }
 
+- (void)setRotation:(CGFloat)rotation
+{
+    _rotation = rotation;
+    self.frame.rotation = rotation;
+}
+
 #pragma mark - MELPrimitiveModelGetters
 
 - (MELRect *)frame
@@ -233,6 +240,11 @@ static NSString *const kTransparency = @"transparency";
 - (NSUInteger)layer
 {
     return _layer;
+}
+
+- (CGFloat)rotation
+{
+    return _rotation;
 }
 
 @end

@@ -63,9 +63,19 @@
 
 - (void)performMELLineModelTasks:(MELLineModel *)object
 {
-    NSBezierPath *path = [NSBezierPath bezierPath];
+    NSAffineTransform *rotate = [[NSAffineTransform alloc] init];
+    NSGraphicsContext *context = [NSGraphicsContext currentContext];
+    CGFloat axisX = object.frame.x + object.frame.width / 2;
+    CGFloat axisY = object.frame.y + object.frame.height / 2;
+    CGFloat deltaX = (axisX * cosf(object.rotation) + axisY * sinf(object.rotation)) - object.frame.x - object.frame.width / 2;
+    CGFloat deltaY = (-axisX * sinf(object.rotation) + axisY * cosf(object.rotation)) - object.frame.y - object.frame.height / 2;
     
-    CGAffineTransformMakeRotation(object.rotation);
+    [context saveGraphicsState];
+    [rotate rotateByRadians:object.rotation];
+    [rotate translateXBy:deltaX yBy:deltaY];
+    [rotate concat];
+
+    NSBezierPath *path = [NSBezierPath bezierPath];
     
     [path setLineWidth:object.thickness];
     [object.color set];
@@ -74,30 +84,59 @@
     [path lineToPoint:object.secondPoint];
     
     [path stroke];
+    
+    [rotate release];
+    [context restoreGraphicsState];
 }
 
 - (void)performMELOvalModelTasks:(MELOvalModel *)object
 {
-    NSBezierPath *oval = [NSBezierPath bezierPathWithOvalInRect:object.frame.rect];
+    NSAffineTransform *rotate = [[NSAffineTransform alloc] init];
+    NSGraphicsContext *context = [NSGraphicsContext currentContext];
+    CGFloat axisX = object.frame.x + object.frame.width / 2;
+    CGFloat axisY = object.frame.y + object.frame.height / 2;
+    CGFloat deltaX = (axisX * cosf(object.rotation) + axisY * sinf(object.rotation)) - object.frame.x - object.frame.width / 2;
+    CGFloat deltaY = (-axisX * sinf(object.rotation) + axisY * cosf(object.rotation)) - object.frame.y - object.frame.height / 2;
+    
+    [context saveGraphicsState];
+    [rotate rotateByRadians:object.rotation];
+    [rotate translateXBy:deltaX yBy:deltaY];
+    [rotate concat];
 
-    CGAffineTransformMakeRotation(object.rotation);
+    NSBezierPath *oval = [NSBezierPath bezierPathWithOvalInRect:object.frame.rect];
     
     [oval setLineWidth:object.thickness];
     [object.color set];
     
     [oval stroke];
+    
+    [rotate release];
+    [context restoreGraphicsState];
 }
 
 - (void)performMELRectangleModelTasks:(MELRectangleModel *)object
 {
-    NSBezierPath *rectangle = [NSBezierPath bezierPathWithRect:object.frame.rect];
+    NSAffineTransform *rotate = [[NSAffineTransform alloc] init];
+    NSGraphicsContext *context = [NSGraphicsContext currentContext];
+    CGFloat axisX = object.frame.x + object.frame.width / 2;
+    CGFloat axisY = object.frame.y + object.frame.height / 2;
+    CGFloat deltaX = (axisX * cosf(object.rotation) + axisY * sinf(object.rotation)) - object.frame.x - object.frame.width / 2;
+    CGFloat deltaY = (-axisX * sinf(object.rotation) + axisY * cosf(object.rotation)) - object.frame.y - object.frame.height / 2;
     
-    CGAffineTransformMakeRotation(object.rotation);
+    [context saveGraphicsState];
+    [rotate rotateByRadians:object.rotation];
+    [rotate translateXBy:deltaX yBy:deltaY];
+    [rotate concat];
+
+    NSBezierPath *rectangle = [NSBezierPath bezierPathWithRect:object.frame.rect];
     
     [rectangle setLineWidth:object.thickness];
     [object.color set];
     
     [rectangle stroke];
+    
+    [rotate release];
+    [context restoreGraphicsState];
 }
 
 - (void)performMELCurveModelTasks:(MELCurveModel *)object
