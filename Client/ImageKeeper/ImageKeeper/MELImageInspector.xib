@@ -7,6 +7,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MELImageInspector">
             <connections>
+                <outlet property="colorWell" destination="ZPM-DU-MBi" id="zl0-aG-dGB"/>
+                <outlet property="thicknessPopUp" destination="rC0-Ix-0OH" id="d7Q-49-8gL"/>
                 <outlet property="window" destination="UPK-AJ-Yu3" id="Rc0-XX-tr9"/>
             </connections>
         </customObject>
@@ -149,12 +151,7 @@
                         </textFieldCell>
                         <connections>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="M9s-DX-1Ac"/>
-                            <binding destination="-2" name="value" keyPath="layer" id="ggd-uc-nLr">
-                                <dictionary key="options">
-                                    <integer key="NSNullPlaceholder" value="1"/>
-                                    <string key="NSValueTransformerName">MELLayerValidation</string>
-                                </dictionary>
-                            </binding>
+                            <binding destination="-2" name="value" keyPath="elementLayer" id="aOx-ow-UEu"/>
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="azn-hL-vyy">
@@ -221,22 +218,20 @@
                             <binding destination="-2" name="enabled" keyPath="isFigure" id="nY3-g8-9XN"/>
                         </connections>
                     </popUpButton>
-                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYd-B4-J9e">
-                        <rect key="frame" x="109" y="43" width="119" height="21"/>
-                        <sliderCell key="cell" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="aOT-LQ-gvy"/>
-                        <connections>
-                            <action selector="rotationChanged:" target="-2" id="uAN-rK-sGA"/>
-                            <binding destination="-2" name="enabled" keyPath="isSelected" id="WLY-sd-5vG"/>
-                            <binding destination="-2" name="value" keyPath="rotation" id="G7K-Z8-ugP"/>
-                        </connections>
-                    </slider>
                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uhP-LQ-abG">
                         <rect key="frame" x="109" y="19" width="119" height="21"/>
                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="DUh-OA-fxf"/>
                         <connections>
-                            <action selector="transparencyChanged:" target="-2" id="UH6-ZI-uyi"/>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="r2M-1q-HTO"/>
                             <binding destination="-2" name="value" keyPath="transparency" id="AZU-0a-LsK"/>
+                        </connections>
+                    </slider>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYd-B4-J9e">
+                        <rect key="frame" x="109" y="43" width="119" height="21"/>
+                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="aOT-LQ-gvy"/>
+                        <connections>
+                            <binding destination="-2" name="enabled" keyPath="isSelected" id="WLY-sd-5vG"/>
+                            <binding destination="-2" name="value" keyPath="rotation" id="G7K-Z8-ugP"/>
                         </connections>
                     </slider>
                 </subviews>

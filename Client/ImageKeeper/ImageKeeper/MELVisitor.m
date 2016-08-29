@@ -39,8 +39,6 @@
     @throw myException;
 }
 
-#warning undo for color and rotating
-
 - (void)performMELImageModelTasks:(MELImageModel *)object
 {
     NSAffineTransform *rotate = [[NSAffineTransform alloc] init];

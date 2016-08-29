@@ -84,9 +84,7 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     NSRect documentFrame = [[document.windowControllers[0] window] frame];
     
     NSRect screenFrame = [[NSScreen mainScreen] frame];
-    
-#warning for screenFrame > documentFrame
-    
+        
     documentFrame.origin.y = (screenFrame.size.height - documentFrame.size.height) / 2;
     documentFrame.origin.x = (screenFrame.size.width - documentFrame.size.width) / 2;
 
@@ -107,27 +105,21 @@ static NSString *const kMELInstrumentPanelController = @"MELInstrumentPanelContr
     return YES;
 }
 
-- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
 {
-    return [filename hasSuffix:kFileExtension];
+    return YES;
 }
 
 #pragma mark - Undo/Redo
 
 - (IBAction)undo:(id)sender
 {
-    if (self.keyWindow == self.canvasController.view.window)
-    {
-        [self.dataStoreUndo.undoManager undo];
-    }
+    [self.dataStoreUndo.undoManager undo];
 }
 
 - (IBAction)redo:(id)sender
 {
-    if (self.keyWindow == self.canvasController.view.window)
-    {
-        [self.dataStoreUndo.undoManager redo];
-    }
+    [self.dataStoreUndo.undoManager redo];
 }
 
 #pragma mark - Panels menu

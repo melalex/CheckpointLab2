@@ -35,7 +35,7 @@ static NSString *const kTransparency = @"transparency";
 {
     if (self = [super init])
     {
-        _color = nil;
+        _color = [NSColor blackColor];
         _frame = nil;
         _layer = 0;
         _rotation = 0;

@@ -379,7 +379,6 @@ void addFocusRingThickness(NSRect *rect)
         else
         {
             newRect = [[(id<MELElement>)anObject frame] rotateRect];
-            oldValue = [aChange[kOld] doubleValue];
         }
         
         addFocusRingThickness(&newRect);
@@ -412,6 +411,8 @@ void addFocusRingThickness(NSRect *rect)
         }
         else if ([aKeyPath isEqualToString:kRotation])
         {
+            oldValue = [aChange[kOld] doubleValue];
+
             oldRekt = [[(id<MELElement>)anObject frame] rotateRectWithRotation:oldValue];
             
             addFocusRingThickness(&oldRekt);

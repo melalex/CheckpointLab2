@@ -16,6 +16,9 @@
 
 @interface MELImageInspector ()
 
+@property (assign) IBOutlet NSPopUpButton *thicknessPopUp;
+@property (assign) IBOutlet NSColorWell *colorWell;
+
 @end
 
 @implementation MELImageInspector
@@ -35,11 +38,12 @@
 #pragma mark - ui events
 
 
-#warning warning
-
 - (IBAction)thicknessChanged:(NSPopUpButton *)sender
 {
     MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
+
+    [[self.dataStore.undoManager prepareWithInvocationTarget:selectedElement] setThickness:selectedElement.thickness];
+
     CGFloat newThickness = sender.indexOfSelectedItem + 1;
     
     selectedElement.thickness = newThickness;
@@ -49,17 +53,11 @@
 {
     MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
 
+    [self.dataStore.undoManager registerUndoWithTarget:selectedElement
+                               selector:@selector(setColor:)
+                                 object:selectedElement.color];
+    
     selectedElement.color = sender.color;
-}
-
-- (IBAction)rotationChanged:(NSSlider *)sender
-{
-//    self.dataStore.selectedElement.rotation = M_PI * sender.floatValue / 50.0;
-}
-
-- (IBAction)transparencyChanged:(NSSlider *)sender
-{
-//    self.dataStore.selectedElement.transparency = 1.0 - sender.floatValue / 100.0;
 }
 
 #pragma mark - MELImageInspector Bindings Support
@@ -84,7 +82,7 @@
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.frame.height), nil];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingLayer
++ (NSSet *)keyPathsForValuesAffectingElementLayer
 {
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.layer), nil];
 }
@@ -99,11 +97,6 @@
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement), nil];
 }
 
-//+ (NSSet *)keyPathsForValuesAffectingThickness
-//{
-//    return [NSSet setWithObjects:@"dataStore.selectedElement.thickness", nil];
-//}
-
 + (NSSet *)keyPathsForValuesAffectingRotation
 {
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.rotation), nil];
@@ -113,11 +106,6 @@
 {
     return [NSSet setWithObjects:@TYPE_KEY_PATH(MELImageInspector, dataStore.selectedElement.transparency), nil];
 }
-
-//+ (NSSet *)keyPathsForValuesAffectingColor
-//{
-//    return [NSSet setWithObjects:@"dataStore.selectedElement.color", nil];
-//}
 
 #pragma mark - MELImageInspectorSetters
 
@@ -149,7 +137,7 @@
     self.dataStore.selectedElement.frame.height = height;
 }
 
-- (void)setLayer:(NSUInteger)layer
+- (void)setElementLayer:(NSUInteger)elementLayer
 {
     NSUInteger oldLayer = self.dataStore.selectedElement.layer;
     NSArray<id<MELElement>> *elements = [self.dataStore getElements];
@@ -161,26 +149,21 @@
             element.layer--;
         }
         
-        if (element.layer >= layer)
+        if (element.layer >= elementLayer)
         {
             element.layer++;
         }
     }
 
-    self.dataStore.selectedElement.layer = layer;
+    self.dataStore.selectedElement.layer = elementLayer;
     
-    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setLayer:oldLayer];
-}
-
-- (void)setThickness:(CGFloat)thickness
-{
-    MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
-    
-    selectedElement.thickness = thickness + 1;
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setElementLayer:oldLayer];
 }
 
 - (void)setRotation:(CGFloat)rotation
 {
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setRotation:self.dataStore.selectedElement.rotation];
+
     CGFloat newRotation = M_PI * rotation / 50.0;
     
     self.dataStore.selectedElement.rotation = newRotation;
@@ -188,16 +171,11 @@
 
 - (void)setTransparency:(CGFloat)transparency
 {
+    [[self.dataStore.undoManager prepareWithInvocationTarget:self] setTransparency:self.dataStore.selectedElement.transparency];
+
     CGFloat newTransparency = 1.0 - transparency / 100.0;
 
     self.dataStore.selectedElement.transparency = newTransparency;
-}
-
-- (void)setColor:(NSColor *)color
-{
-    MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
-    
-    selectedElement.color = color;
 }
 
 #pragma mark - MELImageInspectorGetters
@@ -222,7 +200,7 @@
     return self.dataStore.selectedElement.frame.height;
 }
 
-- (NSUInteger)layer
+- (NSUInteger)elementLayer
 {
     return self.dataStore.selectedElement.layer;
 }
@@ -234,14 +212,17 @@
 
 - (BOOL)isFigure
 {
-    return [self.dataStore.selectedElement isKindOfClass:[MELPrimitiveModel class]];
-}
-
-- (CGFloat)thickness
-{
-    MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
+    BOOL result = [self.dataStore.selectedElement isKindOfClass:[MELPrimitiveModel class]];
     
-    return selectedElement.thickness - 1;
+    if (result)
+    {
+        MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
+
+        self.colorWell.color = selectedElement.color;
+        [self.thicknessPopUp selectItemAtIndex:(selectedElement.thickness - 1)];
+    }
+    
+    return result;
 }
 
 - (CGFloat)rotation
@@ -256,13 +237,6 @@
     CGFloat floatValue = (1.0 - self.dataStore.selectedElement.transparency) * 100.0;
 
     return floatValue;
-}
-
-- (NSColor *)color
-{
-    MELPrimitiveModel *selectedElement = (MELPrimitiveModel *)self.dataStore.selectedElement;
-    
-    return selectedElement.color;
 }
 
 @end
