@@ -61,7 +61,7 @@
             
             NSSetFocusRingStyle(NSFocusRingOnly);
             
-            [[NSBezierPath bezierPathWithRect:NSInsetRect(element.frame.rect, 4, 4)] fill];
+            [[NSBezierPath bezierPathWithRect:NSInsetRect(element.frame.rotateRect, 4, 4)] fill];
             [NSGraphicsContext restoreGraphicsState];
         }
     }

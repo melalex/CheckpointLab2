@@ -21,6 +21,7 @@ static NSString *const kTransparency = @"transparency";
 {
     MELRect *_frame;
     NSUInteger _layer;
+    CGFloat _rotation;
 }
 
 @end
@@ -103,31 +104,31 @@ static NSString *const kTransparency = @"transparency";
 
 - (void)removeObserver:(id)observer context:(NSString *)context
 {
-    [self.frame removeObserver:self
+    [self.frame removeObserver:observer
                     forKeyPath:@OBJECT_KEY_PATH(self.frame, x)
                        context:context];
     
-    [self.frame removeObserver:self
+    [self.frame removeObserver:observer
                     forKeyPath:@OBJECT_KEY_PATH(self.frame, y)
                        context:context];
     
-    [self.frame removeObserver:self
+    [self.frame removeObserver:observer
                     forKeyPath:@OBJECT_KEY_PATH(self.frame, width)
                        context:context];
     
-    [self.frame removeObserver:self
+    [self.frame removeObserver:observer
                     forKeyPath:@OBJECT_KEY_PATH(self.frame, height)
                        context:context];
     
-    [self removeObserver:self
+    [self removeObserver:observer
               forKeyPath:@OBJECT_KEY_PATH(self, layer)
                  context:context];
     
-    [self removeObserver:self
+    [self removeObserver:observer
               forKeyPath:@OBJECT_KEY_PATH(self, rotation)
                  context:context];
     
-    [self removeObserver:self
+    [self removeObserver:observer
               forKeyPath:@OBJECT_KEY_PATH(self, transparency)
                  context:context];
 }
@@ -225,6 +226,12 @@ static NSString *const kTransparency = @"transparency";
     _layer = layer;
 }
 
+- (void)setRotation:(CGFloat)rotation
+{
+    _rotation = rotation;
+    self.frame.rotation = rotation;
+}
+
 #pragma mark - MELImageModelGetters
 
 - (MELRect *)frame
@@ -235,6 +242,11 @@ static NSString *const kTransparency = @"transparency";
 - (NSUInteger)layer
 {
     return _layer;
+}
+
+- (CGFloat)rotation
+{
+    return _rotation;
 }
 
 @end

@@ -45,10 +45,14 @@
 {
     NSAffineTransform *rotate = [[NSAffineTransform alloc] init];
     NSGraphicsContext *context = [NSGraphicsContext currentContext];
+    CGFloat axisX = object.frame.x + object.frame.width / 2;
+    CGFloat axisY = object.frame.y + object.frame.height / 2;
+    CGFloat deltaX = (axisX * cosf(object.rotation) + axisY * sinf(object.rotation)) - object.frame.x - object.frame.width / 2;
+    CGFloat deltaY = (-axisX * sinf(object.rotation) + axisY * cosf(object.rotation)) - object.frame.y - object.frame.height / 2;
     
     [context saveGraphicsState];
     [rotate rotateByRadians:object.rotation];
-    [rotate translateXBy:-(object.frame.width / 2) yBy:-(object.frame.height / 2)];
+    [rotate translateXBy:deltaX yBy:deltaY];
     [rotate concat];
     
     [object.image drawInRect:object.frame.rect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:object.transparency];

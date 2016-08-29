@@ -175,7 +175,7 @@ static NSString *const kMELDataStoreContextNameChanged = @"kMELDataStoreContextN
 
 - (NSRect)selectedElementFrame
 {
-    return self.selectedElement.frame.rect;
+    return self.selectedElement.frame.rotateRect;
 }
 
 - (void)deselectElement

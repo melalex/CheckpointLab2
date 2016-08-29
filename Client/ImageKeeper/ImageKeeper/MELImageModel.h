@@ -16,7 +16,6 @@
 
 @property (readonly,retain) NSImage *image;
 
-@property CGFloat rotation;
 @property CGFloat transparency;
 
 - (instancetype)initWithImage:(NSImage *)image frame:(MELRect *)frame layer:(NSUInteger)layer;

@@ -39,6 +39,36 @@
     return NSMakeRect(self.x, self.y, self.width, self.height);
 }
 
+- (NSRect)rotateRect
+{
+    NSRect frame = self.rect;
+    
+    CGFloat axisX = self.x + self.width / 2;
+    CGFloat axisY = self.y + self.height / 2;
+    
+    frame.size.width = fabs(frame.size.width * cosf(self.rotation)) + fabs(frame.size.height * sinf(self.rotation));
+    frame.size.height = fabs(frame.size.width * sinf(self.rotation)) + fabs(frame.size.height * cosf(self.rotation));
+    frame.origin.x = axisX - frame.size.width / 2;
+    frame.origin.y = axisY - frame.size.height / 2;
+
+    return frame;
+}
+
+- (NSRect)rotateRectWithRotation:(CGFloat)rotation
+{
+    NSRect frame = self.rect;
+    
+    CGFloat axisX = self.x + self.width / 2;
+    CGFloat axisY = self.y + self.height / 2;
+    
+    frame.size.width = fabs(frame.size.width * cosf(rotation)) + fabs(frame.size.height * sinf(rotation));
+    frame.size.height = fabs(frame.size.width * sinf(rotation)) + fabs(frame.size.height * cosf(rotation));
+    frame.origin.x = axisX - frame.size.width / 2;
+    frame.origin.y = axisY - frame.size.height / 2;
+    
+    return frame;
+}
+
 #pragma mark - NSCoding
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder

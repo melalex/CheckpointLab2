@@ -14,10 +14,14 @@
 @property CGFloat y;
 @property CGFloat width;
 @property CGFloat height;
+@property CGFloat rotation;
 
 @property (readonly) NSRect rect;
+@property (readonly) NSRect rotateRect;
 
 - (instancetype)initWithRect:(NSRect)rect;
 - (instancetype)initWithX:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height;
+
+- (NSRect)rotateRectWithRotation:(CGFloat)rotation;
 
 @end

@@ -10,4 +10,6 @@
 
 @protocol MELInspectorStrategy <NSObject>
 
+#warning warning
+
 @end

@@ -60,7 +60,7 @@ static NSString *const kMutableElements = @"mutableElements";
     
     for (id<MELElement> element in self.mutableElements)
     {
-        NSRect elementModelRect = element.frame.rect;
+        NSRect elementModelRect = element.frame.rotateRect;
         
         if (NSPointInRect(point, elementModelRect) &&
             element.layer > topLayer)

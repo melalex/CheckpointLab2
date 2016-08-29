@@ -19,6 +19,11 @@
 @property CGFloat height;
 @property NSUInteger layer;
 
+@property CGFloat thickness;
+@property CGFloat rotation;
+@property CGFloat transparency;
+@property (assign) NSColor *color;
+
 @property (readonly) BOOL isSelected;
 @property (readonly) BOOL isFigure;
 

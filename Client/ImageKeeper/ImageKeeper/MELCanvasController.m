@@ -31,11 +31,12 @@ static NSString *const kX = @"x";
 static NSString *const kY = @"y";
 static NSString *const kWidth = @"width";
 static NSString *const kHeight = @"height";
+static NSString *const kRotation = @"rotation";
 
 static CGFloat const kDefaultDeltaX = 10.0;
 static CGFloat const kDefaultDeltaY = 10.0;
 
-static CGFloat const kFocusRingThickness = 5.0;
+static CGFloat const kFocusRingThickness = 10.0;
 
 @interface MELCanvasController ()
 {
@@ -309,6 +310,14 @@ static CGFloat const kFocusRingThickness = 5.0;
     return _dataStore;
 }
 
+void addFocusRingThickness(NSRect *rect)
+{
+    rect->origin.x -= kFocusRingThickness;
+    rect->origin.y -= kFocusRingThickness;
+    rect->size.width += kFocusRingThickness * 2;
+    rect->size.height += kFocusRingThickness * 2;
+}
+
 - (void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject change:(NSDictionary<NSString *,id> *)aChange context:(void *)aContext
 {
     if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageToDraw))
@@ -328,7 +337,11 @@ static CGFloat const kFocusRingThickness = 5.0;
             
             self.canvas.elements = self.dataStore.documentModel.elements;
             
-            [self.view setNeedsDisplayInRect:frame.rect];
+            NSRect rect = frame.rotateRect;
+            
+            addFocusRingThickness(&rect);
+            
+            [self.view setNeedsDisplayInRect:rect];
         }
         else if (oldElement)
         {
@@ -342,8 +355,12 @@ static CGFloat const kFocusRingThickness = 5.0;
 
             
             self.canvas.elements = self.dataStore.documentModel.elements;
+            
+            NSRect rect = frame.rotateRect;
+            
+            addFocusRingThickness(&rect);
 
-            [self.view setNeedsDisplayInRect:frame.rect];
+            [self.view setNeedsDisplayInRect:rect];
         }
     }
     else if (aContext == (__bridge void * _Nullable)(kMELCanvasControllerContextImageChangeFrame))
@@ -356,36 +373,48 @@ static CGFloat const kFocusRingThickness = 5.0;
             [aKeyPath isEqualToString:kWidth] ||
             [aKeyPath isEqualToString:kHeight])
         {
-            newRect = [(MELRect *)anObject rect];
+            newRect = [(MELRect *)anObject rotateRect];
             oldValue = [aChange[kOld] doubleValue];
         }
         else
         {
-            newRect = [[(id<MELElement>)anObject frame] rect];
+            newRect = [[(id<MELElement>)anObject frame] rotateRect];
+            oldValue = [aChange[kOld] doubleValue];
         }
         
-        newRect.origin.x -= kFocusRingThickness;
-        newRect.origin.y -= kFocusRingThickness;
-        newRect.size.width += kFocusRingThickness * 2;
-        newRect.size.height += kFocusRingThickness * 2;
-        
+        addFocusRingThickness(&newRect);
+
         NSRect oldRekt = newRect;
         
         if ([aKeyPath isEqualToString:kX])
         {
             oldRekt.origin.x = oldValue - kFocusRingThickness;
+            
+            addFocusRingThickness(&oldRekt);
         }
         else if ([aKeyPath isEqualToString:kY])
         {
             oldRekt.origin.y = oldValue - kFocusRingThickness;
+            
+            addFocusRingThickness(&oldRekt);
         }
         else if ([aKeyPath isEqualToString:kWidth])
         {
             oldRekt.size.width = oldValue + 2 * kFocusRingThickness;
+            
+            addFocusRingThickness(&oldRekt);
         }
         else if ([aKeyPath isEqualToString:kHeight])
         {
             oldRekt.size.height = oldValue + 2 * kFocusRingThickness;
+            
+            addFocusRingThickness(&oldRekt);
+        }
+        else if ([aKeyPath isEqualToString:kRotation])
+        {
+            oldRekt = [[(id<MELElement>)anObject frame] rotateRectWithRotation:oldValue];
+            
+            addFocusRingThickness(&oldRekt);
         }
         
         self.canvas.elements = self.dataStore.documentModel.elements;
@@ -397,24 +426,18 @@ static CGFloat const kFocusRingThickness = 5.0;
     {
         if (![aChange[kOld] isEqual:[NSNull null]])
         {
-            NSRect oldValue = [[(id<MELElement>)aChange[kOld] frame] rect];
+            NSRect oldValue = [[(id<MELElement>)aChange[kOld] frame] rotateRect];
             
-            oldValue.origin.x -= kFocusRingThickness;
-            oldValue.origin.y -= kFocusRingThickness;
-            oldValue.size.width += kFocusRingThickness * 2;
-            oldValue.size.height += kFocusRingThickness * 2;
-
+            addFocusRingThickness(&oldValue);
+            
             [self.view setNeedsDisplayInRect:oldValue];
         }
         
         if (![aChange[kNew] isEqual:[NSNull null]])
         {
-            NSRect newValue = [[(id<MELElement>)aChange[kNew] frame] rect];
+            NSRect newValue = [[(id<MELElement>)aChange[kNew] frame] rotateRect];
 
-            newValue.origin.x -= kFocusRingThickness;
-            newValue.origin.y -= kFocusRingThickness;
-            newValue.size.width += kFocusRingThickness * 2;
-            newValue.size.height += kFocusRingThickness * 2;
+            addFocusRingThickness(&newValue);
             
             [self.view setNeedsDisplayInRect:newValue];
         }

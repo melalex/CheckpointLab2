@@ -227,6 +227,7 @@
                         <connections>
                             <action selector="rotationChanged:" target="-2" id="uAN-rK-sGA"/>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="WLY-sd-5vG"/>
+                            <binding destination="-2" name="value" keyPath="rotation" id="G7K-Z8-ugP"/>
                         </connections>
                     </slider>
                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uhP-LQ-abG">
@@ -235,6 +236,7 @@
                         <connections>
                             <action selector="transparencyChanged:" target="-2" id="UH6-ZI-uyi"/>
                             <binding destination="-2" name="enabled" keyPath="isSelected" id="r2M-1q-HTO"/>
+                            <binding destination="-2" name="value" keyPath="transparency" id="AZU-0a-LsK"/>
                         </connections>
                     </slider>
                 </subviews>
